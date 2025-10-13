@@ -1,9 +1,10 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Calendar, Clock } from "lucide-react";
+import { Calendar, Clock, TrendingUp } from "lucide-react";
 import CTASection from "@/components/CTASection";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export default function TaxTipsPage() {
-  // TODO: remove mock data
   const taxTips = [
     {
       title: "Key Tax Deadlines for 2024/25",
@@ -49,67 +50,147 @@ export default function TaxTipsPage() {
     }
   ];
 
+  const categoryColors: Record<string, string> = {
+    "Compliance": "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+    "Tax Planning": "bg-green-500/10 text-green-600 dark:text-green-400",
+    "Contractors": "bg-purple-500/10 text-purple-600 dark:text-purple-400",
+    "Tax Relief": "bg-orange-500/10 text-orange-600 dark:text-orange-400",
+    "VAT": "bg-red-500/10 text-red-600 dark:text-red-400"
+  };
+
   return (
     <div>
-      <section className="bg-gradient-to-br from-primary/5 to-primary/10 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Tax Tips & Insights</h1>
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background py-24 md:py-32 overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+          }}
+          transition={{ duration: 15, repeat: Infinity }}
+          className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl top-0 right-0"
+        />
+        <motion.div
+          animate={{
+            scale: [1.2, 1, 1.2],
+            x: [0, -50, 0],
+          }}
+          transition={{ duration: 18, repeat: Infinity }}
+          className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl bottom-0 left-0"
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
+          >
+            <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
+              <span className="text-sm font-medium text-primary flex items-center gap-2">
+                <TrendingUp className="w-4 h-4" />
+                Expert Insights
+              </span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Tax Tips & Insights</h1>
             <p className="text-lg md:text-xl text-muted-foreground">
               Stay informed with the latest tax news, tips, and strategies from our expert accountants. 
               Regular updates to help you navigate the complex world of UK taxation.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
+      {/* Tips Grid */}
+      <section className="py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Latest Articles</h2>
+            <p className="text-lg text-muted-foreground">
+              Expert guidance to help you stay compliant and maximize your tax efficiency
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {taxTips.map((tip, index) => (
-              <Card key={index} className="hover-elevate transition-all duration-200 flex flex-col" data-testid={`card-tax-tip-${index}`}>
-                <CardHeader>
-                  <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-3 w-fit">
-                    {tip.category}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{tip.title}</h3>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>{tip.date}</span>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+              >
+                <Card className="hover-elevate transition-all duration-300 flex flex-col h-full border-2 hover:border-primary/50 hover:shadow-xl group" data-testid={`card-tax-tip-${index}`}>
+                  <CardHeader>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className={`inline-block px-3 py-1 ${categoryColors[tip.category]} text-xs font-medium rounded-full mb-3 w-fit`}
+                    >
+                      {tip.category}
+                    </motion.div>
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">{tip.title}</h3>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        <span>{tip.date}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="h-4 w-4" />
+                        <span>{tip.readTime}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{tip.readTime}</span>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-muted-foreground">{tip.excerpt}</p>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent className="flex-1">
+                    <p className="text-muted-foreground">{tip.excerpt}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-muted/30 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Get the latest tax tips, updates, and insights delivered straight to your inbox every month.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-2 rounded-md border bg-background"
-              data-testid="input-newsletter-email"
-            />
-            <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover-elevate active-elevate-2" data-testid="button-subscribe">
-              Subscribe
-            </button>
-          </div>
+      {/* Newsletter Section */}
+      <section className="bg-gradient-to-br from-muted/50 to-muted/30 py-24 relative overflow-hidden">
+        <motion.div
+          animate={{
+            rotate: 360,
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity }}
+          className="absolute w-96 h-96 bg-primary/5 rounded-full blur-3xl top-0 left-1/2"
+        />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Get the latest tax tips, updates, and insights delivered straight to your inbox every month.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                data-testid="input-newsletter-email"
+              />
+              <Button size="lg" data-testid="button-subscribe">
+                Subscribe
+              </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
