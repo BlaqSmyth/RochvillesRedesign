@@ -1,49 +1,74 @@
-import Hero from "@/components/Hero";
-import ServiceCard from "@/components/ServiceCard";
-import StatsSection from "@/components/StatsSection";
+import ParallaxHero from "@/components/ParallaxHero";
+import AnimatedServiceCard from "@/components/AnimatedServiceCard";
+import AnimatedStatsSection from "@/components/AnimatedStatsSection";
+import InteractiveTaxCalculator from "@/components/InteractiveTaxCalculator";
 import CTASection from "@/components/CTASection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calculator, FileText, Users, ShieldCheck, TrendingUp, Briefcase, Award, Clock, Target, Heart } from "lucide-react";
-import servicesImage from "@assets/stock_images/accountant_working_f_68d5c60d.jpg";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+
+import taxImage from "@assets/stock_images/business_person_anal_2e0a2ff2.jpg";
+import strategyImage from "@assets/stock_images/modern_business_team_876904bd.jpg";
+import dataImage from "@assets/stock_images/digital_technology_d_8c488575.jpg";
+import growthImage from "@assets/stock_images/business_growth_succ_97d5375f.jpg";
+import contractorImage from "@assets/stock_images/freelancer_contracto_09d92917.jpg";
+import complianceImage from "@assets/stock_images/compliance_audit_doc_4d2a5d70.jpg";
 import officeImage from "@assets/stock_images/modern_office_interi_001cee9b.jpg";
+import professionalImage from "@assets/stock_images/professional_busines_db70ad20.jpg";
+import teamCelebrationImage from "@assets/stock_images/diverse_business_tea_09553b19.jpg";
 
 export default function HomePage() {
+  const servicesRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: servicesRef,
+    offset: ["start end", "end start"]
+  });
+
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
   const services = [
     {
       icon: Calculator,
       title: "Tax Planning & Returns",
       description: "Expert tax planning to minimize your liability while ensuring full HMRC compliance. We handle all types of tax returns for individuals and businesses.",
-      href: "/services"
+      href: "/services",
+      image: taxImage
     },
     {
       icon: FileText,
       title: "Bookkeeping & Accounts",
       description: "Comprehensive bookkeeping services and statutory accounts preparation. Keep your financial records accurate and up-to-date.",
-      href: "/services"
+      href: "/services",
+      image: dataImage
     },
     {
       icon: Users,
       title: "Payroll Services",
       description: "Efficient payroll processing, RTI submissions, and pension scheme administration. We ensure your employees are paid accurately and on time.",
-      href: "/services"
+      href: "/services",
+      image: strategyImage
     },
     {
       icon: Briefcase,
       title: "Contractor Accounting",
       description: "Specialized accounting for contractors and freelancers. IR35 compliance, limited company management, and optimal tax structures.",
-      href: "/contractors-guide"
+      href: "/contractors-guide",
+      image: contractorImage
     },
     {
       icon: ShieldCheck,
       title: "Compliance & Audit",
       description: "Ensure your business meets all regulatory requirements. Audit support, compliance reviews, and statutory filings.",
-      href: "/compliance"
+      href: "/compliance",
+      image: complianceImage
     },
     {
       icon: TrendingUp,
       title: "Financial Planning",
       description: "Strategic financial advice to help your business grow. Investment planning, retirement planning, and wealth management.",
-      href: "/financial-services"
+      href: "/financial-services",
+      image: growthImage
     }
   ];
 
@@ -79,107 +104,194 @@ export default function HomePage() {
 
   return (
     <div>
-      <Hero />
+      <ParallaxHero />
       
-      <StatsSection stats={stats} />
+      <AnimatedStatsSection stats={stats} />
 
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        {/* Background Decoration */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
+      {/* Services Section */}
+      <section ref={servicesRef} className="py-24 md:py-32 relative overflow-hidden">
+        {/* Parallax background decoration */}
+        <motion.div 
+          style={{ y: parallaxY }}
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none"
+        />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 animate-fade-in-up">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
             <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
               <span className="text-sm font-medium text-primary">What We Offer</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Services</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Comprehensive accounting and financial services tailored to your business needs
             </p>
-          </div>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <div
-                key={index}
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <ServiceCard {...service} />
-              </div>
+              <AnimatedServiceCard key={index} {...service} index={index} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-muted/30 py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute w-96 h-96 bg-primary/5 rounded-full blur-3xl top-0 right-0 animate-pulse"></div>
-        </div>
+      {/* Interactive Calculator Section */}
+      <section className="py-24 bg-muted/30 relative overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 0]
+          }}
+          transition={{ duration: 20, repeat: Infinity }}
+          className="absolute w-96 h-96 bg-primary/5 rounded-full blur-3xl top-0 left-0"
+        />
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">See Your Potential Savings</h2>
+            <p className="text-lg text-muted-foreground">
+              Find out how much you could save with professional tax planning
+            </p>
+          </motion.div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1 animate-fade-in-up">
+          <InteractiveTaxCalculator />
+        </div>
+      </section>
+
+      {/* Why Choose Us - Magazine Style Split Screen */}
+      <section className="bg-background py-24 md:py-32 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="order-2 lg:order-1"
+            >
               <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
                 <span className="text-sm font-medium text-primary">Why Choose Us</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Choose Rochvilles & Co?</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Why Choose Rochvilles & Co?</h2>
               <p className="text-lg text-muted-foreground mb-8">
                 We're more than just accountants - we're your trusted financial partners committed to your success.
               </p>
               
               <div className="space-y-6">
                 {whyChooseUs.map((item, index) => (
-                  <Card key={index} className="hover-elevate transition-all duration-300 border-2 hover:border-primary/50 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="p-3 rounded-lg bg-primary/10 text-primary">
-                          <item.icon className="h-6 w-6" />
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ x: 10, scale: 1.02 }}
+                  >
+                    <Card className="hover-elevate transition-all duration-300 border-2 hover:border-primary/50">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <motion.div
+                            whileHover={{ rotate: 360 }}
+                            transition={{ duration: 0.6 }}
+                            className="p-3 rounded-lg bg-primary/10 text-primary flex-shrink-0"
+                          >
+                            <item.icon className="h-6 w-6" />
+                          </motion.div>
+                          <div>
+                            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                            <p className="text-muted-foreground">{item.description}</p>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                          <p className="text-muted-foreground">{item.description}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="order-1 lg:order-2 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="order-1 lg:order-2"
+            >
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-primary/10 rounded-2xl blur-2xl"></div>
-                <img 
-                  src={servicesImage} 
-                  alt="Professional accountant at work" 
+                {/* Animated gradient blob */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 180, 0]
+                  }}
+                  transition={{ duration: 15, repeat: Infinity }}
+                  className="absolute -inset-8 bg-gradient-to-r from-primary/20 to-primary/10 rounded-3xl blur-3xl"
+                />
+                
+                <motion.img 
+                  src={professionalImage} 
+                  alt="Professional accountant" 
                   className="relative rounded-2xl shadow-2xl w-full h-auto"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.4 }}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 relative overflow-hidden">
+      {/* Modern Approach Section with Parallax */}
+      <section className="py-24 md:py-32 relative overflow-hidden bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in-up">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-primary/20 rounded-2xl blur-2xl"></div>
-                <img 
+                <motion.div
+                  animate={{
+                    scale: [1, 1.15, 1],
+                    rotate: [0, -180, 0]
+                  }}
+                  transition={{ duration: 18, repeat: Infinity }}
+                  className="absolute -inset-8 bg-gradient-to-l from-primary/10 to-primary/20 rounded-3xl blur-3xl"
+                />
+                
+                <motion.img 
                   src={officeImage} 
                   alt="Modern office workspace" 
                   className="relative rounded-2xl shadow-2xl w-full h-auto"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.4 }}
                 />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
               <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
                 <span className="text-sm font-medium text-primary">Our Approach</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Modern Accounting for Modern Business</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Modern Accounting for Modern Business</h2>
               <p className="text-lg text-muted-foreground mb-6">
                 We combine traditional expertise with cutting-edge technology to deliver accounting services 
                 that truly make a difference to your business.
@@ -188,28 +300,79 @@ export default function HomePage() {
                 Our cloud-based systems give you real-time access to your financial data, while our experienced 
                 team provides the strategic insights you need to make informed decisions.
               </p>
-              <ul className="space-y-3">
-                <li className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-muted-foreground">Real-time financial reporting and insights</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-muted-foreground">Proactive tax planning and advice</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <span className="text-muted-foreground">Dedicated support when you need it</span>
-                </li>
-              </ul>
-            </div>
+              
+              <div className="space-y-4">
+                {[
+                  "Real-time financial reporting and insights",
+                  "Proactive tax planning and advice",
+                  "Dedicated support when you need it"
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ x: 10 }}
+                    className="flex items-center gap-3"
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.2, rotate: 180 }}
+                      className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"
+                    >
+                      <div className="w-3 h-3 rounded-full bg-primary"></div>
+                    </motion.div>
+                    <span className="text-muted-foreground">{item}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Team Success Section */}
+      <section className="py-24 relative overflow-hidden">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute w-96 h-96 bg-primary/5 rounded-full blur-3xl bottom-0 right-0"
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-3xl mx-auto mb-12"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Your Success is Our Success</h2>
+            <p className="text-lg text-muted-foreground">
+              When you succeed, we celebrate with you. Our team is dedicated to helping your business thrive.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative max-w-4xl mx-auto"
+          >
+            <motion.div
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 10, repeat: Infinity }}
+              className="absolute -inset-6 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5 rounded-3xl blur-3xl"
+            />
+            <img 
+              src={teamCelebrationImage} 
+              alt="Team celebrating success" 
+              className="relative rounded-2xl shadow-2xl w-full h-auto"
+            />
+          </motion.div>
         </div>
       </section>
 
