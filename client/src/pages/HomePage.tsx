@@ -2,6 +2,7 @@ import ParallaxHero from "@/components/ParallaxHero";
 import AnimatedServiceCard from "@/components/AnimatedServiceCard";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import InteractiveTaxCalculator from "@/components/InteractiveTaxCalculator";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import CTASection from "@/components/CTASection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calculator, FileText, Users, ShieldCheck, TrendingUp, Briefcase, Award, Clock, Target, Heart } from "lucide-react";
@@ -375,6 +376,8 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      <TestimonialCarousel />
 
       <CTASection
         title="Ready to Get Started?"
