@@ -33,9 +33,9 @@ export default function Footer() {
               {services.map((item) => (
                 <li key={item.name}>
                   <Link href={item.href}>
-                    <a className="text-sm text-muted-foreground hover:text-foreground" data-testid={`link-footer-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <span className="text-sm text-muted-foreground hover:text-foreground cursor-pointer transition-colors" data-testid={`link-footer-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
                       {item.name}
-                    </a>
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -48,9 +48,9 @@ export default function Footer() {
               {company.map((item) => (
                 <li key={item.name}>
                   <Link href={item.href}>
-                    <a className="text-sm text-muted-foreground hover:text-foreground" data-testid={`link-footer-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <span className="text-sm text-muted-foreground hover:text-foreground cursor-pointer transition-colors" data-testid={`link-footer-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
                       {item.name}
-                    </a>
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -62,13 +62,13 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
                 <Phone className="h-4 w-4 mt-0.5 text-muted-foreground" />
-                <a href="tel:02085144953" className="text-sm text-muted-foreground hover:text-foreground" data-testid="link-footer-phone">
+                <a href="tel:02085144953" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-phone">
                   0208 514 4953
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-0.5 text-muted-foreground" />
-                <a href="mailto:info@rochvilles.co.uk" className="text-sm text-muted-foreground hover:text-foreground" data-testid="link-footer-email">
+                <a href="mailto:info@rochvilles.co.uk" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-email">
                   info@rochvilles.co.uk
                 </a>
               </li>
@@ -87,10 +87,10 @@ export default function Footer() {
             © {new Date().getFullYear()} Rochvilles & Co. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground" data-testid="link-privacy">
+            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-privacy">
               Privacy Policy
             </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground" data-testid="link-terms">
+            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-terms">
               Terms of Service
             </a>
           </div>
