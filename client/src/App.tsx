@@ -16,55 +16,50 @@ import FeesPage from "@/pages/FeesPage";
 import ContactPage from "@/pages/ContactPage";
 import NotFound from "@/pages/not-found";
 
-function Router() {
+function Router({ darkMode, toggleDarkMode }: { darkMode: boolean; toggleDarkMode: () => void }) {
   return (
-    <Switch>
-      <Route path="/" component={HomePage} />
-      <Route path="/services" component={ServicesPage} />
-      <Route path="/tax-tips" component={TaxTipsPage} />
-      <Route path="/contractors-guide" component={ContractorsGuidePage} />
-      <Route path="/compliance" component={CompliancePage} />
-      <Route path="/financial-services" component={FinancialServicesPage} />
-      <Route path="/fees" component={FeesPage} />
-      <Route path="/contact" component={ContactPage} />
-      <Route component={NotFound} />
-    </Switch>
+    <div className="flex flex-col min-h-screen">
+      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <main className="flex-1">
+        <Switch>
+          <Route path="/" component={HomePage} />
+          <Route path="/services" component={ServicesPage} />
+          <Route path="/tax-tips" component={TaxTipsPage} />
+          <Route path="/contractors-guide" component={ContractorsGuidePage} />
+          <Route path="/compliance" component={CompliancePage} />
+          <Route path="/financial-services" component={FinancialServicesPage} />
+          <Route path="/fees" component={FeesPage} />
+          <Route path="/contact" component={ContactPage} />
+          <Route component={NotFound} />
+        </Switch>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    return saved ? JSON.parse(saved) : false;
+  });
 
   useEffect(() => {
-    const isDark = localStorage.getItem("darkMode") === "true";
-    setDarkMode(isDark);
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    localStorage.setItem("darkMode", String(newDarkMode));
-    if (newDarkMode) {
-      document.documentElement.classList.add("dark");
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove('dark');
     }
-  };
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="flex flex-col min-h-screen">
-          <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-          <main className="flex-1">
-            <Router />
-          </main>
-          <Footer />
-        </div>
         <Toaster />
+        <Router darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </TooltipProvider>
     </QueryClientProvider>
   );
