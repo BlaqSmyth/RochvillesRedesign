@@ -1,41 +1,10 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ArrowRight, CheckCircle2, TrendingUp, Shield, Users, Sparkles, DollarSign, Phone, Mail, Calendar, Award, FileText, Calculator, BadgeCheck, Star } from "lucide-react";
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { ArrowRight, CheckCircle2, TrendingUp, Shield, Users, Sparkles, DollarSign, Phone, Mail, Calendar, Award, FileText, Calculator } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef } from "react";
 import heroImage from "@assets/stock_images/professional_busines_f585c442.jpg";
-
-// Counter animation hook
-function useCounter(end: number, duration: number = 2000) {
-  const [count, setCount] = useState(0);
-  const countRef = useRef(null);
-  const isInView = useInView(countRef, { once: true });
-
-  useEffect(() => {
-    if (!isInView) return;
-    
-    let startTime: number;
-    let animationFrame: number;
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      
-      setCount(Math.floor(progress * end));
-      
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [end, duration, isInView]);
-
-  return { count, countRef };
-}
 
 export default function ParallaxHero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -54,25 +23,11 @@ export default function ParallaxHero() {
   const opacity = useTransform(smoothProgress, [0, 0.5, 1], [1, 0.8, 0]);
   const scale = useTransform(smoothProgress, [0, 1], [1, 1.2]);
 
-  const clientsCount = useCounter(500);
-  const yearsCount = useCounter(15);
-  const savingsCount = useCounter(5);
-
-  const certifications = [
-    { name: "ACCA", subtext: "Certified" },
-    { name: "ICAEW", subtext: "Member" },
-    { name: "AAT", subtext: "Licensed" }
+  const trustPoints = [
+    { text: "Trusted by 500+ businesses", icon: Users },
+    { text: "Expert tax planning", icon: TrendingUp },
+    { text: "Compliance guaranteed", icon: Shield }
   ];
-
-  // Particle positions
-  const particles = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    x: `${Math.random() * 100}%`,
-    y: `${Math.random() * 100}%`,
-    size: Math.random() * 6 + 2,
-    duration: Math.random() * 20 + 15,
-    delay: Math.random() * 5
-  }));
 
   const floatingElements = [
     { Icon: TrendingUp, delay: 0, x: "10%", y: "20%" },
@@ -143,33 +98,6 @@ export default function ParallaxHero() {
           }}
           className="absolute w-[500px] h-[500px] bg-gradient-to-t from-primary-foreground/5 to-transparent rounded-full blur-3xl bottom-0 left-1/2"
         />
-      </div>
-
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute rounded-full bg-primary-foreground/20"
-            style={{
-              left: particle.x,
-              top: particle.y,
-              width: particle.size,
-              height: particle.size,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0.2, 0.5, 0.2],
-              scale: [1, 1.5, 1]
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              delay: particle.delay,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
       </div>
 
       {/* Floating Interactive Icons */}
@@ -282,7 +210,7 @@ export default function ParallaxHero() {
             </Link>
           </motion.div>
 
-          {/* Animated Stats with Counter */}
+          {/* Trust points with stagger animation */}
           <motion.div 
             initial="hidden"
             animate="visible"
@@ -296,73 +224,19 @@ export default function ParallaxHero() {
             }}
             className="flex flex-wrap gap-4 mb-8"
           >
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 }
-              }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md px-5 py-3 rounded-full border border-primary-foreground/20 shadow-lg cursor-pointer" 
-              data-testid="trust-point-0"
-            >
-              <Users className="h-5 w-5 text-green-400" />
-              <span className="text-sm font-medium text-primary-foreground/90" ref={clientsCount.countRef}>
-                Trusted by {clientsCount.count}+ businesses
-              </span>
-            </motion.div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 }
-              }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md px-5 py-3 rounded-full border border-primary-foreground/20 shadow-lg cursor-pointer" 
-              data-testid="trust-point-1"
-            >
-              <TrendingUp className="h-5 w-5 text-green-400" />
-              <span className="text-sm font-medium text-primary-foreground/90" ref={yearsCount.countRef}>
-                {yearsCount.count}+ years experience
-              </span>
-            </motion.div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 }
-              }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md px-5 py-3 rounded-full border border-primary-foreground/20 shadow-lg cursor-pointer" 
-              data-testid="trust-point-2"
-            >
-              <Shield className="h-5 w-5 text-green-400" />
-              <span className="text-sm font-medium text-primary-foreground/90" ref={savingsCount.countRef}>
-                £{savingsCount.count}M+ saved
-              </span>
-            </motion.div>
-          </motion.div>
-
-          {/* Professional Certifications Badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
-            className="flex flex-wrap gap-3 mb-8"
-          >
-            {certifications.map((cert, index) => (
+            {trustPoints.map((point, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-md px-5 py-3 rounded-full border border-primary-foreground/20 shadow-lg cursor-pointer" 
+                data-testid={`trust-point-${index}`}
               >
-                <Badge 
-                  variant="outline" 
-                  className="bg-primary-foreground/15 border-primary-foreground/30 text-primary-foreground px-4 py-2 text-sm font-semibold shadow-lg backdrop-blur-sm"
-                  data-testid={`cert-badge-${index}`}
-                >
-                  <BadgeCheck className="h-4 w-4 mr-2" />
-                  {cert.name} <span className="ml-1 text-xs opacity-80">{cert.subtext}</span>
-                </Badge>
+                <point.icon className="h-5 w-5 text-green-400" />
+                <span className="text-sm font-medium text-primary-foreground/90">{point.text}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -380,23 +254,13 @@ export default function ParallaxHero() {
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Card className="relative overflow-hidden bg-primary-foreground/25 backdrop-blur-md border-2 border-primary-foreground/40 hover-elevate active-elevate-2 cursor-pointer shadow-xl">
+                  <Card className="bg-primary-foreground/25 backdrop-blur-md border-2 border-primary-foreground/40 hover-elevate active-elevate-2 cursor-pointer shadow-xl">
                     <CardContent className="p-5 flex items-center gap-3">
-                      <motion.div 
-                        className="p-3 rounded-lg bg-primary-foreground/30"
-                        whileHover={{ scale: 1.1 }}
-                      >
+                      <div className="p-3 rounded-lg bg-primary-foreground/30">
                         <service.icon className="h-6 w-6 text-primary-foreground" />
-                      </motion.div>
+                      </div>
                       <span className="font-semibold text-primary-foreground text-sm">{service.label}</span>
                     </CardContent>
-                    {/* Glow effect on hover */}
-                    <motion.div
-                      className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                      style={{
-                        background: "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)"
-                      }}
-                    />
                   </Card>
                 </motion.div>
               </Link>
