@@ -21,7 +21,7 @@ import contractorImage from "@assets/stock_images/freelancer_contracto_09d92917.
 import complianceImage from "@assets/stock_images/compliance_audit_doc_4d2a5d70.jpg";
 import officeImage from "@assets/stock_images/modern_office_interi_001cee9b.jpg";
 import teamCelebrationImage from "@assets/stock_images/diverse_business_tea_09553b19.jpg";
-import whyChooseUsImage from "@assets/istockphoto-1264934416-612x612_1760484133479.jpg";
+import whyChooseUsImage from "@assets/qualifications_664632699-web_1760484365191.jpg";
 
 export default function HomePage() {
   const servicesRef = useRef(null);
