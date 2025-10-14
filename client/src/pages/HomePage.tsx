@@ -20,8 +20,8 @@ import growthImage from "@assets/stock_images/business_growth_succ_97d5375f.jpg"
 import contractorImage from "@assets/stock_images/freelancer_contracto_09d92917.jpg";
 import complianceImage from "@assets/stock_images/compliance_audit_doc_4d2a5d70.jpg";
 import officeImage from "@assets/stock_images/modern_office_interi_001cee9b.jpg";
-import professionalImage from "@assets/stock_images/professional_busines_db70ad20.jpg";
 import teamCelebrationImage from "@assets/stock_images/diverse_business_tea_09553b19.jpg";
+import whyChooseUsImage from "@assets/istockphoto-1264934416-612x612_1760484133479.jpg";
 
 export default function HomePage() {
   const servicesRef = useRef(null);
@@ -254,8 +254,8 @@ export default function HomePage() {
                 />
                 
                 <motion.img 
-                  src={professionalImage} 
-                  alt="Professional accountant" 
+                  src={whyChooseUsImage} 
+                  alt="Team collaboration and financial planning" 
                   className="relative rounded-2xl shadow-2xl w-full h-auto"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.4 }}
