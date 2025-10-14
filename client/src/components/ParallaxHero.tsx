@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, TrendingUp, Shield, Users, Sparkles, DollarSign } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, CheckCircle2, TrendingUp, Shield, Users, Sparkles, DollarSign, Phone, Mail, Calendar, Award, FileText, Calculator } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import heroImage from "@assets/stock_images/professional_busines_f585c442.jpg";
@@ -33,6 +34,12 @@ export default function ParallaxHero() {
     { Icon: Shield, delay: 0.5, x: "80%", y: "30%" },
     { Icon: DollarSign, delay: 1, x: "15%", y: "70%" },
     { Icon: Sparkles, delay: 1.5, x: "85%", y: "65%" }
+  ];
+
+  const quickServices = [
+    { icon: Calculator, label: "Tax Planning", href: "/services" },
+    { icon: FileText, label: "Bookkeeping", href: "/services" },
+    { icon: TrendingUp, label: "Payroll", href: "/services" }
   ];
 
   return (
@@ -215,7 +222,7 @@ export default function ParallaxHero() {
                 }
               }
             }}
-            className="flex flex-wrap gap-4"
+            className="flex flex-wrap gap-4 mb-8"
           >
             {trustPoints.map((point, index) => (
               <motion.div
@@ -233,7 +240,77 @@ export default function ParallaxHero() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Quick Service Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6"
+          >
+            {quickServices.map((service, index) => (
+              <Link key={index} href={service.href}>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Card className="bg-primary-foreground/10 backdrop-blur-md border-primary-foreground/20 hover-elevate active-elevate-2 cursor-pointer">
+                    <CardContent className="p-4 flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary-foreground/20">
+                        <service.icon className="h-5 w-5 text-primary-foreground" />
+                      </div>
+                      <span className="font-medium text-primary-foreground">{service.label}</span>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Link>
+            ))}
+          </motion.div>
         </div>
+
+        {/* Floating Contact Widget */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2"
+        >
+          <Card className="bg-primary-foreground/10 backdrop-blur-md border-primary-foreground/20 shadow-2xl w-64">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Award className="h-5 w-5 text-primary-foreground" />
+                <h3 className="font-semibold text-primary-foreground">Get in Touch</h3>
+              </div>
+              <div className="space-y-3">
+                <a 
+                  href="tel:02085144953" 
+                  className="flex items-center gap-3 p-3 rounded-lg bg-primary-foreground/10 hover-elevate active-elevate-2 transition-all group"
+                  data-testid="hero-contact-phone"
+                >
+                  <Phone className="h-4 w-4 text-primary-foreground group-hover:scale-110 transition-transform" />
+                  <div>
+                    <div className="text-xs text-primary-foreground/70">Call us</div>
+                    <div className="text-sm font-medium text-primary-foreground">0208 514 4953</div>
+                  </div>
+                </a>
+                <Link href="/contact">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center gap-3 p-3 rounded-lg bg-primary-foreground/10 hover-elevate active-elevate-2 transition-all cursor-pointer"
+                    data-testid="hero-contact-consultation"
+                  >
+                    <Calendar className="h-4 w-4 text-primary-foreground" />
+                    <div>
+                      <div className="text-xs text-primary-foreground/70">Free consultation</div>
+                      <div className="text-sm font-medium text-primary-foreground">Book now</div>
+                    </div>
+                  </motion.div>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}
