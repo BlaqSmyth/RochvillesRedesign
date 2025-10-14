@@ -19,9 +19,9 @@ import dataImage from "@assets/stock_images/digital_technology_d_8c488575.jpg";
 import growthImage from "@assets/stock_images/business_growth_succ_97d5375f.jpg";
 import contractorImage from "@assets/stock_images/freelancer_contracto_09d92917.jpg";
 import complianceImage from "@assets/stock_images/compliance_audit_doc_4d2a5d70.jpg";
-import officeImage from "@assets/stock_images/modern_office_interi_001cee9b.jpg";
 import teamCelebrationImage from "@assets/stock_images/diverse_business_tea_09553b19.jpg";
 import whyChooseUsImage from "@assets/qualifications_664632699-web_1760484365191.jpg";
+import ourApproachImage from "@assets/istockphoto-2171857890-612x612_1760484996229.jpg";
 
 export default function HomePage() {
   const servicesRef = useRef(null);
@@ -287,8 +287,8 @@ export default function HomePage() {
                 />
                 
                 <motion.img 
-                  src={officeImage} 
-                  alt="Modern office workspace" 
+                  src={ourApproachImage} 
+                  alt="Modern technology-driven accounting with real-time financial insights" 
                   className="relative rounded-2xl shadow-2xl w-full h-auto"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.4 }}
