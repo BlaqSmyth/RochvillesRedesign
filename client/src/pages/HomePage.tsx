@@ -4,6 +4,10 @@ import AnimatedStatsSection from "@/components/AnimatedStatsSection";
 import InteractiveTaxCalculator from "@/components/InteractiveTaxCalculator";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import CTASection from "@/components/CTASection";
+import FAQAccordion from "@/components/FAQAccordion";
+import FloatingCTA from "@/components/FloatingCTA";
+import ScrollProgress from "@/components/ScrollProgress";
+import TrustBadges from "@/components/TrustBadges";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calculator, FileText, Users, ShieldCheck, TrendingUp, Briefcase, Award, Clock, Target, Heart } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -34,42 +38,48 @@ export default function HomePage() {
       title: "Tax Planning & Returns",
       description: "Expert tax planning to minimize your liability while ensuring full HMRC compliance. We handle all types of tax returns for individuals and businesses.",
       href: "/services",
-      image: taxImage
+      image: taxImage,
+      popular: true
     },
     {
       icon: FileText,
       title: "Bookkeeping & Accounts",
       description: "Comprehensive bookkeeping services and statutory accounts preparation. Keep your financial records accurate and up-to-date.",
       href: "/services",
-      image: dataImage
+      image: dataImage,
+      popular: false
     },
     {
       icon: Users,
       title: "Payroll Services",
       description: "Efficient payroll processing, RTI submissions, and pension scheme administration. We ensure your employees are paid accurately and on time.",
       href: "/services",
-      image: strategyImage
+      image: strategyImage,
+      popular: false
     },
     {
       icon: Briefcase,
       title: "Contractor Accounting",
       description: "Specialized accounting for contractors and freelancers. IR35 compliance, limited company management, and optimal tax structures.",
       href: "/contractors-guide",
-      image: contractorImage
+      image: contractorImage,
+      popular: true
     },
     {
       icon: ShieldCheck,
       title: "Compliance & Audit",
       description: "Ensure your business meets all regulatory requirements. Audit support, compliance reviews, and statutory filings.",
       href: "/compliance",
-      image: complianceImage
+      image: complianceImage,
+      popular: false
     },
     {
       icon: TrendingUp,
       title: "Financial Planning",
       description: "Strategic financial advice to help your business grow. Investment planning, retirement planning, and wealth management.",
       href: "/financial-services",
-      image: growthImage
+      image: growthImage,
+      popular: false
     }
   ];
 
@@ -105,9 +115,12 @@ export default function HomePage() {
 
   return (
     <div>
+      <ScrollProgress />
       <ParallaxHero />
       
       <AnimatedStatsSection stats={stats} />
+      
+      <TrustBadges />
 
       {/* Services Section */}
       <section ref={servicesRef} className="py-24 md:py-32 relative overflow-hidden">
@@ -379,12 +392,16 @@ export default function HomePage() {
 
       <TestimonialCarousel />
 
+      <FAQAccordion />
+
       <CTASection
         title="Ready to Get Started?"
         description="Let our expert accountants help you achieve your financial goals. Contact us today for a free consultation."
         buttonText="Contact Us Today"
         buttonHref="/contact"
       />
+
+      <FloatingCTA />
     </div>
   );
 }

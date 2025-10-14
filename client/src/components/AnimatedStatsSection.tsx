@@ -98,31 +98,45 @@ export default function AnimatedStatsSection({ stats }: AnimatedStatsSectionProp
                 type: "spring",
                 stiffness: 100
               }}
-              whileHover={{ scale: 1.1, y: -10 }}
-              className="text-center group"
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="text-center group relative"
               data-testid={`stat-${index}`}
             >
-              <motion.div
-                className="relative inline-block mb-4"
-              >
-                {/* Animated ring */}
+              {/* Card background with subtle elevation */}
+              <div className="relative p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 hover-elevate transition-all duration-300">
                 <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 rounded-full border-2 border-primary/20 scale-110"
-                />
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 rounded-full border-2 border-primary/10 scale-125"
-                />
-                
-                <div className="relative text-4xl md:text-5xl font-bold text-primary">
-                  <AnimatedCounter value={stat.value} inView={isInView} />
+                  className="relative inline-block mb-4"
+                >
+                  {/* Animated ring */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 rounded-full border-2 border-primary/20 scale-110"
+                  />
+                  <motion.div
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 rounded-full border-2 border-primary/10 scale-125"
+                  />
+                  
+                  <div className="relative text-4xl md:text-5xl font-bold text-primary">
+                    <AnimatedCounter value={stat.value} inView={isInView} />
+                  </div>
+                </motion.div>
+                <div className="text-sm md:text-base text-muted-foreground group-hover:text-foreground transition-colors mb-3">
+                  {stat.label}
                 </div>
-              </motion.div>
-              <div className="text-sm md:text-base text-muted-foreground group-hover:text-foreground transition-colors">
-                {stat.label}
+                
+                {/* Progress bar */}
+                <div className="w-full h-1.5 bg-muted/50 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-primary to-primary/70"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "100%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: index * 0.1 + 0.5, ease: "easeOut" }}
+                  />
+                </div>
               </div>
             </motion.div>
           ))}

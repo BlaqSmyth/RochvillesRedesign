@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, LucideIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, LucideIcon, Star } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 
@@ -11,6 +12,7 @@ interface AnimatedServiceCardProps {
   href?: string;
   image?: string;
   index: number;
+  popular?: boolean;
 }
 
 export default function AnimatedServiceCard({ 
@@ -19,7 +21,8 @@ export default function AnimatedServiceCard({
   description, 
   href,
   image,
-  index 
+  index,
+  popular = false
 }: AnimatedServiceCardProps) {
   return (
     <motion.div
@@ -33,6 +36,21 @@ export default function AnimatedServiceCard({
         className="hover-elevate transition-all duration-500 h-full flex flex-col group cursor-pointer border-2 hover:border-primary/50 hover:shadow-2xl relative overflow-hidden" 
         data-testid={`card-service-${title.toLowerCase().replace(/\s+/g, '-')}`}
       >
+        {/* Most Popular Badge */}
+        {popular && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0, rotate: -12 }}
+            animate={{ opacity: 1, scale: 1, rotate: -12 }}
+            transition={{ delay: index * 0.1 + 0.5, type: "spring" }}
+            className="absolute top-4 right-4 z-20"
+          >
+            <Badge variant="default" className="bg-primary text-primary-foreground shadow-lg px-3 py-1 flex items-center gap-1">
+              <Star className="h-3 w-3 fill-current" />
+              Most Popular
+            </Badge>
+          </motion.div>
+        )}
+
         {/* Animated gradient background */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
