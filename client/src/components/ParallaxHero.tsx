@@ -266,51 +266,51 @@ export default function ParallaxHero() {
               </Link>
             ))}
           </motion.div>
-        </div>
 
-        {/* Floating Contact Widget */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="hidden xl:block absolute right-4 top-1/2 -translate-y-1/2"
-        >
-          <Card className="bg-primary-foreground/10 backdrop-blur-md border-primary-foreground/20 shadow-2xl w-64">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Award className="h-5 w-5 text-primary-foreground" />
-                <h3 className="font-semibold text-primary-foreground">Get in Touch</h3>
-              </div>
-              <div className="space-y-3">
-                <a 
-                  href="tel:02085144953" 
-                  className="flex items-center gap-3 p-3 rounded-lg bg-primary-foreground/10 hover-elevate active-elevate-2 transition-all group"
-                  data-testid="hero-contact-phone"
-                >
-                  <Phone className="h-4 w-4 text-primary-foreground group-hover:scale-110 transition-transform" />
-                  <div>
-                    <div className="text-xs text-primary-foreground/70">Call us</div>
-                    <div className="text-sm font-medium text-primary-foreground">0208 514 4953</div>
-                  </div>
-                </a>
-                <Link href="/contact">
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-primary-foreground/10 hover-elevate active-elevate-2 transition-all cursor-pointer"
-                    data-testid="hero-contact-consultation"
+          {/* Contact Widget Below Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="flex justify-center sm:justify-start"
+          >
+            <Card className="bg-primary-foreground/25 backdrop-blur-md border-2 border-primary-foreground/40 shadow-2xl max-w-md w-full">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <Award className="h-5 w-5 text-primary-foreground" />
+                  <h3 className="font-semibold text-primary-foreground">Get in Touch</h3>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a 
+                    href="tel:02085144953" 
+                    className="flex-1 flex items-center gap-3 p-3 rounded-lg bg-primary-foreground/20 hover-elevate active-elevate-2 transition-all group"
+                    data-testid="hero-contact-phone"
                   >
-                    <Calendar className="h-4 w-4 text-primary-foreground" />
+                    <Phone className="h-5 w-5 text-primary-foreground group-hover:scale-110 transition-transform" />
                     <div>
-                      <div className="text-xs text-primary-foreground/70">Free consultation</div>
-                      <div className="text-sm font-medium text-primary-foreground">Book now</div>
+                      <div className="text-xs text-primary-foreground/80">Call us</div>
+                      <div className="text-sm font-semibold text-primary-foreground">0208 514 4953</div>
                     </div>
-                  </motion.div>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+                  </a>
+                  <Link href="/contact" className="flex-1">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="h-full flex items-center gap-3 p-3 rounded-lg bg-primary-foreground/20 hover-elevate active-elevate-2 transition-all cursor-pointer"
+                      data-testid="hero-contact-consultation"
+                    >
+                      <Calendar className="h-5 w-5 text-primary-foreground" />
+                      <div>
+                        <div className="text-xs text-primary-foreground/80">Free consultation</div>
+                        <div className="text-sm font-semibold text-primary-foreground">Book now</div>
+                      </div>
+                    </motion.div>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* Scroll indicator */}
