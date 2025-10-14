@@ -273,7 +273,7 @@ export default function ParallaxHero() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2"
+          className="hidden xl:block absolute right-4 top-1/2 -translate-y-1/2"
         >
           <Card className="bg-primary-foreground/10 backdrop-blur-md border-primary-foreground/20 shadow-2xl w-64">
             <CardContent className="p-6">
