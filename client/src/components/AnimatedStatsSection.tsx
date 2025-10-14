@@ -128,7 +128,14 @@ export default function AnimatedStatsSection({ stats }: AnimatedStatsSectionProp
                 </div>
                 
                 {/* Progress bar */}
-                <div className="w-full h-1.5 bg-muted/50 rounded-full overflow-hidden">
+                <div 
+                  className="w-full h-1.5 bg-muted/50 rounded-full overflow-hidden"
+                  role="progressbar"
+                  aria-valuenow={100}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  data-testid={`stat-progress-${index}`}
+                >
                   <motion.div
                     className="h-full bg-gradient-to-r from-primary to-primary/70"
                     initial={{ width: 0 }}
