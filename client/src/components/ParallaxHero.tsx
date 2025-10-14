@@ -37,9 +37,9 @@ export default function ParallaxHero() {
   ];
 
   const quickServices = [
-    { icon: Calculator, label: "Tax Planning", href: "/services" },
-    { icon: FileText, label: "Bookkeeping", href: "/services" },
-    { icon: TrendingUp, label: "Payroll", href: "/services" }
+    { icon: Calculator, label: "Chartered Management Consultants", href: "/services" },
+    { icon: FileText, label: "Accountants", href: "/services" },
+    { icon: TrendingUp, label: "Registered Tax Advisors", href: "/services" }
   ];
 
   return (
@@ -254,12 +254,12 @@ export default function ParallaxHero() {
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Card className="bg-primary-foreground/10 backdrop-blur-md border-primary-foreground/20 hover-elevate active-elevate-2 cursor-pointer">
-                    <CardContent className="p-4 flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-primary-foreground/20">
-                        <service.icon className="h-5 w-5 text-primary-foreground" />
+                  <Card className="bg-primary-foreground/25 backdrop-blur-md border-2 border-primary-foreground/40 hover-elevate active-elevate-2 cursor-pointer shadow-xl">
+                    <CardContent className="p-5 flex items-center gap-3">
+                      <div className="p-3 rounded-lg bg-primary-foreground/30">
+                        <service.icon className="h-6 w-6 text-primary-foreground" />
                       </div>
-                      <span className="font-medium text-primary-foreground">{service.label}</span>
+                      <span className="font-semibold text-primary-foreground text-sm">{service.label}</span>
                     </CardContent>
                   </Card>
                 </motion.div>
