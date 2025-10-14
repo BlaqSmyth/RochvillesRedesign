@@ -36,7 +36,7 @@ export default function ParallaxHero() {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
+    <section ref={ref} className="relative min-h-[65vh] md:min-h-[70vh] flex items-center overflow-hidden">
       {/* Parallax Background Image */}
       <motion.div 
         style={{ y, scale }} 
@@ -120,7 +120,7 @@ export default function ParallaxHero() {
       
       <motion.div 
         style={{ opacity }}
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 z-10"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10"
       >
         <div className="max-w-3xl">
           {/* Badge with entrance animation */}
