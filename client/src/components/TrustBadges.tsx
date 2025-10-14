@@ -31,7 +31,7 @@ const badges = [
 
 export default function TrustBadges() {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden bg-gradient-to-br from-muted/30 via-background to-muted/20">
       {/* Animated background gradient orbs */}
       <motion.div
         animate={{
