@@ -9,6 +9,7 @@ import FloatingCTA from "@/components/FloatingCTA";
 import ScrollProgress from "@/components/ScrollProgress";
 import TrustBadges from "@/components/TrustBadges";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Calculator, FileText, Users, ShieldCheck, TrendingUp, Briefcase, Award, Clock, Target, Heart } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
@@ -152,6 +153,37 @@ export default function HomePage() {
               <AnimatedServiceCard key={index} {...service} index={index} />
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-12 text-center"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button
+                size="lg"
+                asChild
+                className="shadow-lg"
+                data-testid="button-view-all-services"
+              >
+                <a href="/services">
+                  View All Services
+                  <motion.span
+                    className="ml-2"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    →
+                  </motion.span>
+                </a>
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
