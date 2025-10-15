@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Mail, Phone, MapPin } from "lucide-react";
 import ifaLogo from "@assets/institute-of-financial-accountants-logo-png_seeklogo-508022_1760548920320.png";
+import rochvillesLogo from "@assets/rochvilles-logo.png";
 
 export default function Footer() {
   const services = [
@@ -22,7 +23,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">Rochvilles & Co</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src={rochvillesLogo} 
+                alt="Rochvilles & Co logo" 
+                className="h-10 w-10 flex-shrink-0"
+              />
+              <h3 className="text-lg font-semibold">Rochvilles & Co</h3>
+            </div>
             <p className="text-sm text-muted-foreground mb-4">
               Expert accountants serving businesses in Ilford, Essex and London with professional tax, compliance, and financial services.
             </p>

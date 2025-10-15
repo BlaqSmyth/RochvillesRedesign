@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Moon, Sun } from "lucide-react";
+import rochvillesLogo from "@assets/rochvilles-logo.png";
 
 interface HeaderProps {
   darkMode: boolean;
@@ -32,6 +33,11 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
           {/* Logo Section with Tagline */}
           <Link href="/" data-testid="link-logo">
             <div className="flex items-center gap-3 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-4 py-2 -ml-4 transition-all group min-w-0">
+              <img 
+                src={rochvillesLogo} 
+                alt="Rochvilles & Co logo" 
+                className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 transition-transform group-hover:scale-105"
+              />
               <div className="flex flex-col min-w-0">
                 <div className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500 whitespace-nowrap">
                   Rochvilles & Co. Accountants
