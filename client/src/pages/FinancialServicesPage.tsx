@@ -11,16 +11,16 @@ import growthImage from "@assets/stock_images/investment_growth_ch_582e8251.jpg"
 export default function FinancialServicesPage() {
   const coreServices = [
     {
-      icon: Home,
-      title: "Residential & Commercial Mortgages",
-      description: "Authorized by the Financial Services Authority to conduct residential mortgage business. We provide whole-of-market mortgage advice, ensuring you get the best deal available.",
+      icon: Building,
+      title: "Commercial Mortgages & Loan Brokerage",
+      description: "Expert commercial finance solutions including commercial mortgages, loan brokerage, and bridging finance. We source the best commercial lending options to support your business growth and property investments.",
       features: [
-        "Whole-of-market mortgage advice",
-        "First-time buyer mortgages",
-        "Remortgage services",
-        "Buy-to-let mortgages",
         "Commercial property finance",
-        "Mortgage protection insurance"
+        "Commercial loan brokerage",
+        "Bridging finance",
+        "Business expansion loans",
+        "Property portfolio finance",
+        "Development finance"
       ],
       color: "purple"
     },
@@ -107,21 +107,21 @@ export default function FinancialServicesPage() {
 
   const mortgageServices = [
     {
-      title: "Residential Mortgages",
-      description: "Comprehensive residential mortgage advice for homeowners and first-time buyers",
-      items: ["First-time buyer mortgages", "Remortgages", "Moving home", "Buy-to-let", "Help to Buy schemes"],
-      icon: Home
-    },
-    {
       title: "Commercial Mortgages",
       description: "Specialist commercial property finance for business owners and investors",
-      items: ["Commercial property purchase", "Business premises finance", "Property portfolio loans", "Bridging finance", "Development finance"],
+      items: ["Commercial property purchase", "Business premises finance", "Property portfolio loans", "Multi-unit commercial finance", "Investment property loans"],
       icon: Building
     },
     {
-      title: "Specialist Mortgages",
-      description: "Tailored mortgage solutions for unique circumstances and requirements",
-      items: ["Self-employed mortgages", "Contractor mortgages", "Adverse credit mortgages", "Large loan mortgages", "Interest-only mortgages"],
+      title: "Commercial Loan Brokerage",
+      description: "Expert brokerage services for business loans and commercial finance",
+      items: ["Business expansion loans", "Working capital finance", "Equipment finance", "Asset-backed lending", "Commercial credit lines"],
+      icon: Briefcase
+    },
+    {
+      title: "Bridging Finance",
+      description: "Fast, flexible short-term financing for time-sensitive opportunities",
+      items: ["Property bridging loans", "Development bridging finance", "Auction finance", "Chain break solutions", "Refurbishment finance"],
       icon: Star
     }
   ];
@@ -162,8 +162,8 @@ export default function FinancialServicesPage() {
   const regulations = [
     {
       icon: BadgeCheck,
-      title: "FSA Authorized",
-      description: "Authorized by the Financial Services Authority to conduct residential mortgage business and provide regulated financial advice"
+      title: "Professional Credentials",
+      description: "Members of leading professional bodies including AIA and IFA, providing expert financial and accounting services with integrity"
     },
     {
       icon: Award,
@@ -172,13 +172,13 @@ export default function FinancialServicesPage() {
     },
     {
       icon: FileCheck,
-      title: "Whole-of-Market Advice",
-      description: "We search the entire market to find the best products and rates, not tied to any specific provider or lender"
+      title: "Independent Advice",
+      description: "We search the entire market to find the best commercial finance products and rates, not tied to any specific provider or lender"
     },
     {
       icon: Shield,
       title: "Client Protection",
-      description: "Full FCA regulation ensures your interests are protected with professional indemnity insurance and complaint procedures"
+      description: "Professional indemnity insurance and established complaint procedures ensure your interests are protected"
     }
   ];
 
@@ -225,20 +225,20 @@ export default function FinancialServicesPage() {
               >
                 <span className="text-sm font-medium text-primary flex items-center gap-2" data-testid="text-badge-financial-services">
                   <Sparkles className="w-4 h-4" />
-                  FSA Authorized Financial Services
+                  Professional Financial Services
                 </span>
               </motion.div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent" data-testid="heading-rfs-title">
                 Rochvilles Financial Services
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-6">
-                Authorized by the Financial Services Authority to provide whole-of-market financial advice. 
-                Professional financial planning, mortgage services, and wealth management tailored to your unique circumstances.
+                Professional financial planning, commercial finance, and wealth management services tailored to your unique circumstances. 
+                Expert guidance for businesses and individuals across Ilford, Essex, and London.
               </p>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3 p-3 bg-card rounded-lg border border-primary/10">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-sm font-medium">Whole-of-Market Mortgage Advice</span>
+                  <span className="text-sm font-medium">Commercial Finance Solutions</span>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-card rounded-lg border border-purple-500/10">
                   <CheckCircle2 className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
@@ -296,7 +296,7 @@ export default function FinancialServicesPage() {
             </motion.div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4" data-testid="heading-core-services">Comprehensive Financial Services</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Expert financial planning and mortgage advice to help you build, protect, and grow your wealth
+              Expert commercial finance, business advisory, and wealth management services to help your business thrive and grow
             </p>
           </motion.div>
 
@@ -362,12 +362,12 @@ export default function FinancialServicesPage() {
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-6">Expert Financial Guidance You Can Trust</h2>
             <p className="text-lg md:text-xl text-white/90 mb-8">
-              Our FSA-authorized advisors provide whole-of-market financial planning tailored to your unique goals
+              Our professional advisors provide comprehensive financial planning and commercial finance solutions tailored to your unique goals
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
                 <BadgeCheck className="w-5 h-5" />
-                <span className="font-medium">FSA Authorized</span>
+                <span className="font-medium">Professional Service</span>
               </div>
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
                 <Award className="w-5 h-5" />
@@ -396,12 +396,12 @@ export default function FinancialServicesPage() {
               className="inline-block mb-4 px-4 py-2 bg-purple-500/5 rounded-full border border-purple-500/10"
               whileHover={{ scale: 1.05 }}
             >
-              <span className="text-sm font-medium text-purple-600 dark:text-purple-400">Mortgage Expertise</span>
+              <span className="text-sm font-medium text-purple-600 dark:text-purple-400">Commercial Finance Expertise</span>
             </motion.div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4" data-testid="heading-mortgage-services">Whole-of-Market Mortgage Services</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4" data-testid="heading-mortgage-services">Commercial Finance Solutions</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              As an FSA authorized firm, we provide independent mortgage advice across the entire market. 
-              We're not tied to any lender, ensuring you get the best rates and products available.
+              Expert commercial mortgage, loan brokerage, and bridging finance services for businesses. 
+              We source competitive commercial lending solutions from across the market to support your business growth.
             </p>
           </motion.div>
 
@@ -609,13 +609,13 @@ export default function FinancialServicesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   {[
                     {
-                      title: "FSA Authorized",
-                      desc: "Fully authorized by the Financial Services Authority to provide mortgage and investment advice. Your protection is guaranteed through FCA regulation.",
+                      title: "Professional Excellence",
+                      desc: "Members of Association of International Accountants and Institute of Financial Accountants, providing expert financial services with the highest professional standards.",
                       icon: BadgeCheck
                     },
                     {
-                      title: "Whole-of-Market Access",
-                      desc: "We search the entire market to find the best products and rates. Not tied to any lender or provider, ensuring truly independent advice.",
+                      title: "Market-Wide Access",
+                      desc: "We search the entire commercial lending market to find the best products and rates. Not tied to any lender or provider, ensuring truly independent advice.",
                       icon: Star
                     },
                     {
@@ -664,9 +664,8 @@ export default function FinancialServicesPage() {
                 
                 <div className="border-t border-primary/20 pt-6">
                   <p className="text-sm text-muted-foreground italic text-center">
-                    Rochvilles Financial Services is a trading name of Rochvilles & Co. Financial advice is provided 
-                    by qualified and regulated financial advisors. Rochvilles Financial Services is authorized by the 
-                    Financial Services Authority to conduct residential mortgage business and insurance mediation activities.
+                    Rochvilles Financial Services is a trading name of Rochvilles & Co. Commercial finance and business advisory services 
+                    provided by qualified professional advisors. Members of Association of International Accountants and Institute of Financial Accountants.
                   </p>
                 </div>
               </CardContent>

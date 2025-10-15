@@ -73,32 +73,39 @@ export default function ServicesPage() {
       color: "green" as keyof typeof colorClasses
     },
     {
-      icon: Home,
-      title: "Residential & Commercial Mortgages",
-      description: "Authorized by the Financial Services Authority to conduct residential mortgage business. Rochvilles Financial Services advises on whole-of-market mortgages and insurance mediations.",
-      features: ["Whole market advice", "FSA authorized", "Mortgage applications", "Insurance mediation"],
+      icon: Building2,
+      title: "Commercial Loan Brokerage",
+      description: "Expert commercial finance solutions for businesses. We source competitive commercial loans and property finance to help your business grow and expand with confidence.",
+      features: ["Commercial property loans", "Business expansion finance", "Asset finance", "Competitive rates"],
       color: "purple" as keyof typeof colorClasses
+    },
+    {
+      icon: Banknote,
+      title: "Bridging Finance",
+      description: "Fast, flexible short-term financing solutions. Bridging loans for property purchases, development projects, and time-sensitive opportunities when quick access to capital is essential.",
+      features: ["Rapid approvals", "Property bridging loans", "Development finance", "Flexible terms"],
+      color: "orange" as keyof typeof colorClasses
     },
     {
       icon: TrendingUp,
       title: "Business Start Up",
       description: "Comprehensive start-up support to ensure you don't leap into the unknown. Guidance on business structure, tax efficiency, HMRC dealings, accounting records, legislation compliance, and authority registration.",
       features: ["Structure selection", "Business registration", "Tax setup", "Compliance guidance"],
-      color: "orange" as keyof typeof colorClasses
+      color: "red" as keyof typeof colorClasses
     },
     {
       icon: Calculator,
       title: "VAT and Capital Gains Tax",
       description: "Expert VAT registration, returns, and capital gains tax planning. We ensure compliance while maximizing available reliefs and exemptions including taper relief, indexation allowance, and annual exemptions.",
       features: ["VAT registration", "Quarterly returns", "CGT planning", "Relief optimization"],
-      color: "red" as keyof typeof colorClasses
+      color: "teal" as keyof typeof colorClasses
     },
     {
       icon: ShieldCheck,
       title: "Due Diligence",
       description: "In-depth business analysis for acquisitions. Three-year performance review, income/expenditure verification, P&L and balance sheet checks, with expert opinion on future viability.",
       features: ["Performance analysis", "Financial verification", "Viability assessment", "Expert reporting"],
-      color: "teal" as keyof typeof colorClasses
+      color: "purple" as keyof typeof colorClasses
     }
   ];
 
