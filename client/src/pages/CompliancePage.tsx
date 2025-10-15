@@ -1,8 +1,13 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { ShieldCheck, FileCheck, AlertTriangle, CheckCircle2, Users, Calculator, Wallet, FileText, Clock, Banknote, UserCheck, Receipt } from "lucide-react";
+import { ShieldCheck, FileCheck, AlertTriangle, CheckCircle2, Users, Calculator, Wallet, FileText, Clock, Banknote, UserCheck, Receipt, Award, Shield } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import { motion } from "framer-motion";
+
 import complianceImage from "@assets/stock_images/compliance_audit_doc_4d2a5d70.jpg";
+import regulatoryImage from "@assets/stock_images/regulatory_complianc_444dbc96.jpg";
+import legalComplianceImage from "@assets/stock_images/legal_compliance_doc_be784695.jpg";
+import complianceSecurityImage from "@assets/stock_images/compliance_security__fc9ac17d.jpg";
+import complianceExcellenceImage from "@assets/stock_images/compliance_excellenc_288bf283.jpg";
 
 export default function CompliancePage() {
   const complianceAreas = [
@@ -111,16 +116,33 @@ export default function CompliancePage() {
   ];
 
   return (
-    <div>
+    <div className="relative overflow-x-hidden">
+      {/* Decorative Background Elements */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-green-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background py-24 md:py-32 overflow-hidden">
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-green-500/5 to-background" />
+        
+        {/* Geometric pattern overlay */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 right-10 w-20 h-20 border-2 border-blue-500/30 rounded-lg rotate-12" />
+          <div className="absolute top-40 left-20 w-16 h-16 border-2 border-green-500/30 rounded-full" />
+          <div className="absolute bottom-20 right-1/4 w-24 h-24 border-2 border-purple-500/30 rounded-lg -rotate-12" />
+        </div>
+
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
-            rotate: [0, 180, 0]
+            rotate: [0, 180, 360]
           }}
           transition={{ duration: 20, repeat: Infinity }}
-          className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl top-0 right-0"
+          className="absolute w-96 h-96 bg-gradient-to-br from-blue-500/10 to-green-500/10 rounded-full blur-3xl top-0 -right-48"
         />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -130,17 +152,32 @@ export default function CompliancePage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
-                <span className="text-sm font-medium text-primary flex items-center gap-2">
+              <motion.div 
+                className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-green-500/10 rounded-full border border-blue-500/20"
+                whileHover={{ scale: 1.05 }}
+              >
+                <span className="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center gap-2" data-testid="text-badge-compliance">
                   <ShieldCheck className="w-4 h-4" />
                   Compliance & Standards
                 </span>
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">Stay Compliant, Stay Protected</h1>
-              <p className="text-lg md:text-xl text-muted-foreground">
+              </motion.div>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent" data-testid="heading-compliance">
+                Stay Compliant, Stay Protected
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground mb-6">
                 Ensuring your business meets all regulatory requirements. From statutory filings to tax compliance, 
                 we keep you on track and protect your business reputation.
               </p>
+              <div className="flex flex-wrap gap-3">
+                <div className="flex items-center gap-2 px-4 py-2 bg-card rounded-lg border border-blue-500/10">
+                  <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <span className="text-sm font-medium">Full Compliance</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-card rounded-lg border border-green-500/10">
+                  <Award className="w-5 h-5 text-green-600 dark:text-green-400" />
+                  <span className="text-sm font-medium">Expert Support</span>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div
@@ -151,16 +188,20 @@ export default function CompliancePage() {
               <div className="relative">
                 <motion.div
                   animate={{
-                    scale: [1, 1.1, 1],
+                    scale: [1, 1.05, 1],
                   }}
-                  transition={{ duration: 10, repeat: Infinity }}
-                  className="absolute -inset-6 bg-gradient-to-r from-primary/20 to-primary/10 rounded-2xl blur-3xl"
+                  transition={{ duration: 8, repeat: Infinity }}
+                  className="absolute -inset-6 bg-gradient-to-r from-blue-500/20 via-green-500/20 to-purple-500/20 rounded-2xl blur-2xl"
                 />
-                <img 
-                  src={complianceImage} 
-                  alt="Compliance documents" 
-                  className="relative rounded-2xl shadow-2xl w-full h-auto"
-                />
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-background">
+                  <img 
+                    src={complianceImage} 
+                    alt="Compliance documents" 
+                    className="w-full h-auto"
+                    data-testid="img-hero-compliance"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                </div>
               </div>
             </motion.div>
           </div>
@@ -168,8 +209,10 @@ export default function CompliancePage() {
       </section>
 
       {/* Compliance Services */}
-      <section className="py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 md:py-32 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-blue-500/5 to-background" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -177,6 +220,12 @@ export default function CompliancePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
+            <motion.div 
+              className="inline-block mb-4 px-4 py-2 bg-blue-500/5 rounded-full border border-blue-500/10"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Core Services</span>
+            </motion.div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">Compliance Services</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Comprehensive compliance support to keep your business in good standing with all regulatory authorities
@@ -191,15 +240,15 @@ export default function CompliancePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50 hover:shadow-xl" data-testid={`compliance-card-${index}`}>
+                <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50 hover:shadow-xl bg-gradient-to-br from-blue-500/5 to-card" data-testid={`compliance-card-${index}`}>
                   <CardHeader>
                     <div className="flex items-start gap-4">
                       <motion.div
                         whileHover={{ rotate: 360, scale: 1.1 }}
                         transition={{ duration: 0.6 }}
-                        className="p-3 rounded-lg bg-primary/10 text-primary flex-shrink-0"
+                        className="p-3 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 flex-shrink-0"
                       >
                         <area.icon className="h-6 w-6" />
                       </motion.div>
@@ -216,15 +265,55 @@ export default function CompliancePage() {
         </div>
       </section>
 
+      {/* Image Divider Section 1 */}
+      <section className="relative h-96 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={regulatoryImage} 
+            alt="Regulatory compliance standards" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-green-600/90" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center text-white px-4 max-w-4xl"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Regulatory Excellence</h2>
+            <p className="text-lg md:text-xl text-white/90 mb-8">
+              Meeting and exceeding all compliance standards for your peace of mind
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
+                <ShieldCheck className="w-5 h-5" />
+                <span className="font-medium">100% Compliant</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
+                <Award className="w-5 h-5" />
+                <span className="font-medium">Expert Team</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Umbrella Workers & Contractors Section */}
-      <section className="bg-muted/30 py-24 md:py-32 relative overflow-hidden">
+      <section className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-br from-muted/30 via-background to-muted/20">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-10 w-32 h-32 border-4 border-green-500/30 rounded-full" />
+          <div className="absolute bottom-20 right-20 w-24 h-24 border-4 border-blue-500/30 rounded-lg rotate-45" />
+        </div>
+
         <motion.div
           animate={{
-            x: [0, 100, 0],
+            x: [0, 50, 0],
             y: [0, -50, 0]
           }}
           transition={{ duration: 15, repeat: Infinity }}
-          className="absolute w-96 h-96 bg-primary/5 rounded-full blur-3xl bottom-0 right-0"
+          className="absolute w-96 h-96 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-full blur-3xl bottom-0 -right-48"
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -235,6 +324,12 @@ export default function CompliancePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
+            <motion.div 
+              className="inline-block mb-4 px-4 py-2 bg-green-500/5 rounded-full border border-green-500/10"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="text-sm font-medium text-green-600 dark:text-green-400">Contractor Services</span>
+            </motion.div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">Umbrella Workers & Contractors</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Comprehensive compliance and payroll services for contractors working through our umbrella company
@@ -249,14 +344,18 @@ export default function CompliancePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50" data-testid={`umbrella-service-${index}`}>
+                <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50 bg-gradient-to-br from-green-500/5 to-card" data-testid={`umbrella-service-${index}`}>
                   <CardHeader>
                     <div className="flex items-start gap-4">
-                      <div className="p-3 rounded-lg bg-primary/10">
-                        <service.icon className="h-6 w-6 text-primary" />
-                      </div>
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                        className="p-3 rounded-lg bg-green-500/10"
+                      >
+                        <service.icon className="h-6 w-6 text-green-600 dark:text-green-400" />
+                      </motion.div>
                       <div>
                         <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                         <p className="text-sm text-muted-foreground">{service.description}</p>
@@ -270,9 +369,36 @@ export default function CompliancePage() {
         </div>
       </section>
 
+      {/* Image Divider Section 2 */}
+      <section className="relative h-80 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={legalComplianceImage} 
+            alt="Legal compliance documentation" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-green-600/90 via-green-500/80 to-purple-600/90" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-white px-4 max-w-3xl"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Legal Compliance Assured</h2>
+            <p className="text-lg text-white/90">
+              Expert guidance ensuring full compliance with all UK regulations
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Claiming Expenses Section */}
-      <section className="py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 md:py-32 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-purple-500/5 to-background" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -291,10 +417,16 @@ export default function CompliancePage() {
                 or Control, we process expenses at tax year-end via SA100 form at no additional cost.
               </p>
               
-              <Card className="bg-blue-50 dark:bg-blue-950/20 border-2 border-blue-200 dark:border-blue-800">
+              <Card className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-2 border-blue-500/20">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-3">
-                    <Receipt className="h-6 w-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
+                    <motion.div
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                      className="p-2 rounded-lg bg-blue-500/10"
+                    >
+                      <Receipt className="h-6 w-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                    </motion.div>
                     <div>
                       <h3 className="font-semibold text-lg mb-2">Expense Requirements</h3>
                       <ul className="space-y-2 text-sm text-muted-foreground">
@@ -327,32 +459,62 @@ export default function CompliancePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-2 border-primary/20">
+              <Card className="bg-gradient-to-br from-primary/10 via-green-500/10 to-blue-500/10 border-2 border-primary/20">
                 <CardHeader>
                   <h3 className="text-2xl font-bold mb-3">What We Handle For You</h3>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-4">
-                    <li className="flex items-start gap-3">
+                    <motion.li 
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 }}
+                    >
                       <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <span>Calculate your tax and NI contributions</span>
-                    </li>
-                    <li className="flex items-start gap-3">
+                    </motion.li>
+                    <motion.li 
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 }}
+                    >
                       <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <span>Make PAYE payments to HMRC on your behalf</span>
-                    </li>
-                    <li className="flex items-start gap-3">
+                    </motion.li>
+                    <motion.li 
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                    >
                       <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <span>Record all your business expenses</span>
-                    </li>
-                    <li className="flex items-start gap-3">
+                    </motion.li>
+                    <motion.li 
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 }}
+                    >
                       <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <span>Complete Self-Assessment tax returns (free of charge)</span>
-                    </li>
-                    <li className="flex items-start gap-3">
+                    </motion.li>
+                    <motion.li 
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 }}
+                    >
                       <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <span>Calculate potential tax refunds based on expenses</span>
-                    </li>
+                    </motion.li>
                   </ul>
                 </CardContent>
               </Card>
@@ -362,7 +524,7 @@ export default function CompliancePage() {
       </section>
 
       {/* Payment Process Section */}
-      <section className="bg-muted/30 py-24">
+      <section className="py-24 relative bg-gradient-to-br from-muted/30 via-background to-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -371,6 +533,12 @@ export default function CompliancePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
+            <motion.div 
+              className="inline-block mb-4 px-4 py-2 bg-purple-500/5 rounded-full border border-purple-500/10"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="text-sm font-medium text-purple-600 dark:text-purple-400">Payment Process</span>
+            </motion.div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">How You Are Paid</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Our professional employment organisation manages your contractor payroll from start to finish, 
@@ -386,13 +554,13 @@ export default function CompliancePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                whileHover={{ y: -5, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50" data-testid={`payment-step-${index}`}>
+                <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50 bg-gradient-to-br from-purple-500/5 to-card" data-testid={`payment-step-${index}`}>
                   <CardHeader>
                     <div className="flex items-center gap-4 mb-3">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                        <span className="text-2xl font-bold text-primary">{item.step}</span>
+                      <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center">
+                        <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">{item.step}</span>
                       </div>
                       <h3 className="text-xl font-semibold">{item.title}</h3>
                     </div>
@@ -411,12 +579,16 @@ export default function CompliancePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
           >
-            <Card className="bg-green-50 dark:bg-green-950/20 border-2 border-green-200 dark:border-green-800">
+            <Card className="bg-gradient-to-br from-green-500/10 to-green-500/5 border-2 border-green-500/20">
               <CardContent className="p-8">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-green-500/10">
+                  <motion.div
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                    className="p-3 rounded-lg bg-green-500/10"
+                  >
                     <Clock className="h-8 w-8 text-green-600 dark:text-green-400" />
-                  </div>
+                  </motion.div>
                   <div>
                     <h3 className="text-2xl font-bold mb-3">Same Day Payment Guarantee</h3>
                     <p className="text-lg text-muted-foreground mb-4">
@@ -435,9 +607,36 @@ export default function CompliancePage() {
         </div>
       </section>
 
+      {/* Image Divider Section 3 */}
+      <section className="relative h-96 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={complianceSecurityImage} 
+            alt="Compliance security and trust" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 via-blue-500/80 to-green-600/90" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center text-white px-4 max-w-4xl"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Security & Trust</h2>
+            <p className="text-lg md:text-xl text-white/90">
+              Your data and compliance are protected by the highest security standards
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* PAYE & Employment Status Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-blue-500/5 to-background" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -445,12 +644,16 @@ export default function CompliancePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Card className="h-full border-2">
+              <Card className="h-full border-2 hover-elevate bg-gradient-to-br from-blue-500/5 to-card">
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-3 rounded-lg bg-primary/10">
-                      <Wallet className="h-6 w-6 text-primary" />
-                    </div>
+                    <motion.div 
+                      className="p-3 rounded-lg bg-blue-500/10"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <Wallet className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                    </motion.div>
                     <h3 className="text-2xl font-bold">What is PAYE?</h3>
                   </div>
                 </CardHeader>
@@ -463,7 +666,7 @@ export default function CompliancePage() {
                     The amount due is calculated by your employer according to HMRC regulations, then deducted 
                     from your earnings before being paid to HMRC each week or month.
                   </p>
-                  <div className="bg-blue-50 dark:bg-blue-950/20 border-l-4 border-blue-500 p-4 rounded">
+                  <div className="bg-blue-500/10 border-l-4 border-blue-500 p-4 rounded">
                     <p className="text-sm text-muted-foreground">
                       <strong>Note:</strong> We relieve you of all PAYE stress and hassle. We take care of all 
                       PAYE and VAT payments to HMRC, and you won't even have to complete a self-assessment tax 
@@ -480,12 +683,16 @@ export default function CompliancePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Card className="h-full border-2">
+              <Card className="h-full border-2 hover-elevate bg-gradient-to-br from-green-500/5 to-card">
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-3 rounded-lg bg-primary/10">
-                      <UserCheck className="h-6 w-6 text-primary" />
-                    </div>
+                    <motion.div 
+                      className="p-3 rounded-lg bg-green-500/10"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <UserCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
+                    </motion.div>
                     <h3 className="text-2xl font-bold">Employment Status Verification</h3>
                   </div>
                 </CardHeader>
@@ -499,7 +706,7 @@ export default function CompliancePage() {
                     We've established a process to determine correct employment status for all workers, 
                     particularly agency workers in the public sector (NHS, local authorities, and government departments).
                   </p>
-                  <div className="bg-green-50 dark:bg-green-950/20 border-l-4 border-green-500 p-4 rounded">
+                  <div className="bg-green-500/10 border-l-4 border-green-500 p-4 rounded">
                     <p className="text-sm text-muted-foreground">
                       <strong>Our Solution:</strong> We provide the important link between worker and client 
                       to establish correct pay treatment and limit exposure to unpaid taxes and HMRC enforcement.
@@ -513,7 +720,7 @@ export default function CompliancePage() {
       </section>
 
       {/* Overarching Contracts & Calculator Section */}
-      <section className="bg-muted/30 py-24">
+      <section className="py-24 relative bg-gradient-to-br from-muted/30 via-background to-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <motion.div
@@ -522,12 +729,16 @@ export default function CompliancePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Card className="h-full bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20 border-2 border-purple-200 dark:border-purple-800">
+              <Card className="h-full bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-2 border-purple-500/20">
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-3 rounded-lg bg-purple-500/10">
+                    <motion.div 
+                      className="p-3 rounded-lg bg-purple-500/10"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
                       <FileText className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                    </div>
+                    </motion.div>
                     <h3 className="text-2xl font-bold">Overarching Contracts</h3>
                   </div>
                 </CardHeader>
@@ -550,12 +761,16 @@ export default function CompliancePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Card className="h-full bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 border-2 border-blue-200 dark:border-blue-800">
+              <Card className="h-full bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-2 border-blue-500/20">
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-3 rounded-lg bg-blue-500/10">
+                    <motion.div 
+                      className="p-3 rounded-lg bg-blue-500/10"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
                       <Calculator className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                    </div>
+                    </motion.div>
                     <h3 className="text-2xl font-bold">Umbrella Calculator</h3>
                   </div>
                 </CardHeader>
@@ -579,9 +794,36 @@ export default function CompliancePage() {
         </div>
       </section>
 
+      {/* Image Divider Section 4 */}
+      <section className="relative h-80 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={complianceExcellenceImage} 
+            alt="Compliance excellence" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-green-600/90 via-blue-500/80 to-purple-600/90" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-white px-4 max-w-3xl"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Excellence in Compliance</h2>
+            <p className="text-lg text-white/90">
+              Setting the standard for professional compliance services
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Standards Section */}
-      <section className="py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 md:py-32 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-green-500/5 to-background" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -589,6 +831,12 @@ export default function CompliancePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
+            <motion.div 
+              className="inline-block mb-4 px-4 py-2 bg-green-500/5 rounded-full border border-green-500/10"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="text-sm font-medium text-green-600 dark:text-green-400">Standards & Certifications</span>
+            </motion.div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Standards & Certifications</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               We maintain the highest professional standards and comply with all relevant regulations
@@ -605,7 +853,7 @@ export default function CompliancePage() {
                 transition={{ delay: index * 0.15 }}
                 whileHover={{ y: -10, scale: 1.05 }}
               >
-                <Card className="hover-elevate transition-all duration-300 h-full" data-testid={`standard-${index}`}>
+                <Card className="hover-elevate transition-all duration-300 h-full bg-gradient-to-br from-green-500/5 to-card border-2 hover:border-primary/50" data-testid={`standard-${index}`}>
                   <CardHeader>
                     <h3 className="text-xl font-semibold">{standard.title}</h3>
                   </CardHeader>
@@ -620,7 +868,7 @@ export default function CompliancePage() {
                           transition={{ delay: itemIndex * 0.05 }}
                           className="flex items-start gap-2"
                         >
-                          <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
                           <span className="text-sm text-muted-foreground">{item}</span>
                         </motion.li>
                       ))}
@@ -634,17 +882,17 @@ export default function CompliancePage() {
       </section>
 
       {/* Pricing & Benefits Section */}
-      <section className="bg-muted/30 py-24">
+      <section className="py-24 relative bg-gradient-to-br from-muted/30 via-background to-muted/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            whileHover={{ scale: 1.02 }}
           >
-            <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-2 border-primary/20 shadow-2xl">
-              <CardContent className="p-8 md:p-12">
+            <Card className="bg-gradient-to-br from-primary/10 via-blue-500/10 to-green-500/10 border-2 border-primary/20 shadow-2xl overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl" />
+              <CardContent className="p-8 md:p-12 relative">
                 <div className="text-center mb-8">
                   <h2 className="text-4xl font-bold mb-4">Our Fees</h2>
                   <div className="inline-block">
@@ -681,16 +929,17 @@ export default function CompliancePage() {
       </section>
 
       {/* Guarantee Section */}
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            whileHover={{ scale: 1.02 }}
           >
-            <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-2 border-primary/20 shadow-2xl">
+            <Card className="bg-gradient-to-br from-primary/10 via-primary/5 to-card border-2 border-primary/20 shadow-2xl">
               <CardContent className="p-8 md:p-12">
                 <h2 className="text-3xl font-bold mb-4">Peace of Mind Guarantee</h2>
                 <p className="text-lg text-muted-foreground mb-8">
