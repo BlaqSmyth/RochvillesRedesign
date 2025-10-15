@@ -121,7 +121,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
                   <Button
                     variant={location === item.href ? "secondary" : "ghost"}
                     className={`w-full justify-start transition-all ${
-                      location === item.href ? 'border-l-4 border-l-primary font-semibold' : ''
+                      location === item.href ? 'font-semibold bg-primary/10 border-2 border-primary/30' : ''
                     }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
