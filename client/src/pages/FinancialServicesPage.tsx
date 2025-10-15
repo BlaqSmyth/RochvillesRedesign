@@ -1,20 +1,14 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { TrendingUp, PiggyBank, Shield, LineChart, Users, Building, Home, Briefcase, FileCheck, Award, CheckCircle2, BadgeCheck, ArrowRight, Star, Sparkles, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { TrendingUp, PiggyBank, Shield, LineChart, Users, Building, Home, Briefcase, FileCheck, Award, CheckCircle2, BadgeCheck, ArrowRight, Star, Sparkles } from "lucide-react";
 import CTASection from "@/components/CTASection";
-import { motion, useScroll } from "framer-motion";
-import { StatCard } from "@/components/StatCard";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import financialImage from "@assets/stock_images/financial_planning_i_9844cce1.jpg";
 import advisorImage from "@assets/stock_images/professional_financi_9f6c56c8.jpg";
+import cityImage from "@assets/stock_images/modern_office_buildi_b535312f.jpg";
 import familyImage from "@assets/stock_images/happy_family_home_pl_6dcd5c2d.jpg";
-import testimonial1 from "@assets/stock_images/professional_headsho_1cc53ea0.jpg";
-import testimonial2 from "@assets/stock_images/professional_headsho_ad3a003d.jpg";
-import testimonial3 from "@assets/stock_images/professional_headsho_43ccae4f.jpg";
+import growthImage from "@assets/stock_images/investment_growth_ch_582e8251.jpg";
 
 export default function FinancialServicesPage() {
-  const { scrollYProgress } = useScroll();
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-
   const coreServices = [
     {
       icon: Home,
@@ -188,61 +182,8 @@ export default function FinancialServicesPage() {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah Mitchell",
-      role: "First-Time Buyer",
-      image: testimonial1,
-      rating: 5,
-      text: "Rochvilles made buying our first home stress-free. Their whole-of-market approach saved us thousands on our mortgage. Highly recommended!"
-    },
-    {
-      name: "James Thompson",
-      role: "Business Owner",
-      image: testimonial2,
-      rating: 5,
-      text: "Excellent financial planning service. They helped restructure my business finances and personal pension. Professional and knowledgeable team."
-    },
-    {
-      name: "Emily Carter",
-      role: "Property Investor",
-      image: testimonial3,
-      rating: 5,
-      text: "Outstanding mortgage advice for my property portfolio. Their FSA-authorized advisors found the best commercial rates available. Fantastic service!"
-    }
-  ];
-
-  const stats = [
-    { label: "Years Experience", value: 25, suffix: "+" },
-    { label: "Happy Clients", value: 500, suffix: "+" },
-    { label: "Mortgages Arranged", value: 50, prefix: "£", suffix: "M+" },
-    { label: "Client Satisfaction", value: 98, suffix: "%" }
-  ];
-
-  const nextTestimonial = () => {
-    setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextTestimonial();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="relative">
-      {/* Scroll Progress Indicator */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-blue-600 origin-left z-50"
-        style={{ scaleX: scrollYProgress }}
-        data-testid="scroll-progress-indicator"
-      />
-
       {/* Decorative Background Elements */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -252,8 +193,10 @@ export default function FinancialServicesPage() {
 
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Animated gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-background" />
         
+        {/* Geometric pattern overlay */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 left-10 w-20 h-20 border-2 border-primary/20 rounded-lg rotate-12" />
           <div className="absolute top-40 right-20 w-16 h-16 border-2 border-purple-500/20 rounded-full" />
@@ -293,11 +236,11 @@ export default function FinancialServicesPage() {
                 Professional financial planning, mortgage services, and wealth management tailored to your unique circumstances.
               </p>
               <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 p-3 bg-card/50 backdrop-blur-sm rounded-lg border border-primary/10">
+                <div className="flex items-center gap-3 p-3 bg-card rounded-lg border border-primary/10">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
                   <span className="text-sm font-medium">Whole-of-Market Mortgage Advice</span>
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-card/50 backdrop-blur-sm rounded-lg border border-purple-500/10">
+                <div className="flex items-center gap-3 p-3 bg-card rounded-lg border border-purple-500/10">
                   <CheckCircle2 className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                   <span className="text-sm font-medium">Independent Financial Planning</span>
                 </div>
@@ -332,28 +275,9 @@ export default function FinancialServicesPage() {
         </div>
       </section>
 
-      {/* Animated Statistics Section */}
-      <section className="py-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-purple-500/5 to-blue-500/5" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <StatCard
-                key={index}
-                label={stat.label}
-                value={stat.value}
-                prefix={stat.prefix}
-                suffix={stat.suffix}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Core Services Grid */}
       <section className="py-24 md:py-32 relative">
+        {/* Decorative background pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(var(--primary-rgb),0.05)_0%,transparent_50%)]" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -386,7 +310,7 @@ export default function FinancialServicesPage() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className={`border-2 ${colorClasses[service.color as keyof typeof colorClasses].border} hover:border-primary/50 transition-all duration-300 h-full bg-card/50 backdrop-blur-sm`} data-testid={`service-card-${index}`}>
+                <Card className={`border-2 ${colorClasses[service.color as keyof typeof colorClasses].border} hover:border-primary/50 transition-all duration-300 h-full bg-gradient-to-br from-card to-card/50 backdrop-blur-sm`} data-testid={`service-card-${index}`}>
                   <CardHeader>
                     <div className="flex items-start gap-3">
                       <motion.div 
@@ -458,113 +382,6 @@ export default function FinancialServicesPage() {
         </div>
       </section>
 
-      {/* Testimonials Carousel Section */}
-      <section className="py-24 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-background" />
-        
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <motion.div 
-              className="inline-block mb-4 px-4 py-2 bg-primary/5 rounded-full border border-primary/10"
-              whileHover={{ scale: 1.05 }}
-            >
-              <span className="text-sm font-medium text-primary">Client Success Stories</span>
-            </motion.div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4" data-testid="heading-testimonials">What Our Clients Say</h2>
-            <p className="text-lg text-muted-foreground">
-              Trusted by hundreds of families across Ilford, Essex, and London
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            <Card className="p-8 md:p-12 bg-card/50 backdrop-blur-md border-2 border-primary/20 shadow-2xl" data-testid="testimonial-carousel">
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <motion.div
-                  key={activeTestimonial}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="flex-shrink-0"
-                >
-                  <div className="relative">
-                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-primary/20">
-                      <img 
-                        src={testimonials[activeTestimonial].image} 
-                        alt={testimonials[activeTestimonial].name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground rounded-full p-2">
-                      <Quote className="w-4 h-4" />
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  key={`content-${activeTestimonial}`}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="flex-1 text-center md:text-left"
-                >
-                  <div className="flex gap-1 mb-4 justify-center md:justify-start">
-                    {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <p className="text-lg mb-4 italic text-muted-foreground">
-                    "{testimonials[activeTestimonial].text}"
-                  </p>
-                  <div>
-                    <p className="font-bold text-lg">{testimonials[activeTestimonial].name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonials[activeTestimonial].role}</p>
-                  </div>
-                </motion.div>
-              </div>
-
-              <div className="flex items-center justify-center gap-4 mt-8">
-                <button
-                  onClick={prevTestimonial}
-                  className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
-                  data-testid="button-testimonial-prev"
-                  aria-label="Previous testimonial"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                
-                <div className="flex gap-2">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setActiveTestimonial(index)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        index === activeTestimonial ? 'bg-primary w-8' : 'bg-primary/30'
-                      }`}
-                      data-testid={`button-testimonial-dot-${index}`}
-                      aria-label={`Go to testimonial ${index + 1}`}
-                    />
-                  ))}
-                </div>
-
-                <button
-                  onClick={nextTestimonial}
-                  className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
-                  data-testid="button-testimonial-next"
-                  aria-label="Next testimonial"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Mortgage Services Section */}
       <section className="py-24 md:py-32 relative bg-gradient-to-br from-muted/30 via-background to-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -598,7 +415,7 @@ export default function FinancialServicesPage() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
               >
-                <Card className="h-full hover-elevate bg-card/50 backdrop-blur-sm border-2 border-purple-500/10" data-testid={`mortgage-category-${index}`}>
+                <Card className="h-full hover-elevate bg-gradient-to-br from-card via-card to-purple-500/5 border-2 border-purple-500/10" data-testid={`mortgage-category-${index}`}>
                   <CardHeader>
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2 rounded-lg bg-purple-500/10">
@@ -661,7 +478,7 @@ export default function FinancialServicesPage() {
                 className="text-center"
                 data-testid={`regulation-card-${index}`}
               >
-                <Card className="p-6 h-full border-2 hover:border-primary/50 transition-all duration-300 bg-card/50 backdrop-blur-sm">
+                <Card className="p-6 h-full border-2 hover:border-primary/50 transition-all duration-300 bg-gradient-to-br from-card to-primary/5">
                   <motion.div
                     whileHover={{ scale: 1.15, rotate: 360 }}
                     transition={{ duration: 0.6 }}
@@ -717,7 +534,7 @@ export default function FinancialServicesPage() {
                 className="text-center"
                 data-testid={`process-step-${index}`}
               >
-                <Card className="p-6 h-full border-2 hover:border-primary/50 transition-all duration-300 bg-card/50 backdrop-blur-sm">
+                <Card className="p-6 h-full border-2 hover:border-primary/50 transition-all duration-300 bg-gradient-to-br from-card to-green-500/5">
                   <motion.div
                     whileHover={{ scale: 1.2, rotate: 360 }}
                     transition={{ duration: 0.6 }}
@@ -773,7 +590,7 @@ export default function FinancialServicesPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <Card className="bg-gradient-to-br from-primary/10 via-purple-500/10 to-blue-500/10 border-2 border-primary/20 shadow-2xl overflow-hidden backdrop-blur-sm" data-testid="card-why-choose">
+            <Card className="bg-gradient-to-br from-primary/10 via-purple-500/10 to-blue-500/10 border-2 border-primary/20 shadow-2xl overflow-hidden" data-testid="card-why-choose">
               <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl" />
               <CardContent className="p-8 md:p-12 relative">
                 <div className="text-center mb-8">
