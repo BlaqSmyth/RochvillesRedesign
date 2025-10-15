@@ -34,7 +34,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
             <div className="flex items-center gap-3 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-4 py-2 -ml-4 transition-all group min-w-0">
               <div className="flex flex-col min-w-0">
                 <div className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500 whitespace-nowrap">
-                  Rochvilles & Co
+                  Rochvilles & Co. Accountants
                 </div>
                 <div className="text-[10px] sm:text-xs text-foreground/80 font-semibold tracking-wide mt-0.5 whitespace-nowrap">
                   Chartered Management Consultants, Accountants & Tax advisers
