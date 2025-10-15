@@ -1,4 +1,4 @@
-import { Calculator, FileText, Users, Building2, ShieldCheck, PieChart, TrendingUp, Briefcase, Home, Scale, DollarSign, Banknote, BookOpen, Handshake, LineChart, Sparkles, Award, CheckCircle2 } from "lucide-react";
+import { Calculator, FileText, Users, Building2, ShieldCheck, PieChart, TrendingUp, Briefcase, Home, Scale, DollarSign, Banknote, BookOpen, Handshake, LineChart, Sparkles, Award, CheckCircle2, RefreshCcw, Hammer, Receipt } from "lucide-react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import CTASection from "@/components/CTASection";
 import { motion } from "framer-motion";
@@ -106,6 +106,41 @@ export default function ServicesPage() {
       description: "In-depth business analysis for acquisitions. Three-year performance review, income/expenditure verification, P&L and balance sheet checks, with expert opinion on future viability.",
       features: ["Performance analysis", "Financial verification", "Viability assessment", "Expert reporting"],
       color: "purple" as keyof typeof colorClasses
+    },
+    {
+      icon: LineChart,
+      title: "Cash Flow Forecasting",
+      description: "Comprehensive cash flow forecasting and projections to help you plan ahead and maintain healthy business finances. Essential for growth planning and preventing cash flow problems.",
+      features: ["12-month forecasts", "Scenario planning", "Working capital analysis", "Strategic planning"],
+      color: "blue" as keyof typeof colorClasses
+    },
+    {
+      icon: PieChart,
+      title: "Interim Management Accounts",
+      description: "Detailed interim management accounts and forecasts providing real-time insights into your business performance. Essential for making informed decisions between annual accounts.",
+      features: ["Monthly/quarterly reports", "Performance analysis", "Variance reporting", "KPI tracking"],
+      color: "green" as keyof typeof colorClasses
+    },
+    {
+      icon: Receipt,
+      title: "Directors P11D & Dividends",
+      description: "Expert handling of directors' benefits in kind (P11D) and dividend administration. Ensuring compliance while maximizing tax efficiency for company directors.",
+      features: ["P11D preparation", "Dividend calculations", "Tax optimization", "HMRC compliance"],
+      color: "orange" as keyof typeof colorClasses
+    },
+    {
+      icon: Hammer,
+      title: "CIS Services",
+      description: "Comprehensive Construction Industry Scheme (CIS) services. We handle all your CIS returns, verification, and compliance, ensuring you meet HMRC requirements.",
+      features: ["Monthly CIS returns", "Subcontractor verification", "Deduction calculations", "HMRC compliance"],
+      color: "teal" as keyof typeof colorClasses
+    },
+    {
+      icon: RefreshCcw,
+      title: "Struck Off Company Restorations",
+      description: "Professional restoration services for companies that have been struck off or dissolved. We handle the entire restoration process with Companies House to bring your company back to the register.",
+      features: ["Companies House applications", "Legal documentation", "Asset recovery support", "Full restoration service"],
+      color: "red" as keyof typeof colorClasses
     }
   ];
 

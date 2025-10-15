@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Check, Star, Users, Building2, Briefcase, Scale, Calculator, FileText, Clock, TrendingUp, Sparkles, Award, DollarSign, Shield } from "lucide-react";
+import { Check, Star, Users, Building2, Briefcase, Scale, Calculator, FileText, Clock, TrendingUp, Sparkles, Award, DollarSign, Shield, LineChart, Handshake, RefreshCcw, Receipt, Hammer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import CTASection from "@/components/CTASection";
@@ -100,6 +100,34 @@ export default function FeesPage() {
       description: "Quarterly management accounts with recommendations"
     },
     {
+      icon: LineChart,
+      service: "Interim Management Accounts",
+      price: "£400",
+      period: "per report",
+      description: "Detailed interim management accounts forecast with financial analysis"
+    },
+    {
+      icon: TrendingUp,
+      service: "Cash Flow Forecasting",
+      price: "£500",
+      period: "per forecast",
+      description: "12-month cash flow forecasts for business planning and working capital management"
+    },
+    {
+      icon: Receipt,
+      service: "Directors P11D & Dividends",
+      price: "£150",
+      period: "per director",
+      description: "P11D benefit reporting and dividend administration"
+    },
+    {
+      icon: Hammer,
+      service: "CIS Services",
+      price: "£100",
+      period: "per month",
+      description: "Construction Industry Scheme returns and compliance"
+    },
+    {
       icon: Users,
       service: "Extra Partner/Director Tax Return",
       price: "£180",
@@ -132,7 +160,21 @@ export default function FeesPage() {
       service: "Due Diligence",
       price: "£1,500",
       period: "per case",
-      description: "Comprehensive business due diligence"
+      description: "Comprehensive business due diligence for acquisitions"
+    },
+    {
+      icon: Handshake,
+      service: "Mergers & Acquisitions",
+      price: "POA",
+      period: "per transaction",
+      description: "Complete M&A advisory, valuation, and transaction support"
+    },
+    {
+      icon: RefreshCcw,
+      service: "Struck Off Company Restorations",
+      price: "£1,200",
+      period: "per case",
+      description: "Professional restoration of dissolved companies to Companies House register"
     },
     {
       icon: Scale,
@@ -153,7 +195,7 @@ export default function FeesPage() {
       service: "Financial Plan/Cashflow Projections",
       price: "£850",
       period: "per case",
-      description: "Detailed financial planning and projections"
+      description: "Comprehensive financial planning with multi-year projections, budgeting, and strategic analysis"
     }
   ];
 
