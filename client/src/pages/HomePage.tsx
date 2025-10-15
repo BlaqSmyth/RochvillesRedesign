@@ -155,35 +155,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Interactive Calculator Section */}
-      <section className="py-24 bg-muted/30 relative overflow-hidden">
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 90, 0]
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute w-96 h-96 bg-primary/5 rounded-full blur-3xl top-0 left-0"
-        />
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">See Your Potential Savings</h2>
-            <p className="text-lg text-muted-foreground">
-              Find out how much you could save with professional tax planning
-            </p>
-          </motion.div>
-
-          <InteractiveTaxCalculator />
-        </div>
-      </section>
-
       {/* Why Choose Us - Magazine Style Split Screen */}
       <section className="bg-background py-24 md:py-32 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -387,6 +358,35 @@ export default function HomePage() {
               className="relative rounded-2xl shadow-2xl w-full h-auto"
             />
           </motion.div>
+        </div>
+      </section>
+
+      {/* Interactive Calculator Section */}
+      <section className="py-24 bg-muted/30 relative overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 0]
+          }}
+          transition={{ duration: 20, repeat: Infinity }}
+          className="absolute w-96 h-96 bg-primary/5 rounded-full blur-3xl top-0 left-0"
+        />
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">See Your Potential Savings</h2>
+            <p className="text-lg text-muted-foreground">
+              Find out how much you could save with professional tax planning
+            </p>
+          </motion.div>
+
+          <InteractiveTaxCalculator />
         </div>
       </section>
 
