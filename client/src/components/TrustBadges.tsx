@@ -1,31 +1,65 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Award, CheckCircle2, Users } from "lucide-react";
+import { ShieldCheck, Award, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
+
+// Import professional body logos
+import ipaLogo from "@assets/stock_images/institute_of_public__8798aa31.jpg";
+import ifaLogo from "@assets/stock_images/institute_of_financi_69856edd.jpg";
+import aiaLogo from "@assets/stock_images/association_of_inter_b9f2b6d7.jpg";
+import cmiLogo from "@assets/stock_images/chartered_management_47162a1b.jpg";
+import ftaLogo from "@assets/stock_images/federation_of_tax_ad_6dd9504a.jpg";
+import ciiLogo from "@assets/stock_images/chartered_insurance__e50b955b.jpg";
+import pfsLogo from "@assets/stock_images/personal_finance_soc_7d414193.jpg";
+import smpLogo from "@assets/stock_images/society_of_mortgage__5e2fac54.jpg";
 
 const badges = [
   {
-    icon: ShieldCheck,
-    title: "ACCA Certified",
-    description: "Qualified Chartered Accountants",
+    logo: ipaLogo,
+    title: "Institute of Public Accountants",
+    abbreviation: "IPA",
     color: "from-blue-500/10 to-blue-600/5"
   },
   {
-    icon: Award,
-    title: "ICAEW Members",
-    description: "Institute of Chartered Accountants",
+    logo: ifaLogo,
+    title: "Institute of Financial Accountants",
+    abbreviation: "IFA",
+    color: "from-emerald-500/10 to-emerald-600/5"
+  },
+  {
+    logo: aiaLogo,
+    title: "Association of International Accountants",
+    abbreviation: "AIA",
+    color: "from-indigo-500/10 to-indigo-600/5"
+  },
+  {
+    logo: cmiLogo,
+    title: "Chartered Management Institute",
+    abbreviation: "CMI",
+    color: "from-violet-500/10 to-violet-600/5"
+  },
+  {
+    logo: ftaLogo,
+    title: "Federation of Tax Advisers",
+    abbreviation: "FTA",
+    color: "from-cyan-500/10 to-cyan-600/5"
+  },
+  {
+    logo: ciiLogo,
+    title: "The Chartered Insurance Institute",
+    abbreviation: "CII",
     color: "from-amber-500/10 to-amber-600/5"
   },
   {
-    icon: CheckCircle2,
-    title: "AAT Licensed",
-    description: "Professional Bookkeepers",
-    color: "from-green-500/10 to-green-600/5"
+    logo: pfsLogo,
+    title: "Personal Finance Society",
+    abbreviation: "PFS",
+    color: "from-rose-500/10 to-rose-600/5"
   },
   {
-    icon: Users,
-    title: "500+ Clients",
-    description: "Trusted Across UK",
-    color: "from-purple-500/10 to-purple-600/5"
+    logo: smpLogo,
+    title: "Society of Mortgage Professionals",
+    abbreviation: "SMP",
+    color: "from-teal-500/10 to-teal-600/5"
   }
 ];
 
@@ -69,13 +103,13 @@ export default function TrustBadges() {
           <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
             <span className="text-sm font-medium text-primary">Our Credentials</span>
           </div>
-          <h3 className="text-3xl md:text-4xl font-bold mb-4">Professional Certifications</h3>
+          <h3 className="text-3xl md:text-4xl font-bold mb-4">Professional Memberships</h3>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Backed by professional qualifications and years of expertise in accounting and financial services
+            Members of leading professional accounting and financial services bodies
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {badges.map((badge, index) => (
             <motion.div
               key={index}
@@ -84,7 +118,7 @@ export default function TrustBadges() {
               viewport={{ once: true }}
               transition={{ 
                 duration: 0.6, 
-                delay: index * 0.1,
+                delay: index * 0.05,
                 type: "spring",
                 stiffness: 100
               }}
@@ -103,29 +137,24 @@ export default function TrustBadges() {
                   transition={{ duration: 0.8 }}
                 />
 
-                <div className="relative p-8 text-center">
-                  {/* Icon with animated ring */}
-                  <div className="relative inline-block mb-6">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                      className="absolute inset-0 rounded-full border-2 border-primary/20 scale-125"
+                <div className="relative p-6 text-center flex flex-col items-center justify-center min-h-[180px]">
+                  {/* Logo with animated container */}
+                  <div className="relative mb-4 w-20 h-20 rounded-xl overflow-hidden bg-white/80 dark:bg-gray-900/80 p-2 shadow-lg group-hover:shadow-xl group-hover:shadow-primary/20 transition-all duration-300">
+                    <img 
+                      src={badge.logo} 
+                      alt={`${badge.title} logo`}
+                      className="w-full h-full object-contain"
                     />
-                    <motion.div
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6, type: "spring" }}
-                      className="relative inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary shadow-lg group-hover:shadow-xl group-hover:shadow-primary/20 transition-all duration-300"
-                    >
-                      <badge.icon className="h-10 w-10" strokeWidth={1.5} />
-                    </motion.div>
                   </div>
 
-                  <h4 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    {badge.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {badge.description}
-                  </p>
+                  <div className="text-center">
+                    <h4 className="text-sm font-bold mb-1 group-hover:text-primary transition-colors">
+                      {badge.abbreviation}
+                    </h4>
+                    <p className="text-xs text-muted-foreground leading-tight">
+                      {badge.title}
+                    </p>
+                  </div>
 
                   {/* Decorative bottom accent */}
                   <motion.div

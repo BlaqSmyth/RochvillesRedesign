@@ -30,13 +30,13 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between gap-4">
           {/* Logo Section with Tagline */}
-          <Link href="/" data-testid="link-home">
+          <Link href="/" data-testid="link-logo">
             <div className="flex items-center gap-3 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-4 py-2 -ml-4 transition-all group">
               <div className="flex flex-col">
-                <div className="text-2xl font-bold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500">
+                <div className="text-3xl font-extrabold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500">
                   Rochvilles & Co
                 </div>
-                <div className="text-[10px] text-muted-foreground font-medium tracking-wide">
+                <div className="text-xs text-foreground/80 font-semibold tracking-wide mt-0.5">
                   Chartered Management Consultants, Accountants & Tax advisers
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
                 <div className="p-1.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                   <Phone className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
                 </div>
-                <span className="font-medium">0208 514 4953</span>
+                <span className="font-medium whitespace-nowrap">0208 514 4953</span>
               </a>
             </div>
             

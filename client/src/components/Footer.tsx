@@ -1,5 +1,7 @@
 import { Link } from "wouter";
 import { Mail, Phone, MapPin } from "lucide-react";
+import aiaLogo from "@assets/stock_images/association_of_inter_b9f2b6d7.jpg";
+import ifaLogo from "@assets/stock_images/institute_of_financi_69856edd.jpg";
 
 export default function Footer() {
   const services = [
@@ -82,7 +84,32 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        {/* Authorization Statement */}
+        <div className="border-t mt-8 pt-8">
+          <div className="flex flex-col items-center gap-4 mb-6">
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-900/80 p-2 shadow-md">
+                <img 
+                  src={aiaLogo} 
+                  alt="Association of International Accountants logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-16 h-16 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-900/80 p-2 shadow-md">
+                <img 
+                  src={ifaLogo} 
+                  alt="Institute of Financial Accountants logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+            <p className="text-sm text-center text-muted-foreground max-w-3xl">
+              <span className="font-semibold text-foreground">Authorised by Association of International Accountants & Institute of Financial Accountants</span> to engage in public practise
+            </p>
+          </div>
+        </div>
+
+        <div className="border-t pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Rochvilles & Co. All rights reserved.
           </p>
