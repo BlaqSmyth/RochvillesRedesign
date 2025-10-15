@@ -1,7 +1,6 @@
 import { Link } from "wouter";
 import { Mail, Phone, MapPin } from "lucide-react";
-import aiaLogo from "@assets/stock_images/association_of_inter_b9f2b6d7.jpg";
-import ifaLogo from "@assets/stock_images/institute_of_financi_69856edd.jpg";
+import ifaLogo from "@assets/institute-of-financial-accountants-logo-png_seeklogo-508022_1760548920320.png";
 
 export default function Footer() {
   const services = [
@@ -87,15 +86,14 @@ export default function Footer() {
         {/* Authorization Statement */}
         <div className="border-t mt-8 pt-8">
           <div className="flex flex-col items-center gap-4 mb-6">
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-16 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-900/80 p-2 shadow-md">
-                <img 
-                  src={aiaLogo} 
-                  alt="Association of International Accountants logo"
-                  className="w-full h-full object-contain"
-                />
+            <div className="flex items-center justify-center gap-6">
+              <div className="flex items-center justify-center w-20 h-20 rounded-lg bg-white/80 dark:bg-gray-900/80 p-2 shadow-md border-2 border-primary/20">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-primary">AIA</div>
+                  <div className="text-[8px] text-muted-foreground leading-tight">Association of International Accountants</div>
+                </div>
               </div>
-              <div className="w-16 h-16 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-900/80 p-2 shadow-md">
+              <div className="w-32 h-20 rounded-lg overflow-hidden bg-white/80 dark:bg-gray-900/80 p-2 shadow-md">
                 <img 
                   src={ifaLogo} 
                   alt="Institute of Financial Accountants logo"
