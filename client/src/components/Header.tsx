@@ -32,17 +32,17 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
         <div className="flex h-20 items-center justify-between gap-4">
           {/* Logo Section with Tagline */}
           <Link href="/" data-testid="link-logo">
-            <div className="flex items-center gap-3 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-4 py-2 -ml-4 transition-all group min-w-0">
+            <div className="flex items-center gap-2 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 -ml-3 transition-all group min-w-0">
               <img 
                 src={rochvillesLogo} 
                 alt="Rochvilles & Co logo" 
-                className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 transition-transform group-hover:scale-105"
+                className="h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 transition-transform group-hover:scale-105"
               />
               <div className="flex flex-col min-w-0">
-                <div className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500 whitespace-nowrap">
+                <div className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500 whitespace-nowrap">
                   Rochvilles & Co. Accountants
                 </div>
-                <div className="text-[10px] sm:text-xs text-foreground/80 font-semibold tracking-wide mt-0.5 whitespace-nowrap">
+                <div className="text-[9px] sm:text-[10px] text-foreground/80 font-semibold tracking-wide mt-0.5 whitespace-nowrap">
                   Chartered Management Consultants, Accountants & Tax advisers
                 </div>
               </div>
@@ -50,13 +50,13 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-0">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href} data-testid={`link-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 <Button
                   variant={location === item.href ? "secondary" : "ghost"}
                   size="sm"
-                  className={`text-sm transition-all relative group ${
+                  className={`text-xs px-2 transition-all relative group ${
                     location === item.href ? 'font-semibold' : ''
                   }`}
                 >
@@ -71,15 +71,15 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
           </nav>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-2">
-            <div className="hidden md:flex items-center gap-3 mr-2">
+          <div className="flex items-center gap-1.5">
+            <div className="hidden xl:flex items-center gap-2">
               <a 
                 href="tel:02085144953" 
-                className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-all group rounded-lg hover-elevate active-elevate-2" 
+                className="flex items-center gap-1.5 px-2 py-1.5 text-xs text-muted-foreground hover:text-foreground transition-all group rounded-lg hover-elevate active-elevate-2" 
                 data-testid="link-phone"
               >
-                <div className="p-1.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <Phone className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
+                <div className="p-1 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <Phone className="h-3.5 w-3.5 text-primary group-hover:scale-110 transition-transform" />
                 </div>
                 <span className="font-medium whitespace-nowrap">0208 514 4953</span>
               </a>
