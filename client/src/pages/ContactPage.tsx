@@ -89,7 +89,7 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: "Location",
-      content: "Ilford, Essex\nServing London and surrounding areas",
+      content: "411 Ilford Lane\nIlford, Essex\nIG1 2SN",
       href: null,
       testId: null
     },
