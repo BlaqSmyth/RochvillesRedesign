@@ -1,10 +1,12 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 import contactImage from "@assets/stock_images/business_handshake_p_845ce2ca.jpg";
 
 export default function ContactPage() {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,12 +14,54 @@ export default function ContactPage() {
     company: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! We'll be in touch soon.");
-    setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus("success");
+        toast({
+          title: "Message Sent!",
+          description: data.message,
+          duration: 5000,
+        });
+        setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+      } else {
+        setSubmitStatus("error");
+        toast({
+          title: "Error",
+          description: data.message || "Failed to send message. Please try again.",
+          variant: "destructive",
+          duration: 5000,
+        });
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please check your connection and try again.",
+        variant: "destructive",
+        duration: 5000,
+      });
+      console.error("Contact form error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -169,10 +213,37 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full group shadow-lg hover:shadow-xl transition-all" data-testid="button-submit">
-                  <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  Send Message
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  className="w-full group shadow-lg hover:shadow-xl transition-all" 
+                  disabled={isSubmitting}
+                  data-testid="button-submit"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
+                {submitStatus === "success" && (
+                  <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mt-2 p-3 bg-green-50 dark:bg-green-950/30 rounded-lg border border-green-200 dark:border-green-800">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">Message sent successfully! We'll get back to you soon.</span>
+                  </div>
+                )}
+                {submitStatus === "error" && (
+                  <div className="flex items-center gap-2 text-red-600 dark:text-red-400 mt-2 p-3 bg-red-50 dark:bg-red-950/30 rounded-lg border border-red-200 dark:border-red-800">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">Failed to send message. Please try again.</span>
+                  </div>
+                )}
               </form>
             </div>
 
