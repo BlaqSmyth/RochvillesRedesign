@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import LogoCarousel from "@/components/LogoCarousel";
 
 interface Testimonial {
   name: string;
@@ -248,17 +247,6 @@ export default function TestimonialCarousel() {
             </motion.div>
           </div>
         </div>
-
-        {/* Client Logos Carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-20"
-        >
-          <LogoCarousel />
-        </motion.div>
       </div>
     </section>
   );
