@@ -23,36 +23,59 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80 transition-all duration-300 shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b backdrop-blur-xl bg-background/95 shadow-lg transition-all duration-300" style={{ backdropFilter: 'blur(24px)' }}>
+      {/* Decorative gradient line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-green-600 to-purple-600" />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between gap-4">
+        <div className="flex h-20 items-center justify-between gap-4">
+          {/* Logo Section with Tagline */}
           <Link href="/" data-testid="link-home">
-            <div className="flex items-center gap-2 cursor-pointer hover-elevate active-elevate-2 rounded-md px-3 py-2 -ml-3 transition-all">
-              <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                Rochvilles & Co
+            <div className="flex items-center gap-3 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-4 py-2 -ml-4 transition-all group">
+              <div className="flex flex-col">
+                <div className="text-2xl font-bold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500">
+                  Rochvilles & Co
+                </div>
+                <div className="text-[10px] text-muted-foreground font-medium tracking-wide">
+                  Chartered Management Consultants, Accountants & Tax advisers
+                </div>
               </div>
             </div>
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href} data-testid={`link-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 <Button
                   variant={location === item.href ? "secondary" : "ghost"}
                   size="sm"
-                  className="text-sm transition-all"
+                  className={`text-sm transition-all relative group ${
+                    location === item.href ? 'font-semibold' : ''
+                  }`}
                 >
                   {item.name}
+                  {location === item.href && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full" />
+                  )}
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 via-green-600 to-purple-600 rounded-full group-hover:w-4/5 transition-all duration-300" />
                 </Button>
               </Link>
             ))}
           </nav>
 
+          {/* Action Buttons */}
           <div className="flex items-center gap-2">
             <div className="hidden md:flex items-center gap-3 mr-2">
-              <a href="tel:02085144953" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors group" data-testid="link-phone">
-                <Phone className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                <span>0208 514 4953</span>
+              <a 
+                href="tel:02085144953" 
+                className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-all group rounded-lg hover-elevate active-elevate-2" 
+                data-testid="link-phone"
+              >
+                <div className="p-1.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <Phone className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
+                </div>
+                <span className="font-medium">0208 514 4953</span>
               </a>
             </div>
             
@@ -60,14 +83,19 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
               variant="ghost"
               size="icon"
               onClick={toggleDarkMode}
-              className="transition-all hover:rotate-12"
+              className="transition-all hover:rotate-12 hover-elevate"
               data-testid="button-theme-toggle"
             >
               {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
 
             <Link href="/contact">
-              <Button variant="default" size="sm" className="hidden md:flex shadow-md hover:shadow-lg transition-all" data-testid="button-contact-header">
+              <Button 
+                variant="default" 
+                size="sm" 
+                className="hidden md:flex shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary" 
+                data-testid="button-contact-header"
+              >
                 Contact Us
               </Button>
             </Link>
@@ -84,6 +112,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden border-t py-4 animate-fade-in-up" data-testid="mobile-menu">
             <nav className="flex flex-col gap-2">
@@ -91,7 +120,9 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
                 <Link key={item.name} href={item.href} data-testid={`link-mobile-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
                   <Button
                     variant={location === item.href ? "secondary" : "ghost"}
-                    className="w-full justify-start"
+                    className={`w-full justify-start transition-all ${
+                      location === item.href ? 'border-l-4 border-l-primary font-semibold' : ''
+                    }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -99,7 +130,12 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
                 </Link>
               ))}
               <Link href="/contact">
-                <Button variant="default" className="w-full" onClick={() => setMobileMenuOpen(false)} data-testid="button-contact-mobile">
+                <Button 
+                  variant="default" 
+                  className="w-full mt-2 bg-gradient-to-r from-primary to-primary/90" 
+                  onClick={() => setMobileMenuOpen(false)} 
+                  data-testid="button-contact-mobile"
+                >
                   Contact Us
                 </Button>
               </Link>
