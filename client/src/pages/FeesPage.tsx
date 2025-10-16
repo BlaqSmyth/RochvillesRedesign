@@ -303,6 +303,65 @@ export default function FeesPage() {
         </div>
       </section>
 
+      {/* Special Offer Banner - Concise */}
+      <section className="py-8 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className="relative overflow-hidden border-2 border-primary/30 bg-gradient-to-br from-primary/10 via-orange-500/5 to-green-500/5" data-testid="card-special-offer-banner">
+              <CardContent className="p-6 md:p-8">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Sparkles className="w-5 h-5 text-primary" />
+                      <span className="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full" data-testid="badge-special-offer-fees">
+                        SPECIAL OFFER
+                      </span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-2" data-testid="heading-new-business-package">
+                      New Business Package: £399 <span className="text-lg font-normal text-muted-foreground">+ VAT/year</span>
+                    </h3>
+                    <p className="text-muted-foreground mb-3">
+                      Complete Accountancy, Bookkeeping, VAT & Payroll services for Directors & up to 6 Employees
+                    </p>
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-green-600 dark:text-green-400" />
+                        <span>Contractor Specialists</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-green-600 dark:text-green-400" />
+                        <span>IR35 Experts</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-green-600 dark:text-green-400" />
+                        <span>Fixed Fees - Half Industry Rate</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Link href="/contractors-guide">
+                      <Button className="w-full sm:w-auto hover-elevate active-elevate-2" data-testid="button-learn-more-offer">
+                        Learn More
+                      </Button>
+                    </Link>
+                    <Link href="/contact">
+                      <Button variant="outline" className="w-full sm:w-auto hover-elevate active-elevate-2" data-testid="button-get-quote-offer">
+                        Get a Quote
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Payroll Services */}
       <section className="py-24 md:py-32 relative">
         {/* Decorative background pattern */}
