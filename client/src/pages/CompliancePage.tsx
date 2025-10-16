@@ -896,7 +896,7 @@ export default function CompliancePage() {
                 <div className="text-center mb-8">
                   <h2 className="text-4xl font-bold mb-4">Our Fees</h2>
                   <div className="inline-block">
-                    <div className="text-5xl font-bold text-primary mb-2">£12</div>
+                    <div className="text-5xl font-bold text-primary mb-2">£20</div>
                     <p className="text-lg text-muted-foreground">per week per timesheet submitted</p>
                   </div>
                   <p className="text-sm text-muted-foreground mt-4">
