@@ -780,7 +780,7 @@ export default function CompliancePage() {
                   </p>
                   <p className="text-muted-foreground mb-4">
                     We can help you calculate your take-home pay to the nearest penny using our Umbrella 
-                    Calculator, as long as your tax code is one of the standard codes (1250L) and we're 
+                    Calculator, as long as your tax code is one of the standard codes (1257L) and we're 
                     calculating like for like.
                   </p>
                   <p className="text-sm text-muted-foreground italic">
