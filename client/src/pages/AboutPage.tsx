@@ -118,8 +118,8 @@ export default function AboutPage() {
                 Expert Accountants You Can Trust
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-6">
-                Rochvilles & Co. Accountants is a professional accounting firm based in London & Essex, 
-                serving businesses and contractors in London & Essex and across the United Kingdom.
+                Rochvilles & Co. Accountants is a professional accounting firm based in London, 
+                serving businesses and contractors in London and across the United Kingdom.
               </p>
               <p className="text-muted-foreground mb-6">
                 As authorised members of both the Association of International Accountants (AIA) and 
