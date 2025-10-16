@@ -33,7 +33,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
         <div className="flex h-28 items-center justify-between gap-4">
           {/* Logo Section */}
           <Link href="/" data-testid="link-logo">
-            <div className="cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 transition-all group" style={{ marginLeft: '-96px' }}>
+            <div className="cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 transition-all group" style={{ marginLeft: '-192px' }}>
               <img 
                 src={rochvillesLogo} 
                 alt="Rochvilles & Co. Accountants - Chartered Management Consultants, Accountants & Tax advisers" 
