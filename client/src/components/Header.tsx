@@ -37,7 +37,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
               <img 
                 src={rochvillesLogo} 
                 alt="Rochvilles & Co. Accountants - Chartered Management Consultants, Accountants & Tax advisers" 
-                className="h-14 sm:h-16 w-auto transition-transform group-hover:scale-105"
+                className="h-auto w-auto max-h-20 transition-transform group-hover:scale-105"
               />
             </div>
           </Link>
