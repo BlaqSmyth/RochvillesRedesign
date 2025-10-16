@@ -30,14 +30,14 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-green-600 to-purple-600" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-24 items-center justify-between gap-4">
+        <div className="flex h-28 items-center justify-between gap-4">
           {/* Logo Section */}
           <Link href="/" data-testid="link-logo">
             <div className="cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 -ml-3 transition-all group">
               <img 
                 src={rochvillesLogo} 
                 alt="Rochvilles & Co. Accountants - Chartered Management Consultants, Accountants & Tax advisers" 
-                className="h-auto w-auto max-h-20 transition-transform group-hover:scale-105"
+                className="h-auto w-auto max-h-24 transition-transform group-hover:scale-105"
               />
             </div>
           </Link>
