@@ -317,7 +317,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div className="mt-8 pt-6 border-t-2 border-primary/10">
-                    <p className="font-bold text-xl text-foreground" data-testid="text-ceo-name">Marcellinius Oguh</p>
+                    <p className="font-bold text-xl text-foreground" data-testid="text-ceo-name">Marcelli Oguh</p>
                     <p className="text-primary font-semibold" data-testid="text-ceo-title">CEO & Founder, Rochvilles & Co. Accountants</p>
                     <p className="text-sm text-muted-foreground mt-1">AIA, IFA</p>
                   </div>
@@ -343,7 +343,7 @@ export default function AboutPage() {
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-background">
                   <img 
                     src={ceoPhoto} 
-                    alt="Marcellinius Oguh - CEO of Rochvilles & Co. Accountants" 
+                    alt="Marcelli Oguh - CEO of Rochvilles & Co. Accountants" 
                     className="w-full h-auto"
                     data-testid="img-ceo"
                   />
