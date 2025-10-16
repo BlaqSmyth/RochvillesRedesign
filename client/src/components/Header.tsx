@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Moon, Sun } from "lucide-react";
-import rochvillesLogo from "@assets/rochvilles-logo.png";
+import rochvillesLogo from "@assets/rochvilles-header-logo.png";
 
 interface HeaderProps {
   darkMode: boolean;
@@ -30,23 +30,15 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-green-600 to-purple-600" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between gap-4">
-          {/* Logo Section with Tagline */}
+        <div className="flex h-24 items-center justify-between gap-4">
+          {/* Logo Section */}
           <Link href="/" data-testid="link-logo">
-            <div className="flex items-center gap-2 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 -ml-3 transition-all group min-w-0">
+            <div className="cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 -ml-3 transition-all group">
               <img 
                 src={rochvillesLogo} 
-                alt="Rochvilles & Co logo" 
-                className="h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 transition-transform group-hover:scale-105"
+                alt="Rochvilles & Co. Accountants - Chartered Management Consultants, Accountants & Tax advisers" 
+                className="h-14 sm:h-16 w-auto transition-transform group-hover:scale-105"
               />
-              <div className="flex flex-col min-w-0">
-                <div className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500 whitespace-nowrap">
-                  Rochvilles & Co. Accountants
-                </div>
-                <div className="text-[9px] sm:text-[10px] text-foreground/80 font-semibold tracking-wide mt-0.5 whitespace-nowrap">
-                  Chartered Management Consultants, Accountants & Tax advisers
-                </div>
-              </div>
             </div>
           </Link>
 
