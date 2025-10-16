@@ -43,13 +43,13 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-0">
+          <nav className="hidden lg:flex items-center gap-1">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href} data-testid={`link-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 <Button
                   variant={location === item.href ? "secondary" : "ghost"}
-                  size="sm"
-                  className={`text-xs px-2 transition-all relative group ${
+                  size="default"
+                  className={`text-sm px-4 transition-all relative group ${
                     location === item.href ? 'font-semibold' : ''
                   }`}
                 >
