@@ -325,6 +325,9 @@ export default function FeesPage() {
                     <h3 className="text-2xl md:text-3xl font-bold mb-2" data-testid="heading-new-business-package">
                       New Business Package: £399 <span className="text-lg font-normal text-muted-foreground">+ VAT/year</span>
                     </h3>
+                    <h4 className="text-lg font-semibold text-primary mb-2" data-testid="subheading-contractor-umbrella">
+                      Contractors & Umbrella Payroll Services
+                    </h4>
                     <p className="text-muted-foreground mb-3">
                       Complete Accountancy, Bookkeeping, VAT & Payroll services for Directors & up to 6 Employees
                     </p>
