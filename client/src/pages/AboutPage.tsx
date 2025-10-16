@@ -1,10 +1,11 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Award, Users, Shield, TrendingUp, Target, CheckCircle2, Building2, Briefcase, MapPin } from "lucide-react";
+import { Award, Users, Shield, TrendingUp, Target, CheckCircle2, Building2, Briefcase, MapPin, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
 import ifaLogo from "@assets/institute-of-financial-accountants-logo-png_seeklogo-508022_1760548920320.png";
 import teamImage from "@assets/stock_images/professional_account_2d70c25c.jpg";
 import officeImage from "@assets/stock_images/modern_workspace_off_ad07179a.jpg";
+import ceoPhoto from "@assets/PHOTO-2025-10-16-12-36-12_1760614692778.jpg";
 
 export default function AboutPage() {
   const values = [
@@ -189,6 +190,79 @@ export default function AboutPage() {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* CEO Statement */}
+      <section className="py-24 md:py-32 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="order-2 lg:order-1"
+            >
+              <div className="relative">
+                <Quote className="absolute -top-4 -left-4 w-12 h-12 text-primary/20" />
+                <div className="relative bg-gradient-to-br from-primary/5 to-blue-500/5 p-8 rounded-2xl border-2 border-primary/10" data-testid="container-ceo-statement">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-6" data-testid="heading-ceo-statement">
+                    A Message from Our CEO
+                  </h2>
+                  <div className="space-y-4 text-muted-foreground">
+                    <p className="text-lg leading-relaxed">
+                      "At Rochvilles & Co., we believe that every business deserves access to professional, 
+                      transparent, and personalized accounting services. Our commitment is to provide exceptional 
+                      financial guidance that empowers our clients to achieve their business goals."
+                    </p>
+                    <p className="text-lg leading-relaxed">
+                      "With our authorisations from AIA and IFA, combined with our deep expertise in contractor 
+                      accounting and tax planning, we offer more than just compliance—we provide strategic partnership 
+                      that drives success. Our competitive fixed-fee structure ensures you receive top-tier service 
+                      without the premium prices."
+                    </p>
+                    <p className="text-lg leading-relaxed">
+                      "Whether you're a contractor navigating IR35, a business seeking growth, or an individual 
+                      requiring tax planning, we're here to deliver clarity, efficiency, and results you can trust."
+                    </p>
+                  </div>
+                  <div className="mt-8 pt-6 border-t-2 border-primary/10">
+                    <p className="font-bold text-xl text-foreground" data-testid="text-ceo-name">Emmanuel Rochville</p>
+                    <p className="text-primary font-semibold" data-testid="text-ceo-title">CEO & Founder, Rochvilles & Co. Accountants</p>
+                    <p className="text-sm text-muted-foreground mt-1">AIA, IFA</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="order-1 lg:order-2"
+            >
+              <div className="relative">
+                <motion.div
+                  animate={{
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{ duration: 8, repeat: Infinity }}
+                  className="absolute -inset-6 bg-gradient-to-br from-primary/20 via-blue-500/20 to-green-500/20 rounded-2xl blur-2xl"
+                />
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-background">
+                  <img 
+                    src={ceoPhoto} 
+                    alt="Emmanuel Rochville - CEO of Rochvilles & Co. Accountants" 
+                    className="w-full h-auto"
+                    data-testid="img-ceo"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
