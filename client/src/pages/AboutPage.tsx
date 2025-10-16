@@ -297,7 +297,7 @@ export default function AboutPage() {
                 <Quote className="absolute -top-4 -left-4 w-12 h-12 text-primary/20" />
                 <div className="relative bg-gradient-to-br from-primary/5 to-blue-500/5 p-8 rounded-2xl border-2 border-primary/10" data-testid="container-ceo-statement">
                   <h2 className="text-3xl md:text-4xl font-bold mb-6" data-testid="heading-ceo-statement">
-                    A Message from Our Founder/CEO
+                    A Message from Our Founder
                   </h2>
                   <div className="space-y-4 text-muted-foreground">
                     <p className="text-lg leading-relaxed">
