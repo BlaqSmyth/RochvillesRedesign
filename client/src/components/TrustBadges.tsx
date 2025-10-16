@@ -193,6 +193,10 @@ export default function TrustBadges() {
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span>Data Protection Compliant</span>
             </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span>Anti-Money Laundering Compliant</span>
+            </div>
           </div>
         </motion.div>
       </div>
