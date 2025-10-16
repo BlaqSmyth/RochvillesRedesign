@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     question: "Are you qualified and certified?",
-    answer: "Yes, our team includes ACCA certified accountants, ICAEW members, and AAT licensed professionals. We maintain the highest professional standards and stay updated with the latest regulations and tax legislation."
+    answer: "Yes, our team includes CIPA, AIA, IFA & CIM certified professionals. We maintain the highest professional standards and stay updated with the latest regulations and tax legislation."
   }
 ];
 

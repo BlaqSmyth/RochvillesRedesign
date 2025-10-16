@@ -95,7 +95,7 @@ export default function HomePage() {
     {
       icon: Award,
       title: "Expert Team",
-      description: "Our qualified accountants have extensive experience across all industries and business sizes."
+      description: "Our qualified accountants have extensive experience across all small to medium enterprise (SME) businesses."
     },
     {
       icon: Clock,
