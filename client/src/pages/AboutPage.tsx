@@ -3,7 +3,14 @@ import { Award, Users, Shield, TrendingUp, Target, CheckCircle2, Building2, Brie
 import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
 import ifaLogo from "@assets/institute-of-financial-accountants-logo-png_seeklogo-508022_1760548920320.png";
-import teamImage from "@assets/stock_images/professional_account_2d70c25c.jpg";
+import aiaLogo from "@assets/stock_images/association_of_inter_b9f2b6d7.jpg";
+import ciiLogo from "@assets/chartered-insurance-institute-logo-png_seeklogo-358677_1760548490997.png";
+import cmiLogo from "@assets/CMI_idJ8_s4bmY_0_1760548668823.png";
+import ftaLogo from "@assets/stock_images/federation_of_tax_ad_6dd9504a.jpg";
+import ipaLogo from "@assets/stock_images/institute_of_public__8798aa31.jpg";
+import pfsLogo from "@assets/PFS_NoStrapline_DarkGrey_Reduced_uk7jy_resized_medium_1760548562667.png";
+import smpLogo from "@assets/Member_SMP_Black_CMYK_with_strapline_1760548599999.png";
+import heroImage from "@assets/istockphoto-2171857890-612x612_1760615546462.jpg";
 import officeImage from "@assets/stock_images/modern_workspace_off_ad07179a.jpg";
 import ceoPhoto from "@assets/PHOTO-2025-10-16-12-36-12_1760614692778.jpg";
 
@@ -143,8 +150,8 @@ export default function AboutPage() {
                 />
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-background">
                   <img 
-                    src={teamImage} 
-                    alt="Professional accounting team" 
+                    src={heroImage} 
+                    alt="Professional accounting technology" 
                     className="w-full h-auto"
                     data-testid="img-hero-about"
                   />
@@ -169,24 +176,106 @@ export default function AboutPage() {
             <h2 className="text-2xl md:text-3xl font-bold mb-8" data-testid="heading-memberships">
               Professional Memberships & Authorisations
             </h2>
-            <div className="flex flex-col items-center gap-6 mb-6">
-              <div className="flex items-center justify-center gap-8">
-                <div className="flex items-center justify-center w-24 h-24 rounded-lg bg-white dark:bg-gray-900 p-3 shadow-lg border-2 border-primary/20">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">AIA</div>
-                    <div className="text-[9px] text-muted-foreground leading-tight">Association of International Accountants</div>
-                  </div>
-                </div>
-                <div className="w-40 h-24 rounded-lg overflow-hidden bg-white dark:bg-gray-900 p-3 shadow-lg border-2 border-primary/20">
+            <div className="flex flex-col items-center gap-8 mb-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                {/* AIA Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center h-28 rounded-lg bg-white dark:bg-gray-900 p-4 shadow-lg border-2 border-primary/20 hover-elevate"
+                >
                   <img 
-                    src={ifaLogo} 
-                    alt="Institute of Financial Accountants logo"
+                    src={aiaLogo} 
+                    alt="Association of International Accountants (AIA)"
                     className="w-full h-full object-contain"
                   />
-                </div>
+                </motion.div>
+
+                {/* IFA Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center h-28 rounded-lg bg-white dark:bg-gray-900 p-4 shadow-lg border-2 border-primary/20 hover-elevate"
+                >
+                  <img 
+                    src={ifaLogo} 
+                    alt="Institute of Financial Accountants (IFA)"
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+
+                {/* CII Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center h-28 rounded-lg bg-white dark:bg-gray-900 p-4 shadow-lg border-2 border-primary/20 hover-elevate"
+                >
+                  <img 
+                    src={ciiLogo} 
+                    alt="Chartered Insurance Institute (CII)"
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+
+                {/* CMI Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center h-28 rounded-lg bg-white dark:bg-gray-900 p-4 shadow-lg border-2 border-primary/20 hover-elevate"
+                >
+                  <img 
+                    src={cmiLogo} 
+                    alt="Chartered Management Institute (CMI)"
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+
+                {/* FTA Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center h-28 rounded-lg bg-white dark:bg-gray-900 p-4 shadow-lg border-2 border-primary/20 hover-elevate"
+                >
+                  <img 
+                    src={ftaLogo} 
+                    alt="Federation of Tax Advisers (FTA)"
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+
+                {/* IPA Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center h-28 rounded-lg bg-white dark:bg-gray-900 p-4 shadow-lg border-2 border-primary/20 hover-elevate"
+                >
+                  <img 
+                    src={ipaLogo} 
+                    alt="Institute of Public Accountants (IPA)"
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+
+                {/* PFS Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center h-28 rounded-lg bg-white dark:bg-gray-900 p-4 shadow-lg border-2 border-primary/20 hover-elevate"
+                >
+                  <img 
+                    src={pfsLogo} 
+                    alt="Personal Finance Society (PFS)"
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+
+                {/* SMP Logo */}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center justify-center h-28 rounded-lg bg-white dark:bg-gray-900 p-4 shadow-lg border-2 border-primary/20 hover-elevate"
+                >
+                  <img 
+                    src={smpLogo} 
+                    alt="Society of Mortgage Professionals (SMP)"
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
               </div>
               <p className="text-sm text-center text-muted-foreground max-w-3xl">
-                <span className="font-semibold text-foreground">Authorised by Association of International Accountants & Institute of Financial Accountants</span> to engage in public practise
+                <span className="font-semibold text-foreground">Authorised and accredited by leading professional bodies</span> to provide comprehensive accounting, tax, and financial advisory services
               </p>
             </div>
           </motion.div>
@@ -218,7 +307,7 @@ export default function AboutPage() {
                     </p>
                     <p className="text-lg leading-relaxed">
                       "With our authorisations from AIA and IFA, combined with our deep expertise in contractor 
-                      accounting and tax planning, we offer more than just compliance—we provide strategic partnership 
+                      accounting and tax planning, we offer more than just compliance, we provide strategic partnership 
                       that drives success. Our competitive fixed-fee structure ensures you receive top-tier service 
                       without the premium prices."
                     </p>
@@ -228,7 +317,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div className="mt-8 pt-6 border-t-2 border-primary/10">
-                    <p className="font-bold text-xl text-foreground" data-testid="text-ceo-name">Emmanuel Rochville</p>
+                    <p className="font-bold text-xl text-foreground" data-testid="text-ceo-name">Marcellinius Oguh</p>
                     <p className="text-primary font-semibold" data-testid="text-ceo-title">CEO & Founder, Rochvilles & Co. Accountants</p>
                     <p className="text-sm text-muted-foreground mt-1">AIA, IFA</p>
                   </div>
@@ -254,7 +343,7 @@ export default function AboutPage() {
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-background">
                   <img 
                     src={ceoPhoto} 
-                    alt="Emmanuel Rochville - CEO of Rochvilles & Co. Accountants" 
+                    alt="Marcellinius Oguh - CEO of Rochvilles & Co. Accountants" 
                     className="w-full h-auto"
                     data-testid="img-ceo"
                   />
