@@ -33,18 +33,19 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
         <div className="flex h-20 items-center justify-between gap-4">
           {/* Logo Section with Tagline */}
           <Link href="/" data-testid="link-logo">
-            <div className="flex items-center gap-2 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 -ml-3 transition-all group min-w-0">
-              <img 
-                src={rochvillesLogo} 
-                alt="Rochvilles & Co logo" 
-                className="h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 transition-transform group-hover:scale-105"
-              />
+            <div className="flex items-center gap-3 cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 -ml-3 transition-all group min-w-0">
+              <div className="h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 bg-blue-700 dark:bg-blue-600 rounded flex items-center justify-center transition-transform group-hover:scale-105">
+                <span className="text-white font-bold text-2xl sm:text-3xl">R</span>
+              </div>
               <div className="flex flex-col min-w-0">
-                <div className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-primary via-blue-600 to-green-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:via-green-600 group-hover:to-primary transition-all duration-500 whitespace-nowrap">
-                  Rochvilles & Co. Accountants
+                <div className="text-lg sm:text-xl font-bold text-cyan-500 dark:text-cyan-400 transition-all duration-500 whitespace-nowrap" style={{ fontStyle: 'italic' }}>
+                  Rochvilles & Co.
                 </div>
-                <div className="text-[9px] sm:text-[10px] text-foreground/80 font-semibold tracking-wide mt-0.5 whitespace-nowrap">
-                  Chartered Management Consultants, Accountants & Tax advisers
+                <div className="text-sm sm:text-base font-bold text-cyan-500 dark:text-cyan-400 -mt-1 whitespace-nowrap" style={{ fontStyle: 'italic' }}>
+                  Accountants Ltd.
+                </div>
+                <div className="text-[9px] sm:text-[10px] text-foreground font-semibold tracking-wide mt-0.5 whitespace-nowrap">
+                  Chartered Management Consultants, Accountants & Registered Tax Advisers
                 </div>
               </div>
             </div>
