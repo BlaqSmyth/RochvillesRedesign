@@ -170,16 +170,16 @@ export default function InteractiveTaxCalculator() {
                   value={income}
                   onValueChange={setIncome}
                   min={20000}
-                  max={200000}
-                  step={5000}
+                  max={1000000}
+                  step={10000}
                   className="mb-6"
                   data-testid="slider-income"
                 />
 
                 <div className="grid grid-cols-3 gap-2 text-xs text-muted-foreground">
                   <div>£20k</div>
-                  <div className="text-center">£110k</div>
-                  <div className="text-right">£200k</div>
+                  <div className="text-center">£510k</div>
+                  <div className="text-right">£1M</div>
                 </div>
               </div>
 
@@ -259,16 +259,16 @@ export default function InteractiveTaxCalculator() {
                   value={income}
                   onValueChange={setIncome}
                   min={20000}
-                  max={200000}
-                  step={5000}
+                  max={1000000}
+                  step={10000}
                   className="mb-6"
                   data-testid="slider-income-tax"
                 />
 
                 <div className="grid grid-cols-3 gap-2 text-xs text-muted-foreground">
                   <div>£20k</div>
-                  <div className="text-center">£110k</div>
-                  <div className="text-right">£200k</div>
+                  <div className="text-center">£510k</div>
+                  <div className="text-right">£1M</div>
                 </div>
               </div>
 
