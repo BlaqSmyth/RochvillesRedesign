@@ -171,7 +171,7 @@ export default function ParallaxHero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-xl mb-8 text-primary-foreground/90 leading-relaxed"
           >
-            Professional accounting, tax planning, and financial services for businesses in Ilford, Essex and London. 
+            Professional accounting, tax planning, and financial services for businesses in London and across the United Kingdom. 
             Let us handle your finances while you focus on growing your business.
           </motion.p>
           
