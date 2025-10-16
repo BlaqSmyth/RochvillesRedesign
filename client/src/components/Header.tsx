@@ -30,7 +30,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-green-600 to-purple-600" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-28 items-center justify-between gap-4">
+        <div className="flex h-28 items-center justify-between gap-4" style={{ marginLeft: '96px' }}>
           {/* Logo Section */}
           <Link href="/" data-testid="link-logo">
             <div className="cursor-pointer hover-elevate active-elevate-2 rounded-lg px-3 py-2 transition-all group" style={{ marginLeft: '-192px' }}>
