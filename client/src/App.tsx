@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomePage from "@/pages/HomePage";
+import AboutPage from "@/pages/AboutPage";
 import ServicesPage from "@/pages/ServicesPage";
 import TaxTipsPage from "@/pages/TaxTipsPage";
 import ContractorsGuidePage from "@/pages/ContractorsGuidePage";
@@ -23,6 +24,7 @@ function Router({ darkMode, toggleDarkMode }: { darkMode: boolean; toggleDarkMod
       <main className="flex-1">
         <Switch>
           <Route path="/" component={HomePage} />
+          <Route path="/about" component={AboutPage} />
           <Route path="/services" component={ServicesPage} />
           <Route path="/tax-tips" component={TaxTipsPage} />
           <Route path="/contractors-guide" component={ContractorsGuidePage} />

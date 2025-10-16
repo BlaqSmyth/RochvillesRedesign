@@ -15,6 +15,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
 
   const navigation = [
     { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Tax Tips", href: "/tax-tips" },
     { name: "Contractors Guide", href: "/contractors-guide" },
