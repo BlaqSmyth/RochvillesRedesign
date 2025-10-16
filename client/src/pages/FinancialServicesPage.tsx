@@ -233,7 +233,7 @@ export default function FinancialServicesPage() {
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-6">
                 Professional financial planning, commercial finance, and wealth management services tailored to your unique circumstances. 
-                Expert guidance for businesses and individuals across Ilford, Essex, and London.
+                Expert guidance for businesses and individuals across the United Kingdom.
               </p>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3 p-3 bg-card rounded-lg border border-primary/10">
