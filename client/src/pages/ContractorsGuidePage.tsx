@@ -182,6 +182,129 @@ export default function ContractorsGuidePage() {
         </div>
       </section>
 
+      {/* Special Offer Section */}
+      <section className="py-16 md:py-24 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <Card className="relative overflow-hidden border-2 border-primary/20 shadow-2xl">
+              {/* Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-orange-500/5 to-green-500/5" />
+              
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+              
+              <CardHeader className="relative z-10 pb-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-6 h-6 text-primary" />
+                  <span className="inline-block px-4 py-1 bg-primary/20 text-primary text-sm font-semibold rounded-full" data-testid="badge-special-offer">
+                    SPECIAL OFFER
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4" data-testid="heading-new-business-offer">
+                  All New Businesses Package
+                </h2>
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-4xl md:text-5xl font-bold text-primary" data-testid="text-price-399">£399.00</span>
+                  <span className="text-xl text-muted-foreground">plus VAT per year</span>
+                </div>
+                <p className="text-lg text-muted-foreground">
+                  Complete Accountancy, Bookkeeping, VAT and Payroll services<br />
+                  <span className="text-sm">(Directors & up to 6 Employees)</span>
+                </p>
+              </CardHeader>
+              
+              <CardContent className="relative z-10 space-y-8">
+                {/* Contractors & Umbrella Payroll Services */}
+                <div>
+                  <h3 className="text-2xl font-bold mb-4 flex items-center gap-2" data-testid="heading-contractor-umbrella">
+                    <Briefcase className="w-6 h-6 text-primary" />
+                    Contractors & Umbrella Payroll Services
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    Rochvilles & Co. Accountants can provide you with all the accounting help you need to run your limited company as a contractor as smoothly as possible, also as your payroll services provider to those contractors who would rather delegate all their day-to-day activities to an HMRC compliant umbrella service.
+                  </p>
+                  <p className="text-muted-foreground mb-6">
+                    Rochvilles & Co. specialises in the contracting sector and can offer the expertise necessary to maximise your contracting returns and ensure you stay 100% compliant with legislation affecting you.
+                  </p>
+                </div>
+
+                {/* Key Benefits */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-start gap-3 p-4 bg-card/50 rounded-lg border border-primary/10 hover-elevate" data-testid="card-benefit-specialist">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold mb-1">Contractor Accounting Specialists</h4>
+                      <p className="text-sm text-muted-foreground">Expert knowledge in contractor-specific accounting needs</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3 p-4 bg-card/50 rounded-lg border border-primary/10 hover-elevate" data-testid="card-benefit-service">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold mb-1">Personalised Service</h4>
+                      <p className="text-sm text-muted-foreground">No call centres - direct access to your dedicated accountant</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3 p-4 bg-card/50 rounded-lg border border-primary/10 hover-elevate" data-testid="card-benefit-inclusive">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold mb-1">Fully Inclusive Service</h4>
+                      <p className="text-sm text-muted-foreground">Tax returns, accounts, payroll, tailored record keeping options</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3 p-4 bg-card/50 rounded-lg border border-primary/10 hover-elevate" data-testid="card-benefit-experts">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold mb-1">Tax, VAT & IR35 Experts</h4>
+                      <p className="text-sm text-muted-foreground">Specialists in all aspects of contractor taxation</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3 p-4 bg-card/50 rounded-lg border border-primary/10 hover-elevate" data-testid="card-benefit-planning">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold mb-1">Strategic Tax Planning</h4>
+                      <p className="text-sm text-muted-foreground">Full advice and support including property tax specialists</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3 p-4 bg-card/50 rounded-lg border border-primary/10 hover-elevate" data-testid="card-benefit-fees">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold mb-1">Competitive Fixed Fees</h4>
+                      <p className="text-sm text-muted-foreground">Relatively half of what most other contractors charge</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Button */}
+                <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                  <a href="/contact" className="inline-flex">
+                    <button className="w-full sm:w-auto bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover-elevate active-elevate-2 transition-all flex items-center justify-center gap-2" data-testid="button-get-started-offer">
+                      Get Started Today
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                  </a>
+                  <a href="/fees" className="inline-flex">
+                    <button className="w-full sm:w-auto border border-primary/20 px-8 py-3 rounded-lg font-semibold hover-elevate active-elevate-2 transition-all" data-testid="button-view-pricing">
+                      View All Pricing
+                    </button>
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Main Content Section */}
       <section className="py-24 md:py-32 relative">
         {/* Decorative background pattern */}
