@@ -6,10 +6,10 @@ import ifaLogo from "@assets/institute-of-financial-accountants-logo-png_seeklog
 import aiaLogo from "@assets/stock_images/association_of_inter_b9f2b6d7.jpg";
 import ciiLogo from "@assets/chartered-insurance-institute-logo-png_seeklogo-358677_1760548490997.png";
 import cmiLogo from "@assets/CMI_idJ8_s4bmY_0_1760548668823.png";
-import ftaLogo from "@assets/stock_images/federation_of_tax_ad_6dd9504a.jpg";
-import ipaLogo from "@assets/stock_images/institute_of_public__8798aa31.jpg";
+import ftaLogo from "@assets/id7rxvLLLa_1760547035151_1760618930986.png";
+import ipaLogo from "@assets/idfMqNUqBD_1760546699175_1760618958013.png";
 import pfsLogo from "@assets/PFS_NoStrapline_DarkGrey_Reduced_uk7jy_resized_medium_1760548562667.png";
-import smpLogo from "@assets/Member_SMP_Black_CMYK_with_strapline_1760548599999.png";
+import smpLogo from "@assets/Member_SMP_Black_CMYK_with_strapline_1760619084342.png";
 import heroImage from "@assets/istockphoto-2171857890-612x612_1760615546462.jpg";
 import officeImage from "@assets/stock_images/modern_workspace_off_ad07179a.jpg";
 import ceoPhoto from "@assets/PHOTO-2025-10-16-12-36-12_1760614692778.jpg";
