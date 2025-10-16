@@ -43,7 +43,7 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1" style={{ marginRight: '96px' }}>
             {navigation.map((item) => (
               <Link key={item.name} href={item.href} data-testid={`link-${item.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 <Button
