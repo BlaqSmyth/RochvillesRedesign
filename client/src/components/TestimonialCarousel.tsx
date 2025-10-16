@@ -14,31 +14,59 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    name: "Sarah Mitchell",
-    company: "TechStart Solutions",
-    role: "Founder & CEO",
+    name: "Joseph Chuma",
+    company: "Highland Solicitors",
+    role: "Founder",
     content: "Rochvilles & Co transformed our accounting processes. Their proactive tax planning saved us over £15,000 last year. The team is responsive, knowledgeable, and truly cares about our success.",
     rating: 5
   },
   {
-    name: "David Thompson",
-    company: "Thompson Contractors Ltd",
-    role: "IT Contractor",
-    content: "As a contractor, IR35 compliance was a nightmare until I found Rochvilles. They handle everything seamlessly - from contract reviews to optimizing my take-home pay. Couldn't be happier!",
+    name: "Arthur Kopa",
+    company: "A Kopa Constructions Ltd",
+    role: "CEO",
+    content: "As a construction company, managing finances and compliance can be complex. Rochvilles handles everything seamlessly - from VAT returns to strategic tax planning. Outstanding service!",
     rating: 5
   },
   {
-    name: "Emma Richards",
-    company: "The Wellness Studio",
-    role: "Business Owner",
+    name: "Carmen Pipenco",
+    company: "Hotel Quality Cleaning LTD",
+    role: "CEO",
     content: "Switching to Rochvilles was the best decision for our growing business. Their cloud-based system gives us real-time insights, and their advice has been invaluable for our expansion plans.",
     rating: 5
   },
   {
-    name: "James Patterson",
-    company: "Patterson & Associates",
-    role: "Managing Director",
+    name: "Iana Marshall",
+    company: "Landbridge Consulting LTD",
+    role: "CEO",
     content: "Professional, reliable, and always ahead of deadlines. Rochvilles & Co has been instrumental in keeping our compliance on track while providing strategic financial guidance.",
+    rating: 5
+  },
+  {
+    name: "Judith Kwentoh",
+    company: "J3 Business Consultancy LTD",
+    role: "CEO",
+    content: "The expertise and dedication of Rochvilles & Co are unmatched. They've helped us navigate complex tax regulations and optimize our financial operations with exceptional professionalism.",
+    rating: 5
+  },
+  {
+    name: "Ade Adewale",
+    company: "Armour Energy LTD",
+    role: "CEO",
+    content: "Rochvilles provides exactly what we need - expert accounting services with transparent pricing. Their industry knowledge in the energy sector has been invaluable to our growth.",
+    rating: 5
+  },
+  {
+    name: "Chris Mundia",
+    company: "West Kent Group LTD",
+    role: "CEO",
+    content: "Outstanding service from start to finish. Rochvilles & Co has transformed how we manage our finances, providing clear insights and proactive advice that drives our business forward.",
+    rating: 5
+  },
+  {
+    name: "Olagoke Sokoya",
+    company: "Oatbuy2 Lets Properties",
+    role: "CEO",
+    content: "Managing property finances requires precision and expertise. Rochvilles delivers both with exceptional service. Their guidance on tax efficiency has significantly improved our bottom line.",
     rating: 5
   }
 ];
