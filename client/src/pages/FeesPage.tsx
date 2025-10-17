@@ -1,203 +1,87 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Check, Star, Users, Building2, Briefcase, Scale, Calculator, FileText, Clock, TrendingUp, Sparkles, Award, DollarSign, Shield, LineChart, Handshake, RefreshCcw, Receipt, Hammer } from "lucide-react";
+import { Check, Star, Users, Building2, Briefcase, Scale, Calculator, FileText, Clock, TrendingUp, Sparkles, Award, DollarSign, Shield, LineChart, Handshake, RefreshCcw, Receipt, Hammer, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import CTASection from "@/components/CTASection";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import type { PayrollPackage, BusinessType, PricingTier, AdditionalService } from "@shared/schema";
 
 import pricingImage from "@assets/stock_images/transparent_pricing__7edf573a.jpg";
 import businessValueImage from "@assets/stock_images/business_value_cost__d53ab898.jpg";
 import consultationImage from "@assets/stock_images/professional_account_2d70c25c.jpg";
 import successImage from "@assets/stock_images/financial_success_gr_6aa3b709.jpg";
 
+const iconMap: Record<string, LucideIcon> = {
+  Users,
+  Building2,
+  Briefcase,
+  Scale,
+  Calculator,
+  FileText,
+  TrendingUp,
+  LineChart,
+  Handshake,
+  RefreshCcw,
+  Receipt,
+  Hammer,
+  Clock,
+  DollarSign,
+  Shield,
+  Award,
+  Sparkles,
+  Check,
+  Star
+};
+
 export default function FeesPage() {
-  const payrollPackages = [
-    {
-      name: "Small Payroll",
-      employees: "Up to 10 employees",
-      price: "£45",
-      icon: Users,
-      features: [
-        "Monthly payroll processing",
-        "RTI submissions to HMRC",
-        "Payslips for all employees",
-        "P60s and P45s",
-        "Pension auto-enrolment support"
-      ]
-    },
-    {
-      name: "Medium Payroll",
-      employees: "10-25 employees",
-      price: "£75",
-      icon: Building2,
-      features: [
-        "All Small Payroll features",
-        "Advanced reporting",
-        "Multi-location support",
-        "Dedicated payroll specialist",
-        "Priority support"
-      ]
-    }
-  ];
+  const { data: payrollPackagesData = [] } = useQuery<PayrollPackage[]>({
+    queryKey: ["/api/pricing/payroll-packages"],
+  });
 
-  const businessTypes = [
-    {
-      type: "Sole Trader",
-      icon: Briefcase,
-      tiers: [
-        { turnover: "Up to £25k", price: "£550" },
-        { turnover: "£26k - £35k", price: "£650" },
-        { turnover: "£35k - £100k", price: "£1,000" },
-        { turnover: "Above £100k", price: "POA" }
-      ]
-    },
-    {
-      type: "Partnership",
-      icon: Users,
-      tiers: [
-        { turnover: "Up to £25k", price: "£650" },
-        { turnover: "£26k - £35k", price: "£750" },
-        { turnover: "£35k - £100k", price: "£1,250" },
-        { turnover: "Above £100k", price: "POA" }
-      ]
-    },
-    {
-      type: "Limited Company",
-      icon: Building2,
-      popular: true,
-      tiers: [
-        { turnover: "Up to £25k", price: "£850" },
-        { turnover: "£26k - £35k", price: "£1,000" },
-        { turnover: "£35k - £100k", price: "£1,850" },
-        { turnover: "Above £100k", price: "POA" }
-      ]
-    },
-    {
-      type: "Solicitors",
-      icon: Scale,
-      tiers: [
-        { turnover: "Up to £25k", price: "£1,250" },
-        { turnover: "£26k - £35k", price: "£1,500" },
-        { turnover: "£35k - £100k", price: "£2,300" },
-        { turnover: "Above £100k", price: "POA" }
-      ]
-    }
-  ];
+  const { data: businessTypesData = [] } = useQuery<BusinessType[]>({
+    queryKey: ["/api/pricing/business-types"],
+  });
 
-  const additionalServices = [
-    {
-      icon: Calculator,
-      service: "VAT Returns",
-      price: "£200",
-      period: "per quarter",
-      description: "Quarterly VAT return preparation and submission"
-    },
-    {
-      icon: FileText,
-      service: "Management Accounts",
-      price: "£300",
-      period: "per quarter",
-      description: "Quarterly management accounts with recommendations"
-    },
-    {
-      icon: LineChart,
-      service: "Interim Management Accounts",
-      price: "£400",
-      period: "per report",
-      description: "Detailed interim management accounts forecast with financial analysis"
-    },
-    {
-      icon: TrendingUp,
-      service: "Cash Flow Forecasting",
-      price: "£500",
-      period: "per forecast",
-      description: "12-month cash flow forecasts for business planning and working capital management"
-    },
-    {
-      icon: Receipt,
-      service: "Directors P11D & Dividends",
-      price: "£150",
-      period: "per director",
-      description: "P11D benefit reporting and dividend administration"
-    },
-    {
-      icon: Hammer,
-      service: "CIS Services",
-      price: "£100",
-      period: "per month",
-      description: "Construction Industry Scheme returns and compliance"
-    },
-    {
-      icon: Users,
-      service: "Extra Partner/Director Tax Return",
-      price: "£180",
-      period: "per return",
-      description: "Individual tax return for additional partners or directors"
-    },
-    {
-      icon: TrendingUp,
-      service: "Business Plans & Start-ups",
-      price: "£850",
-      period: "per case",
-      description: "Comprehensive business plan development"
-    },
-    {
-      icon: Building2,
-      service: "Company Formation (Express)",
-      price: "£150",
-      period: "one-off",
-      description: "Fast-track company incorporation service"
-    },
-    {
-      icon: Building2,
-      service: "Company Formation (Off-the-Shelf)",
-      price: "£100",
-      period: "one-off",
-      description: "Ready-made company purchase"
-    },
-    {
-      icon: FileText,
-      service: "Due Diligence",
-      price: "£1,500",
-      period: "per case",
-      description: "Comprehensive business due diligence for acquisitions"
-    },
-    {
-      icon: Handshake,
-      service: "Mergers & Acquisitions",
-      price: "POA",
-      period: "per transaction",
-      description: "Complete M&A advisory, valuation, and transaction support"
-    },
-    {
-      icon: RefreshCcw,
-      service: "Struck Off Company Restorations",
-      price: "£1,200",
-      period: "per case",
-      description: "Professional restoration of dissolved companies to Companies House register"
-    },
-    {
-      icon: Scale,
-      service: "Accountants Opinion/Review",
-      price: "£550",
-      period: "per review",
-      description: "Professional opinion and review services"
-    },
-    {
-      icon: Calculator,
-      service: "Software Setup & Training",
-      price: "£180",
-      period: "per hour",
-      description: "Accounting software implementation and training"
-    },
-    {
-      icon: TrendingUp,
-      service: "Financial Plan/Cashflow Projections",
-      price: "£850",
-      period: "per case",
-      description: "Comprehensive financial planning with multi-year projections, budgeting, and strategic analysis"
-    }
-  ];
+  const { data: pricingTiersData = [] } = useQuery<PricingTier[]>({
+    queryKey: ["/api/pricing/pricing-tiers"],
+  });
+
+  const { data: additionalServicesData = [] } = useQuery<AdditionalService[]>({
+    queryKey: ["/api/pricing/additional-services"],
+  });
+
+  const payrollPackages = payrollPackagesData.map((pkg, index) => ({
+    ...pkg,
+    employees: pkg.employeeRange,
+    icon: index === 0 ? Users : Building2
+  }));
+
+  const businessTypes = businessTypesData.map(bt => {
+    const tiers = pricingTiersData
+      .filter(tier => tier.businessTypeId === bt.id)
+      .sort((a, b) => a.displayOrder - b.displayOrder);
+    
+    return {
+      type: bt.type,
+      icon: iconMap[bt.icon] || Briefcase,
+      popular: bt.popular,
+      tiers: tiers.map(tier => ({
+        turnover: tier.turnover,
+        price: tier.price
+      }))
+    };
+  }).sort((a, b) => {
+    const aOrder = businessTypesData.find(bt => bt.type === a.type)?.displayOrder || 0;
+    const bOrder = businessTypesData.find(bt => bt.type === b.type)?.displayOrder || 0;
+    return aOrder - bOrder;
+  });
+
+  const additionalServices = additionalServicesData.map(svc => ({
+    ...svc,
+    service: svc.serviceName,
+    icon: iconMap[svc.icon] || FileText
+  })).sort((a, b) => a.displayOrder - b.displayOrder);
 
   const includedInPrice = [
     "Annual accounts preparation",
