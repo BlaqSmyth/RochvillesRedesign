@@ -36,19 +36,19 @@ const iconMap: Record<string, LucideIcon> = {
 
 export default function FeesPage() {
   const { data: payrollPackagesData = [] } = useQuery<PayrollPackage[]>({
-    queryKey: ["/api/pricing/payroll-packages"],
+    queryKey: ["/api/payroll-packages"],
   });
 
   const { data: businessTypesData = [] } = useQuery<BusinessType[]>({
-    queryKey: ["/api/pricing/business-types"],
+    queryKey: ["/api/business-types"],
   });
 
   const { data: pricingTiersData = [] } = useQuery<PricingTier[]>({
-    queryKey: ["/api/pricing/pricing-tiers"],
+    queryKey: ["/api/pricing-tiers"],
   });
 
   const { data: additionalServicesData = [] } = useQuery<AdditionalService[]>({
-    queryKey: ["/api/pricing/additional-services"],
+    queryKey: ["/api/additional-services"],
   });
 
   const payrollPackages = payrollPackagesData.map((pkg, index) => ({
