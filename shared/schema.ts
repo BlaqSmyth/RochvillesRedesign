@@ -222,3 +222,50 @@ export type ContactSubmission = {
   submittedAt: string;
   status: string;
 };
+
+// Quote Requests
+export const quoteRequests = pgTable("quote_requests", {
+  id: serial("id").primaryKey(),
+  // Business details
+  businessTypeId: integer("business_type_id").notNull().references(() => businessTypes.id),
+  businessTypeName: text("business_type_name").notNull(),
+  turnover: text("turnover").notNull(),
+  employeeCount: integer("employee_count").default(0).notNull(),
+  
+  // Selected services
+  payrollPackageId: integer("payroll_package_id").references(() => payrollPackages.id),
+  payrollPackageName: text("payroll_package_name"),
+  additionalServiceIds: text("additional_service_ids").array().default([]).notNull(),
+  additionalServiceNames: text("additional_service_names").array().default([]).notNull(),
+  
+  // Calculated pricing
+  basePrice: text("base_price").notNull(), // From pricing tier
+  payrollPrice: text("payroll_price").default("0").notNull(),
+  additionalServicesTotal: text("additional_services_total").default("0").notNull(),
+  subtotal: text("subtotal").notNull(),
+  vatAmount: text("vat_amount").notNull(),
+  grandTotal: text("grand_total").notNull(),
+  
+  // Contact information
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  company: text("company"),
+  message: text("message"),
+  
+  // Status tracking
+  status: text("status").default("new").notNull(), // new, contacted, converted, lost
+  adminNotes: text("admin_notes"),
+  
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertQuoteRequestSchema = createInsertSchema(quoteRequests).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertQuoteRequest = z.infer<typeof insertQuoteRequestSchema>;
+export type QuoteRequest = typeof quoteRequests.$inferSelect;
