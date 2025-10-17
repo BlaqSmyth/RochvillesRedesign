@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, TrendingUp, Lightbulb, BookOpen, Sparkles, X } from "lucide-react";
 import CTASection from "@/components/CTASection";
@@ -9,6 +8,8 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 
 import taxPlanningImage from "@assets/stock_images/tax_planning_financi_1bccad55.jpg";
@@ -26,8 +27,6 @@ interface TaxTip {
 }
 
 export default function TaxTipsPage() {
-  const [selectedTip, setSelectedTip] = useState<TaxTip | null>(null);
-
   const taxTips: TaxTip[] = [
     {
       title: "Key Tax Deadlines for 2024/25",
@@ -580,34 +579,69 @@ export default function TaxTipsPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
               >
-                <Card 
-                  className="hover-elevate transition-all duration-300 flex flex-col h-full border-2 hover:border-primary/50 hover:shadow-xl group bg-gradient-to-br from-card to-muted/5 cursor-pointer" 
-                  data-testid={`card-tax-tip-${index}`}
-                  onClick={() => setSelectedTip(tip)}
-                >
-                  <CardHeader>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className={`inline-block px-3 py-1 ${categoryColors[tip.category]} text-xs font-medium rounded-full mb-3 w-fit`}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button 
+                      type="button"
+                      className="text-left w-full h-full"
+                      data-testid={`button-tax-tip-${index}`}
                     >
-                      {tip.category}
-                    </motion.div>
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">{tip.title}</h3>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{tip.date}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        <span>{tip.readTime}</span>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="flex-1">
-                    <p className="text-muted-foreground">{tip.excerpt}</p>
-                  </CardContent>
-                </Card>
+                      <Card className="hover-elevate transition-all duration-300 flex flex-col h-full border-2 hover:border-primary/50 hover:shadow-xl group bg-gradient-to-br from-card to-muted/5 cursor-pointer">
+                        <CardHeader>
+                          <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            className={`inline-block px-3 py-1 ${categoryColors[tip.category]} text-xs font-medium rounded-full mb-3 w-fit`}
+                          >
+                            {tip.category}
+                          </motion.div>
+                          <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">{tip.title}</h3>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4" />
+                              <span>{tip.date}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              <span>{tip.readTime}</span>
+                            </div>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="flex-1">
+                          <p className="text-muted-foreground">{tip.excerpt}</p>
+                        </CardContent>
+                      </Card>
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                    <>
+                      <DialogHeader>
+                        <div className="flex items-center justify-between mb-4">
+                          <div className={`inline-block px-3 py-1 ${categoryColors[tip.category]} text-xs font-medium rounded-full`}>
+                            {tip.category}
+                          </div>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4" />
+                              <span>{tip.date}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              <span>{tip.readTime}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <DialogTitle className="text-3xl font-bold">{tip.title}</DialogTitle>
+                        <DialogDescription className="sr-only">
+                          {tip.excerpt}
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div 
+                        className="prose prose-lg dark:prose-invert max-w-none mt-6"
+                        dangerouslySetInnerHTML={{ __html: tip.fullContent }}
+                      />
+                    </>
+                  </DialogContent>
+                </Dialog>
               </motion.div>
             ))}
           </div>
@@ -728,38 +762,6 @@ export default function TaxTipsPage() {
         buttonText="Contact Us"
         buttonHref="/contact"
       />
-
-      {/* Article Modal */}
-      <Dialog open={selectedTip !== null} onOpenChange={(open) => !open && setSelectedTip(null)}>
-        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-          {selectedTip && (
-            <>
-              <DialogHeader>
-                <div className="flex items-center justify-between mb-4">
-                  <div className={`inline-block px-3 py-1 ${categoryColors[selectedTip.category]} text-xs font-medium rounded-full`}>
-                    {selectedTip.category}
-                  </div>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>{selectedTip.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{selectedTip.readTime}</span>
-                    </div>
-                  </div>
-                </div>
-                <DialogTitle className="text-3xl font-bold">{selectedTip.title}</DialogTitle>
-              </DialogHeader>
-              <div 
-                className="prose prose-lg dark:prose-invert max-w-none mt-6"
-                dangerouslySetInnerHTML={{ __html: selectedTip.fullContent }}
-              />
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
