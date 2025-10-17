@@ -568,7 +568,7 @@ export default function TaxTipsPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 auto-rows-fr">
             {taxTips.map((tip, index) => {
               const isExpanded = expandedCard === index;
               
@@ -583,7 +583,11 @@ export default function TaxTipsPage() {
                   className={isExpanded ? "lg:col-span-2" : ""}
                 >
                   <Card 
-                    className="hover-elevate transition-all duration-300 overflow-hidden border-2 hover:border-primary/30 group bg-gradient-to-br from-card to-muted/5"
+                    className={`hover-elevate transition-all duration-300 overflow-hidden border-2 hover:border-primary/30 group h-full ${
+                      isExpanded 
+                        ? 'bg-gradient-to-br from-primary/5 via-card to-accent/5' 
+                        : 'bg-gradient-to-br from-card to-muted/5'
+                    }`}
                     data-testid={`card-tax-tip-${index}`}
                   >
                     <button
@@ -623,7 +627,7 @@ export default function TaxTipsPage() {
                           </motion.div>
                         </div>
                         {!isExpanded && (
-                          <p className="text-muted-foreground mt-2">{tip.excerpt}</p>
+                          <p className="text-muted-foreground mt-2 line-clamp-2">{tip.excerpt}</p>
                         )}
                       </CardHeader>
                     </button>
@@ -637,17 +641,42 @@ export default function TaxTipsPage() {
                           transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
                           <CardContent className="pt-0">
-                            <div className="border-t pt-6 mt-2">
-                              <div 
-                                className="prose prose-lg dark:prose-invert max-w-none"
-                                dangerouslySetInnerHTML={{ __html: tip.fullContent }}
-                              />
-                              <div className="mt-6 pt-6 border-t flex justify-end">
+                            {/* Decorative gradient bar */}
+                            <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-green-500 to-purple-500 rounded-full mb-6" />
+                            
+                            {/* Article content with sophisticated styling */}
+                            <div className="relative">
+                              {/* Background pattern */}
+                              <div className="absolute inset-0 opacity-5 pointer-events-none">
+                                <div className="absolute top-10 right-10 w-32 h-32 rounded-full bg-primary/20 blur-3xl" />
+                                <div className="absolute bottom-20 left-20 w-40 h-40 rounded-full bg-accent/20 blur-3xl" />
+                              </div>
+                              
+                              {/* Content wrapper with padding and styling */}
+                              <div className="relative bg-gradient-to-br from-card/50 to-transparent rounded-xl p-6 md:p-8">
+                                <div 
+                                  className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-primary prose-h3:text-2xl prose-h3:font-bold prose-h3:mb-4 prose-h3:mt-8 prose-h4:text-xl prose-h4:font-semibold prose-h4:text-foreground/90 prose-h4:mb-3 prose-h4:mt-6 prose-p:text-muted-foreground prose-p:leading-relaxed prose-strong:text-foreground prose-ul:my-4 prose-li:text-muted-foreground"
+                                  dangerouslySetInnerHTML={{ __html: tip.fullContent }}
+                                />
+                              </div>
+                            </div>
+                            
+                            {/* Bottom action bar with gradient */}
+                            <div className="mt-8 pt-6 border-t border-gradient-to-r from-transparent via-border to-transparent">
+                              <div className="flex items-center justify-between flex-wrap gap-4">
+                                <div className="flex items-center gap-3">
+                                  <div className={`w-2 h-2 rounded-full ${categoryColors[tip.category].replace('bg-', 'bg-').split(' ')[0]}`} />
+                                  <span className="text-sm text-muted-foreground">
+                                    Article by Rochvilles & Co. Accountants
+                                  </span>
+                                </div>
                                 <Button 
                                   variant="outline" 
                                   onClick={() => toggleCard(index)}
                                   data-testid={`button-collapse-${index}`}
+                                  className="bg-gradient-to-r from-primary/10 to-accent/10 hover:from-primary/20 hover:to-accent/20"
                                 >
+                                  <ChevronDown className="h-4 w-4 mr-2" />
                                   Collapse Article
                                 </Button>
                               </div>
