@@ -3,16 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import type { Testimonial } from "@shared/schema";
 
-interface Testimonial {
-  name: string;
-  company: string;
-  role: string;
-  content: string;
-  rating: number;
-}
-
-const testimonials: Testimonial[] = [
+const fallbackTestimonials: Testimonial[] = [
   {
     name: "Joseph Chuma",
     company: "Highland Solicitors",
@@ -73,6 +67,15 @@ const testimonials: Testimonial[] = [
 
 export default function TestimonialCarousel() {
   const [current, setCurrent] = useState(0);
+  
+  // Fetch testimonials from CMS
+  const { data: cmsTestimonials } = useQuery<Testimonial[]>({
+    queryKey: ["/api/testimonials"],
+    select: (data) => data.filter(t => t.published),
+  });
+  
+  // Use CMS data if available, fallback to hardcoded testimonials
+  const testimonials = cmsTestimonials && cmsTestimonials.length > 0 ? cmsTestimonials : fallbackTestimonials;
   const [direction, setDirection] = useState(0);
 
   const slideVariants = {

@@ -15,6 +15,12 @@ import CompliancePage from "@/pages/CompliancePage";
 import FinancialServicesPage from "@/pages/FinancialServicesPage";
 import FeesPage from "@/pages/FeesPage";
 import ContactPage from "@/pages/ContactPage";
+import AdminLoginPage from "@/pages/AdminLoginPage";
+import AdminDashboardPage from "@/pages/admin/AdminDashboardPage";
+import AdminArticlesPage from "@/pages/admin/AdminArticlesPage";
+import AdminTestimonialsPage from "@/pages/admin/AdminTestimonialsPage";
+import AdminServicesPage from "@/pages/admin/AdminServicesPage";
+import AdminLayout from "@/pages/admin/AdminLayout";
 import NotFound from "@/pages/not-found";
 
 function Router({ darkMode, toggleDarkMode }: { darkMode: boolean; toggleDarkMode: () => void }) {
@@ -23,6 +29,36 @@ function Router({ darkMode, toggleDarkMode }: { darkMode: boolean; toggleDarkMod
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+  // Admin routes don't need header/footer
+  if (location.startsWith('/admin')) {
+    return (
+      <Switch>
+        <Route path="/admin/login" component={AdminLoginPage} />
+        <Route path="/admin/dashboard">
+          <AdminLayout>
+            <AdminDashboardPage />
+          </AdminLayout>
+        </Route>
+        <Route path="/admin/articles">
+          <AdminLayout>
+            <AdminArticlesPage />
+          </AdminLayout>
+        </Route>
+        <Route path="/admin/testimonials">
+          <AdminLayout>
+            <AdminTestimonialsPage />
+          </AdminLayout>
+        </Route>
+        <Route path="/admin/services">
+          <AdminLayout>
+            <AdminServicesPage />
+          </AdminLayout>
+        </Route>
+        <Route component={NotFound} />
+      </Switch>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen">

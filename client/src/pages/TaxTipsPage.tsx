@@ -1,32 +1,34 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, ChevronDown, Lightbulb, BookOpen, Sparkles } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import type { Article } from "@shared/schema";
 
 import taxPlanningImage from "@assets/stock_images/tax_planning_financi_1bccad55.jpg";
 import taxSavingsImage from "@assets/stock_images/business_tax_savings_ee70625a.jpg";
 import taxDeadlineImage from "@assets/stock_images/tax_deadline_calenda_07b5e5be.jpg";
 import complianceSuccessImage from "@assets/stock_images/financial_compliance_4dc9f628.jpg";
 
-interface TaxTip {
-  title: string;
-  date: string;
-  readTime: string;
-  excerpt: string;
-  category: string;
-  fullContent: string;
-}
-
 export default function TaxTipsPage() {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
+
+  const { data: articles = [], isLoading } = useQuery<Article[]>({
+    queryKey: ["/api/articles"],
+    select: (data) => data.filter(article => article.published),
+  });
 
   const toggleCard = (index: number) => {
     setExpandedCard(expandedCard === index ? null : index);
   };
 
-  const taxTips: TaxTip[] = [
+  // Use CMS articles as the data source
+  const taxTips = articles;
+
+  // Fallback data for initial setup (will be replaced by CMS)
+  const fallbackTaxTips = [
     {
       title: "Key Tax Deadlines for 2024/25",
       date: "March 2024",
