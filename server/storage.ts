@@ -21,6 +21,8 @@ import {
   type InsertPricingTier,
   type AdditionalService,
   type InsertAdditionalService,
+  type QuoteRequest,
+  type InsertQuoteRequest,
   adminUsers,
   articles,
   testimonials,
@@ -31,6 +33,7 @@ import {
   businessTypes,
   pricingTiers,
   additionalServices,
+  quoteRequests,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc } from "drizzle-orm";
@@ -105,6 +108,13 @@ export interface IStorage {
   createAdditionalService(service: InsertAdditionalService): Promise<AdditionalService>;
   updateAdditionalService(id: number, service: Partial<InsertAdditionalService>): Promise<AdditionalService | undefined>;
   deleteAdditionalService(id: number): Promise<boolean>;
+
+  // Quote Request methods
+  getQuoteRequests(status?: string): Promise<QuoteRequest[]>;
+  getQuoteRequest(id: number): Promise<QuoteRequest | undefined>;
+  createQuoteRequest(quote: InsertQuoteRequest): Promise<QuoteRequest>;
+  updateQuoteRequest(id: number, quote: Partial<InsertQuoteRequest>): Promise<QuoteRequest | undefined>;
+  deleteQuoteRequest(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -456,6 +466,44 @@ export class DatabaseStorage implements IStorage {
 
   async deleteAdditionalService(id: number): Promise<boolean> {
     const result = await db.delete(additionalServices).where(eq(additionalServices.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // Quote Request methods
+  async getQuoteRequests(status?: string): Promise<QuoteRequest[]> {
+    const query = db.select().from(quoteRequests).orderBy(desc(quoteRequests.createdAt));
+    
+    if (status) {
+      return await query.where(eq(quoteRequests.status, status));
+    }
+    
+    return await query;
+  }
+
+  async getQuoteRequest(id: number): Promise<QuoteRequest | undefined> {
+    const [quote] = await db.select().from(quoteRequests).where(eq(quoteRequests.id, id));
+    return quote || undefined;
+  }
+
+  async createQuoteRequest(insertQuote: InsertQuoteRequest): Promise<QuoteRequest> {
+    const [quote] = await db
+      .insert(quoteRequests)
+      .values(insertQuote)
+      .returning();
+    return quote;
+  }
+
+  async updateQuoteRequest(id: number, updateData: Partial<InsertQuoteRequest>): Promise<QuoteRequest | undefined> {
+    const [quote] = await db
+      .update(quoteRequests)
+      .set({ ...updateData, updatedAt: new Date() })
+      .where(eq(quoteRequests.id, id))
+      .returning();
+    return quote || undefined;
+  }
+
+  async deleteQuoteRequest(id: number): Promise<boolean> {
+    const result = await db.delete(quoteRequests).where(eq(quoteRequests.id, id));
     return result.rowCount ? result.rowCount > 0 : false;
   }
 
