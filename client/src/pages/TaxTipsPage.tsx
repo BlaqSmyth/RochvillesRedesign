@@ -1,16 +1,9 @@
+import { useState } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Calendar, Clock, TrendingUp, Lightbulb, BookOpen, Sparkles, X } from "lucide-react";
+import { Calendar, Clock, ChevronDown, Lightbulb, BookOpen, Sparkles } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 import taxPlanningImage from "@assets/stock_images/tax_planning_financi_1bccad55.jpg";
 import taxSavingsImage from "@assets/stock_images/business_tax_savings_ee70625a.jpg";
@@ -27,6 +20,12 @@ interface TaxTip {
 }
 
 export default function TaxTipsPage() {
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+
+  const toggleCard = (index: number) => {
+    setExpandedCard(expandedCard === index ? null : index);
+  };
+
   const taxTips: TaxTip[] = [
     {
       title: "Key Tax Deadlines for 2024/25",
@@ -569,81 +568,98 @@ export default function TaxTipsPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {taxTips.map((tip, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-              >
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <button 
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {taxTips.map((tip, index) => {
+              const isExpanded = expandedCard === index;
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  layout
+                  className={isExpanded ? "lg:col-span-2" : ""}
+                >
+                  <Card 
+                    className="hover-elevate transition-all duration-300 overflow-hidden border-2 hover:border-primary/30 group bg-gradient-to-br from-card to-muted/5"
+                    data-testid={`card-tax-tip-${index}`}
+                  >
+                    <button
                       type="button"
-                      className="text-left w-full h-full"
+                      onClick={() => toggleCard(index)}
+                      className="w-full text-left"
                       data-testid={`button-tax-tip-${index}`}
                     >
-                      <Card className="hover-elevate transition-all duration-300 flex flex-col h-full border-2 hover:border-primary/50 hover:shadow-xl group bg-gradient-to-br from-card to-muted/5 cursor-pointer">
-                        <CardHeader>
+                      <CardHeader>
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <motion.div
+                              className={`inline-block px-3 py-1 ${categoryColors[tip.category]} text-xs font-medium rounded-full mb-3 w-fit`}
+                            >
+                              {tip.category}
+                            </motion.div>
+                            <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors pr-8">
+                              {tip.title}
+                            </h3>
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                              <div className="flex items-center gap-1">
+                                <Calendar className="h-4 w-4" />
+                                <span>{tip.date}</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Clock className="h-4 w-4" />
+                                <span>{tip.readTime}</span>
+                              </div>
+                            </div>
+                          </div>
                           <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            className={`inline-block px-3 py-1 ${categoryColors[tip.category]} text-xs font-medium rounded-full mb-3 w-fit`}
+                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="flex-shrink-0"
                           >
-                            {tip.category}
+                            <ChevronDown className="h-6 w-6 text-primary" />
                           </motion.div>
-                          <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">{tip.title}</h3>
-                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                            <div className="flex items-center gap-1">
-                              <Calendar className="h-4 w-4" />
-                              <span>{tip.date}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Clock className="h-4 w-4" />
-                              <span>{tip.readTime}</span>
-                            </div>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="flex-1">
-                          <p className="text-muted-foreground">{tip.excerpt}</p>
-                        </CardContent>
-                      </Card>
-                    </button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                    <>
-                      <DialogHeader>
-                        <div className="flex items-center justify-between mb-4">
-                          <div className={`inline-block px-3 py-1 ${categoryColors[tip.category]} text-xs font-medium rounded-full`}>
-                            {tip.category}
-                          </div>
-                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                            <div className="flex items-center gap-1">
-                              <Calendar className="h-4 w-4" />
-                              <span>{tip.date}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Clock className="h-4 w-4" />
-                              <span>{tip.readTime}</span>
-                            </div>
-                          </div>
                         </div>
-                        <DialogTitle className="text-3xl font-bold">{tip.title}</DialogTitle>
-                        <DialogDescription className="sr-only">
-                          {tip.excerpt}
-                        </DialogDescription>
-                      </DialogHeader>
-                      <div 
-                        className="prose prose-lg dark:prose-invert max-w-none mt-6"
-                        dangerouslySetInnerHTML={{ __html: tip.fullContent }}
-                      />
-                    </>
-                  </DialogContent>
-                </Dialog>
-              </motion.div>
-            ))}
+                        {!isExpanded && (
+                          <p className="text-muted-foreground mt-2">{tip.excerpt}</p>
+                        )}
+                      </CardHeader>
+                    </button>
+                    
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                        >
+                          <CardContent className="pt-0">
+                            <div className="border-t pt-6 mt-2">
+                              <div 
+                                className="prose prose-lg dark:prose-invert max-w-none"
+                                dangerouslySetInnerHTML={{ __html: tip.fullContent }}
+                              />
+                              <div className="mt-6 pt-6 border-t flex justify-end">
+                                <Button 
+                                  variant="outline" 
+                                  onClick={() => toggleCard(index)}
+                                  data-testid={`button-collapse-${index}`}
+                                >
+                                  Collapse Article
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
