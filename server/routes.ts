@@ -366,6 +366,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get all payroll packages for admin (includes unpublished)
+  app.get("/api/admin/payroll-packages", requireAdmin, async (req, res) => {
+    try {
+      const packages = await storage.getPayrollPackages(); // Get all, including unpublished
+      res.json(packages);
+    } catch (error) {
+      console.error("Get admin payroll packages error:", error);
+      res.status(500).json({ error: "Failed to fetch payroll packages" });
+    }
+  });
+
   // Create payroll package (admin only)
   app.post("/api/admin/payroll-packages", requireAdmin, async (req, res) => {
     try {
@@ -431,6 +442,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Get business type error:", error);
       res.status(500).json({ error: "Failed to fetch business type" });
+    }
+  });
+
+  // Get all business types for admin (includes unpublished)
+  app.get("/api/admin/business-types", requireAdmin, async (req, res) => {
+    try {
+      const types = await storage.getBusinessTypes(); // Get all, including unpublished
+      res.json(types);
+    } catch (error) {
+      console.error("Get admin business types error:", error);
+      res.status(500).json({ error: "Failed to fetch business types" });
     }
   });
 
@@ -501,6 +523,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get all pricing tiers for admin
+  app.get("/api/admin/pricing-tiers", requireAdmin, async (req, res) => {
+    try {
+      const tiers = await storage.getPricingTiers(); // Get all tiers
+      res.json(tiers);
+    } catch (error) {
+      console.error("Get admin pricing tiers error:", error);
+      res.status(500).json({ error: "Failed to fetch pricing tiers" });
+    }
+  });
+
   // Create pricing tier (admin only)
   app.post("/api/admin/pricing-tiers", requireAdmin, async (req, res) => {
     try {
@@ -566,6 +599,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Get additional service error:", error);
       res.status(500).json({ error: "Failed to fetch additional service" });
+    }
+  });
+
+  // Get all additional services for admin (includes unpublished)
+  app.get("/api/admin/additional-services", requireAdmin, async (req, res) => {
+    try {
+      const services = await storage.getAdditionalServices(); // Get all, including unpublished
+      res.json(services);
+    } catch (error) {
+      console.error("Get admin additional services error:", error);
+      res.status(500).json({ error: "Failed to fetch additional services" });
     }
   });
 
