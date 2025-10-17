@@ -117,7 +117,12 @@ export default function QuoteWizardPage() {
   };
 
   const handleStep2Submit = (data: Step2Data) => {
-    setStep2Data(data);
+    // Convert "none" to undefined for payroll package
+    const cleanedData = {
+      ...data,
+      payrollPackageId: data.payrollPackageId === "none" ? undefined : data.payrollPackageId,
+    };
+    setStep2Data(cleanedData);
     setCurrentStep(3);
   };
 
@@ -125,7 +130,9 @@ export default function QuoteWizardPage() {
     if (!step1Data || !step2Data) return;
 
     const businessType = businessTypes.find(bt => bt.id === parseInt(step1Data.businessTypeId));
-    const payrollPackage = payrollPackages.find(p => p.id === parseInt(step2Data.payrollPackageId || "0"));
+    const payrollPackage = step2Data.payrollPackageId && step2Data.payrollPackageId !== "none" 
+      ? payrollPackages.find(p => p.id === parseInt(step2Data.payrollPackageId!))
+      : undefined;
     const selectedServices = additionalServices.filter(s => 
       step2Data.additionalServiceIds.includes(s.id.toString())
     );
@@ -164,9 +171,9 @@ export default function QuoteWizardPage() {
     createQuoteMutation.mutate(quoteData);
   };
 
-  const getTurnoverOptions = () => {
-    if (!step1Data?.businessTypeId) return [];
-    const tiers = pricingTiers.filter(t => t.businessTypeId === parseInt(step1Data.businessTypeId));
+  const getTurnoverOptions = (businessTypeId: string) => {
+    if (!businessTypeId) return [];
+    const tiers = pricingTiers.filter(t => t.businessTypeId === parseInt(businessTypeId));
     return Array.from(new Set(tiers.map(t => t.turnover)));
   };
 
@@ -271,26 +278,31 @@ export default function QuoteWizardPage() {
                     <FormField
                       control={step1Form.control}
                       name="turnover"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Annual Turnover</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger data-testid="select-turnover">
-                                <SelectValue placeholder="Select your turnover range" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {getTurnoverOptions().map((turnover) => (
-                                <SelectItem key={turnover} value={turnover}>
-                                  {turnover}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                      render={({ field }) => {
+                        const businessTypeId = step1Form.watch("businessTypeId");
+                        const turnoverOptions = getTurnoverOptions(businessTypeId);
+                        
+                        return (
+                          <FormItem>
+                            <FormLabel>Annual Turnover</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger data-testid="select-turnover">
+                                  <SelectValue placeholder="Select your turnover range" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {turnoverOptions.map((turnover) => (
+                                  <SelectItem key={turnover} value={turnover}>
+                                    {turnover}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        );
+                      }}
                     />
                   )}
 
@@ -340,7 +352,7 @@ export default function QuoteWizardPage() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="">None</SelectItem>
+                              <SelectItem value="none">None</SelectItem>
                               {payrollPackages.map((pkg) => (
                                 <SelectItem key={pkg.id} value={pkg.id.toString()}>
                                   {pkg.name} - £{pkg.price}
