@@ -17,6 +17,7 @@ import {
   MessageSquare, 
   Briefcase,
   DollarSign,
+  Calculator,
   LogOut,
   Settings
 } from "lucide-react";
@@ -49,6 +50,11 @@ const menuItems = [
     title: "Pricing",
     url: "/admin/pricing",
     icon: DollarSign,
+  },
+  {
+    title: "Quotes",
+    url: "/admin/quotes",
+    icon: Calculator,
   },
 ];
 

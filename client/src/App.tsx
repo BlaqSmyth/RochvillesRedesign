@@ -21,6 +21,8 @@ import AdminArticlesPage from "@/pages/admin/AdminArticlesPage";
 import AdminTestimonialsPage from "@/pages/admin/AdminTestimonialsPage";
 import AdminServicesPage from "@/pages/admin/AdminServicesPage";
 import AdminPricingPage from "@/pages/admin/AdminPricingPage";
+import AdminQuotesPage from "@/pages/admin/AdminQuotesPage";
+import QuoteWizardPage from "@/pages/QuoteWizardPage";
 import AdminLayout from "@/pages/admin/AdminLayout";
 import NotFound from "@/pages/not-found";
 
@@ -61,6 +63,11 @@ function Router({ darkMode, toggleDarkMode }: { darkMode: boolean; toggleDarkMod
             <AdminPricingPage />
           </AdminLayout>
         </Route>
+        <Route path="/admin/quotes">
+          <AdminLayout>
+            <AdminQuotesPage />
+          </AdminLayout>
+        </Route>
         <Route component={NotFound} />
       </Switch>
     );
@@ -79,6 +86,7 @@ function Router({ darkMode, toggleDarkMode }: { darkMode: boolean; toggleDarkMod
           <Route path="/compliance" component={CompliancePage} />
           <Route path="/financial-services" component={FinancialServicesPage} />
           <Route path="/fees" component={FeesPage} />
+          <Route path="/get-quote" component={QuoteWizardPage} />
           <Route path="/contact" component={ContactPage} />
           <Route component={NotFound} />
         </Switch>

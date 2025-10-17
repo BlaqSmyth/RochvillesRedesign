@@ -88,6 +88,17 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
               {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
 
+            <Link href="/get-quote">
+              <Button 
+                variant="default" 
+                size="sm" 
+                className="hidden md:flex shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800" 
+                data-testid="button-get-quote-header"
+              >
+                Get a Quote
+              </Button>
+            </Link>
+
             <Link href="/contact">
               <Button 
                 variant="default" 
