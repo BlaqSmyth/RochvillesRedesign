@@ -1,7 +1,7 @@
 import ParallaxHero from "@/components/ParallaxHero";
 import AnimatedServiceCard from "@/components/AnimatedServiceCard";
 import AnimatedStatsSection from "@/components/AnimatedStatsSection";
-import InteractiveTaxCalculator from "@/components/InteractiveTaxCalculator";
+import BusinessToolsSection from "@/components/BusinessToolsSection";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import CTASection from "@/components/CTASection";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -393,7 +393,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Interactive Calculator Section */}
+      {/* Business Tools Section - Tax Calculator & Quote Wizard */}
       <section className="py-24 bg-muted/30 relative overflow-hidden">
         <motion.div
           animate={{
@@ -412,13 +412,16 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">See Your Potential Savings</h2>
+            <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
+              <span className="text-sm font-medium text-primary">Business Tools</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Plan & Save with Our Free Tools</h2>
             <p className="text-lg text-muted-foreground">
-              Find out how much you could save with professional tax planning
+              Calculate your tax savings or get an instant quote for our accounting services
             </p>
           </motion.div>
 
-          <InteractiveTaxCalculator />
+          <BusinessToolsSection />
         </div>
       </section>
 
