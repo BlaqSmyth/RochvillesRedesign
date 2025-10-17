@@ -573,28 +573,31 @@ export default function TaxTipsPage() {
               const isExpanded = expandedCard === index;
               
               return (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={isExpanded ? "lg:col-span-2" : ""}
                 >
-                  <Card 
-                    className={`hover-elevate transition-all duration-300 overflow-visible border-2 hover:border-primary/30 group relative ${
-                      isExpanded 
-                        ? 'bg-gradient-to-br from-primary/5 via-card to-accent/5 z-40' 
-                        : 'bg-gradient-to-br from-card to-muted/5'
-                    }`}
-                    data-testid={`card-tax-tip-${index}`}
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
-                    <button
-                      type="button"
-                      onClick={() => toggleCard(index)}
-                      className="w-full text-left"
-                      data-testid={`button-tax-tip-${index}`}
+                    <Card 
+                      className={`hover-elevate transition-all duration-300 border-2 hover:border-primary/30 group ${
+                        isExpanded 
+                          ? 'bg-gradient-to-br from-primary/5 via-card to-accent/5' 
+                          : 'bg-gradient-to-br from-card to-muted/5'
+                      }`}
+                      data-testid={`card-tax-tip-${index}`}
                     >
-                      <CardHeader>
+                      <button
+                        type="button"
+                        onClick={() => toggleCard(index)}
+                        className="w-full text-left"
+                        data-testid={`button-tax-tip-${index}`}
+                      >
+                        <CardHeader>
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
                             <motion.div
@@ -622,10 +625,9 @@ export default function TaxTipsPage() {
                           <p className="text-muted-foreground mt-2 line-clamp-2">{tip.excerpt}</p>
                         )}
                       </CardHeader>
-                    </button>
-                    
-                    {isExpanded && (
-                      <div className="absolute left-0 right-0 top-full mt-0 bg-gradient-to-br from-primary/5 via-card to-accent/5 border-2 border-primary/30 rounded-b-lg shadow-2xl z-50 overflow-hidden">
+                      </button>
+                      
+                      {isExpanded && (
                         <CardContent className="pt-0 animate-in fade-in slide-in-from-top-2 duration-300">
                             {/* Decorative gradient bar */}
                             <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-green-500 to-purple-500 rounded-full mb-6" />
@@ -667,11 +669,11 @@ export default function TaxTipsPage() {
                                 </Button>
                               </div>
                             </div>
-                          </CardContent>
-                        </div>
-                    )}
-                  </Card>
-                </motion.div>
+                        </CardContent>
+                      )}
+                    </Card>
+                  </motion.div>
+                </div>
               );
             })}
           </div>
