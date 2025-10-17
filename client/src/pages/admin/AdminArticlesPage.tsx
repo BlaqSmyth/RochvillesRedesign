@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import type { Article } from "@shared/schema";
+import { RichTextEditor } from "@/components/RichTextEditor";
 
 const articleSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -273,17 +274,16 @@ export default function AdminArticlesPage() {
                 name="fullContent"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Content (HTML)</FormLabel>
+                    <FormLabel>Full Content</FormLabel>
                     <FormControl>
-                      <Textarea
-                        {...field}
-                        placeholder="Full article content with HTML formatting"
-                        rows={12}
-                        data-testid="input-article-content"
+                      <RichTextEditor
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Write your article content here..."
                       />
                     </FormControl>
                     <FormDescription>
-                      Use HTML tags like &lt;h3&gt;, &lt;h4&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;strong&gt; for formatting
+                      Use the toolbar to format your content. The editor will generate HTML automatically.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
