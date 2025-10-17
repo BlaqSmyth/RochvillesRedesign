@@ -20,6 +20,7 @@ import AdminDashboardPage from "@/pages/admin/AdminDashboardPage";
 import AdminArticlesPage from "@/pages/admin/AdminArticlesPage";
 import AdminTestimonialsPage from "@/pages/admin/AdminTestimonialsPage";
 import AdminServicesPage from "@/pages/admin/AdminServicesPage";
+import AdminPricingPage from "@/pages/admin/AdminPricingPage";
 import AdminLayout from "@/pages/admin/AdminLayout";
 import NotFound from "@/pages/not-found";
 
@@ -53,6 +54,11 @@ function Router({ darkMode, toggleDarkMode }: { darkMode: boolean; toggleDarkMod
         <Route path="/admin/services">
           <AdminLayout>
             <AdminServicesPage />
+          </AdminLayout>
+        </Route>
+        <Route path="/admin/pricing">
+          <AdminLayout>
+            <AdminPricingPage />
           </AdminLayout>
         </Route>
         <Route component={NotFound} />
