@@ -67,6 +67,7 @@ const fallbackTestimonials: Testimonial[] = [
 
 export default function TestimonialCarousel() {
   const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(0);
   
   // Fetch testimonials from CMS
   const { data: cmsTestimonials } = useQuery<Testimonial[]>({
@@ -76,7 +77,14 @@ export default function TestimonialCarousel() {
   
   // Use CMS data if available, fallback to hardcoded testimonials
   const testimonials = cmsTestimonials && cmsTestimonials.length > 0 ? cmsTestimonials : fallbackTestimonials;
-  const [direction, setDirection] = useState(0);
+
+  // Don't render if no testimonials available
+  if (!testimonials || testimonials.length === 0) {
+    return null;
+  }
+
+  // Ensure current index is within bounds
+  const safeIndex = Math.min(current, testimonials.length - 1);
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -193,7 +201,7 @@ export default function TestimonialCarousel() {
                     </motion.div>
 
                     <div className="flex mb-4">
-                      {[...Array(testimonials[current].rating)].map((_, i) => (
+                      {[...Array(testimonials[safeIndex].rating)].map((_, i) => (
                         <motion.svg
                           key={i}
                           initial={{ opacity: 0, scale: 0 }}
@@ -208,7 +216,7 @@ export default function TestimonialCarousel() {
                     </div>
 
                     <p className="text-lg md:text-xl text-foreground mb-8 leading-relaxed italic">
-                      "{testimonials[current].content}"
+                      "{testimonials[safeIndex].content}"
                     </p>
 
                     <div className="flex items-center gap-4">
@@ -219,13 +227,13 @@ export default function TestimonialCarousel() {
                         className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center"
                       >
                         <span className="text-xl font-bold text-primary">
-                          {testimonials[current].name.charAt(0)}
+                          {testimonials[safeIndex].name.charAt(0)}
                         </span>
                       </motion.div>
                       <div>
-                        <div className="font-semibold text-lg">{testimonials[current].name}</div>
-                        <div className="text-sm text-muted-foreground">{testimonials[current].role}</div>
-                        <div className="text-sm text-muted-foreground">{testimonials[current].company}</div>
+                        <div className="font-semibold text-lg">{testimonials[safeIndex].name}</div>
+                        <div className="text-sm text-muted-foreground">{testimonials[safeIndex].role}</div>
+                        <div className="text-sm text-muted-foreground">{testimonials[safeIndex].company}</div>
                       </div>
                     </div>
                   </CardContent>

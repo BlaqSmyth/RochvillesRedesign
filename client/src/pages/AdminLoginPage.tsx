@@ -22,6 +22,7 @@ export default function AdminLoginPage() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
@@ -33,6 +34,7 @@ export default function AdminLoginPage() {
 
   async function onSubmit(data: LoginForm) {
     setIsLoading(true);
+    setError("");
     try {
       const response: any = await apiRequest("POST", "/api/admin/login", data);
       
@@ -42,9 +44,11 @@ export default function AdminLoginPage() {
       });
       setLocation("/admin/dashboard");
     } catch (error: any) {
+      const errorMessage = error.message || "Invalid credentials";
+      setError(errorMessage);
       toast({
         title: "Login failed",
-        description: error.message || "Invalid credentials",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -64,6 +68,15 @@ export default function AdminLoginPage() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              {error && (
+                <div 
+                  className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-md text-sm"
+                  role="alert"
+                  data-testid="text-login-error"
+                >
+                  {error}
+                </div>
+              )}
               <FormField
                 control={form.control}
                 name="username"

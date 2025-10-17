@@ -1,10 +1,43 @@
 import express, { type Request, Response, NextFunction } from "express";
+import session from "express-session";
+import connectPg from "connect-pg-simple";
+import { Pool } from "@neondatabase/serverless";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Ensure SESSION_SECRET is set
+if (!process.env.SESSION_SECRET) {
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("SESSION_SECRET environment variable must be set in production");
+  }
+  log("WARNING: SESSION_SECRET not set, using development fallback");
+}
+
+// PostgreSQL session store for production-grade persistence
+const PgStore = connectPg(session);
+const sessionPool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+// Session middleware for admin authentication
+app.use(
+  session({
+    store: new PgStore({
+      pool: sessionPool,
+      createTableIfMissing: true,
+    }),
+    secret: process.env.SESSION_SECRET || "dev-secret-UNSAFE-change-in-production",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
+  })
+);
 
 app.use((req, res, next) => {
   const start = Date.now();

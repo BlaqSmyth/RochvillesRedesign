@@ -58,25 +58,44 @@ Preferred communication style: Simple, everyday language.
 
 **Data Layer**
 - Interface-based storage abstraction (`IStorage`)
-- In-memory storage implementation (`MemStorage`) using Maps
-- Designed for easy migration to persistent database (Drizzle ORM configured)
+- PostgreSQL database with Drizzle ORM
+- Full CRUD operations for all content types
 
-### Data Storage Solutions
+### Data Storage & CMS
 
-**Current Implementation**
-- In-memory storage using JavaScript Map for development/demo purposes
-- User entity with id, username, and password fields
-
-**Database Ready**
-- **Drizzle ORM** configured for PostgreSQL
-- **Neon Database** serverless driver installed
+**Database Implementation**
+- **PostgreSQL** via Neon serverless database
+- **Drizzle ORM** for type-safe database operations
 - Schema defined in `shared/schema.ts` with Zod validation
-- Migration system configured with drizzle-kit
-- Database URL expected via environment variable
+- Database includes:
+  - `admin_users`: Admin authentication (username, password hash, email)
+  - `articles`: Tax tips and blog posts (title, category, excerpt, HTML content, readTime, published)
+  - `testimonials`: Client testimonials (name, company, role, content, rating, published)
+  - `services`: Service offerings (name, description, price, features array, published)
+  - `contact_submissions`: Contact form submissions
+  - `session`: PostgreSQL-backed session storage
 
 **Session Management**
-- **connect-pg-simple** installed for PostgreSQL session storage
-- Ready for Express session middleware integration
+- **express-session** with PostgreSQL store (connect-pg-simple)
+- Production-grade session persistence with automatic table creation
+- 24-hour session lifetime with secure, httpOnly cookies
+- Mandatory SESSION_SECRET in production (fails fast if not set)
+
+**Content Management System (CMS)**
+- Full admin dashboard for content management
+- Session-based authentication with bcrypt password hashing
+- Protected admin routes with authentication middleware
+- CRUD operations for articles, testimonials, and services
+- Admin pages: /admin/login, /admin/dashboard, /admin/articles, /admin/testimonials, /admin/services
+- Public API endpoints: /api/articles, /api/testimonials, /api/services
+- Admin API endpoints: /api/admin/* (all require authentication)
+
+**CMS Security**
+- Admin setup endpoint prevents multiple admin creation
+- Passwords hashed with bcrypt (10 rounds)
+- Session tokens stored in PostgreSQL
+- CSRF protection via session cookies
+- Error messages don't expose sensitive information
 
 ### External Dependencies
 
