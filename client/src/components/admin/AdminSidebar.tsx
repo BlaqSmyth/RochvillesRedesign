@@ -16,6 +16,7 @@ import {
   FileText, 
   MessageSquare, 
   Briefcase,
+  DollarSign,
   LogOut,
   Settings
 } from "lucide-react";
@@ -43,6 +44,11 @@ const menuItems = [
     title: "Services",
     url: "/admin/services",
     icon: Briefcase,
+  },
+  {
+    title: "Pricing",
+    url: "/admin/pricing",
+    icon: DollarSign,
   },
 ];
 
