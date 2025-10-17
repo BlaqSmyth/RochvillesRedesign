@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calculator, FileText } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,8 +8,16 @@ import QuoteWizard from "./QuoteWizard";
 export default function BusinessToolsSection() {
   const [tabValue, setTabValue] = useState("calculator");
 
+  useEffect(() => {
+    if (window.location.hash === "#get-quote") {
+      setTabValue("quote");
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
+
   return (
     <motion.div
+      id="get-quote"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}

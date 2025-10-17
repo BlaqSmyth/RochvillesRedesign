@@ -88,16 +88,28 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
               {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
 
-            <Link href="/get-quote">
-              <Button 
-                variant="default" 
-                size="sm" 
-                className="hidden md:flex shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800" 
-                data-testid="button-get-quote-header"
-              >
-                Get a Quote
-              </Button>
-            </Link>
+            <Button 
+              variant="default" 
+              size="sm" 
+              className="hidden md:flex shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800" 
+              data-testid="button-get-quote-header"
+              onClick={() => {
+                if (location !== "/") {
+                  window.location.href = "/#get-quote";
+                } else {
+                  const section = document.getElementById("get-quote");
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                    setTimeout(() => {
+                      const quoteTab = document.querySelector('[data-testid="tab-get-quote"]') as HTMLElement;
+                      if (quoteTab) quoteTab.click();
+                    }, 300);
+                  }
+                }
+              }}
+            >
+              Get a Quote
+            </Button>
 
             <Link href="/contact">
               <Button 
