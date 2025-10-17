@@ -13,12 +13,24 @@ import {
   type InsertService,
   type SiteSetting,
   type InsertSiteSetting,
+  type PayrollPackage,
+  type InsertPayrollPackage,
+  type BusinessType,
+  type InsertBusinessType,
+  type PricingTier,
+  type InsertPricingTier,
+  type AdditionalService,
+  type InsertAdditionalService,
   adminUsers,
   articles,
   testimonials,
   services,
   siteSettings,
   users,
+  payrollPackages,
+  businessTypes,
+  pricingTiers,
+  additionalServices,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc } from "drizzle-orm";
@@ -65,6 +77,34 @@ export interface IStorage {
   getSiteSettings(category?: string): Promise<SiteSetting[]>;
   getSiteSetting(key: string): Promise<SiteSetting | undefined>;
   upsertSiteSetting(setting: InsertSiteSetting): Promise<SiteSetting>;
+
+  // Payroll Package methods
+  getPayrollPackages(published?: boolean): Promise<PayrollPackage[]>;
+  getPayrollPackage(id: number): Promise<PayrollPackage | undefined>;
+  createPayrollPackage(pkg: InsertPayrollPackage): Promise<PayrollPackage>;
+  updatePayrollPackage(id: number, pkg: Partial<InsertPayrollPackage>): Promise<PayrollPackage | undefined>;
+  deletePayrollPackage(id: number): Promise<boolean>;
+
+  // Business Type methods
+  getBusinessTypes(published?: boolean): Promise<BusinessType[]>;
+  getBusinessType(id: number): Promise<BusinessType | undefined>;
+  createBusinessType(type: InsertBusinessType): Promise<BusinessType>;
+  updateBusinessType(id: number, type: Partial<InsertBusinessType>): Promise<BusinessType | undefined>;
+  deleteBusinessType(id: number): Promise<boolean>;
+
+  // Pricing Tier methods
+  getPricingTiers(businessTypeId?: number): Promise<PricingTier[]>;
+  getPricingTier(id: number): Promise<PricingTier | undefined>;
+  createPricingTier(tier: InsertPricingTier): Promise<PricingTier>;
+  updatePricingTier(id: number, tier: Partial<InsertPricingTier>): Promise<PricingTier | undefined>;
+  deletePricingTier(id: number): Promise<boolean>;
+
+  // Additional Service methods
+  getAdditionalServices(published?: boolean): Promise<AdditionalService[]>;
+  getAdditionalService(id: number): Promise<AdditionalService | undefined>;
+  createAdditionalService(service: InsertAdditionalService): Promise<AdditionalService>;
+  updateAdditionalService(id: number, service: Partial<InsertAdditionalService>): Promise<AdditionalService | undefined>;
+  deleteAdditionalService(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -261,6 +301,162 @@ export class DatabaseStorage implements IStorage {
       .values(insertUser)
       .returning();
     return user;
+  }
+
+  // Payroll Package methods
+  async getPayrollPackages(published?: boolean): Promise<PayrollPackage[]> {
+    if (published !== undefined) {
+      return await db
+        .select()
+        .from(payrollPackages)
+        .where(eq(payrollPackages.published, published))
+        .orderBy(payrollPackages.displayOrder);
+    }
+    return await db.select().from(payrollPackages).orderBy(payrollPackages.displayOrder);
+  }
+
+  async getPayrollPackage(id: number): Promise<PayrollPackage | undefined> {
+    const [pkg] = await db.select().from(payrollPackages).where(eq(payrollPackages.id, id));
+    return pkg || undefined;
+  }
+
+  async createPayrollPackage(insertPkg: InsertPayrollPackage): Promise<PayrollPackage> {
+    const [pkg] = await db
+      .insert(payrollPackages)
+      .values(insertPkg)
+      .returning();
+    return pkg;
+  }
+
+  async updatePayrollPackage(id: number, updateData: Partial<InsertPayrollPackage>): Promise<PayrollPackage | undefined> {
+    const [pkg] = await db
+      .update(payrollPackages)
+      .set(updateData)
+      .where(eq(payrollPackages.id, id))
+      .returning();
+    return pkg || undefined;
+  }
+
+  async deletePayrollPackage(id: number): Promise<boolean> {
+    const result = await db.delete(payrollPackages).where(eq(payrollPackages.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // Business Type methods
+  async getBusinessTypes(published?: boolean): Promise<BusinessType[]> {
+    if (published !== undefined) {
+      return await db
+        .select()
+        .from(businessTypes)
+        .where(eq(businessTypes.published, published))
+        .orderBy(businessTypes.displayOrder);
+    }
+    return await db.select().from(businessTypes).orderBy(businessTypes.displayOrder);
+  }
+
+  async getBusinessType(id: number): Promise<BusinessType | undefined> {
+    const [type] = await db.select().from(businessTypes).where(eq(businessTypes.id, id));
+    return type || undefined;
+  }
+
+  async createBusinessType(insertType: InsertBusinessType): Promise<BusinessType> {
+    const [type] = await db
+      .insert(businessTypes)
+      .values(insertType)
+      .returning();
+    return type;
+  }
+
+  async updateBusinessType(id: number, updateData: Partial<InsertBusinessType>): Promise<BusinessType | undefined> {
+    const [type] = await db
+      .update(businessTypes)
+      .set(updateData)
+      .where(eq(businessTypes.id, id))
+      .returning();
+    return type || undefined;
+  }
+
+  async deleteBusinessType(id: number): Promise<boolean> {
+    const result = await db.delete(businessTypes).where(eq(businessTypes.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // Pricing Tier methods
+  async getPricingTiers(businessTypeId?: number): Promise<PricingTier[]> {
+    if (businessTypeId !== undefined) {
+      return await db
+        .select()
+        .from(pricingTiers)
+        .where(eq(pricingTiers.businessTypeId, businessTypeId))
+        .orderBy(pricingTiers.displayOrder);
+    }
+    return await db.select().from(pricingTiers).orderBy(pricingTiers.displayOrder);
+  }
+
+  async getPricingTier(id: number): Promise<PricingTier | undefined> {
+    const [tier] = await db.select().from(pricingTiers).where(eq(pricingTiers.id, id));
+    return tier || undefined;
+  }
+
+  async createPricingTier(insertTier: InsertPricingTier): Promise<PricingTier> {
+    const [tier] = await db
+      .insert(pricingTiers)
+      .values(insertTier)
+      .returning();
+    return tier;
+  }
+
+  async updatePricingTier(id: number, updateData: Partial<InsertPricingTier>): Promise<PricingTier | undefined> {
+    const [tier] = await db
+      .update(pricingTiers)
+      .set(updateData)
+      .where(eq(pricingTiers.id, id))
+      .returning();
+    return tier || undefined;
+  }
+
+  async deletePricingTier(id: number): Promise<boolean> {
+    const result = await db.delete(pricingTiers).where(eq(pricingTiers.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // Additional Service methods
+  async getAdditionalServices(published?: boolean): Promise<AdditionalService[]> {
+    if (published !== undefined) {
+      return await db
+        .select()
+        .from(additionalServices)
+        .where(eq(additionalServices.published, published))
+        .orderBy(additionalServices.displayOrder);
+    }
+    return await db.select().from(additionalServices).orderBy(additionalServices.displayOrder);
+  }
+
+  async getAdditionalService(id: number): Promise<AdditionalService | undefined> {
+    const [service] = await db.select().from(additionalServices).where(eq(additionalServices.id, id));
+    return service || undefined;
+  }
+
+  async createAdditionalService(insertService: InsertAdditionalService): Promise<AdditionalService> {
+    const [service] = await db
+      .insert(additionalServices)
+      .values(insertService)
+      .returning();
+    return service;
+  }
+
+  async updateAdditionalService(id: number, updateData: Partial<InsertAdditionalService>): Promise<AdditionalService | undefined> {
+    const [service] = await db
+      .update(additionalServices)
+      .set(updateData)
+      .where(eq(additionalServices.id, id))
+      .returning();
+    return service || undefined;
+  }
+
+  async deleteAdditionalService(id: number): Promise<boolean> {
+    const result = await db.delete(additionalServices).where(eq(additionalServices.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
   }
 
   // Contact form methods (kept as placeholder - needs proper table implementation)
