@@ -114,6 +114,82 @@ export const insertUserSchema = createInsertSchema(users).pick({
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
+// Payroll Packages
+export const payrollPackages = pgTable("payroll_packages", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  employeeRange: text("employee_range").notNull(),
+  price: text("price").notNull(),
+  features: text("features").array().notNull(),
+  displayOrder: integer("display_order").default(0).notNull(),
+  published: boolean("published").default(true).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertPayrollPackageSchema = createInsertSchema(payrollPackages).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertPayrollPackage = z.infer<typeof insertPayrollPackageSchema>;
+export type PayrollPackage = typeof payrollPackages.$inferSelect;
+
+// Business Types (for pricing)
+export const businessTypes = pgTable("business_types", {
+  id: serial("id").primaryKey(),
+  type: text("type").notNull(),
+  icon: text("icon").notNull(),
+  popular: boolean("popular").default(false).notNull(),
+  displayOrder: integer("display_order").default(0).notNull(),
+  published: boolean("published").default(true).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertBusinessTypeSchema = createInsertSchema(businessTypes).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertBusinessType = z.infer<typeof insertBusinessTypeSchema>;
+export type BusinessType = typeof businessTypes.$inferSelect;
+
+// Pricing Tiers (for business types)
+export const pricingTiers = pgTable("pricing_tiers", {
+  id: serial("id").primaryKey(),
+  businessTypeId: integer("business_type_id").notNull().references(() => businessTypes.id, { onDelete: 'cascade' }),
+  turnover: text("turnover").notNull(),
+  price: text("price").notNull(),
+  displayOrder: integer("display_order").default(0).notNull(),
+});
+
+export const insertPricingTierSchema = createInsertSchema(pricingTiers).omit({
+  id: true,
+});
+
+export type InsertPricingTier = z.infer<typeof insertPricingTierSchema>;
+export type PricingTier = typeof pricingTiers.$inferSelect;
+
+// Additional Services
+export const additionalServices = pgTable("additional_services", {
+  id: serial("id").primaryKey(),
+  serviceName: text("service_name").notNull(),
+  price: text("price").notNull(),
+  period: text("period").notNull(),
+  description: text("description").notNull(),
+  icon: text("icon").notNull(),
+  displayOrder: integer("display_order").default(0).notNull(),
+  published: boolean("published").default(true).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertAdditionalServiceSchema = createInsertSchema(additionalServices).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertAdditionalService = z.infer<typeof insertAdditionalServiceSchema>;
+export type AdditionalService = typeof additionalServices.$inferSelect;
+
 // Contact Form Schema
 export const contactSubmissions = {
   id: text("id").primaryKey(),
