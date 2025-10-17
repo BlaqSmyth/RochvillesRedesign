@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, ChevronDown, Lightbulb, BookOpen, Sparkles } from "lucide-react";
 import CTASection from "@/components/CTASection";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 import taxPlanningImage from "@assets/stock_images/tax_planning_financi_1bccad55.jpg";
@@ -30,7 +30,7 @@ export default function TaxTipsPage() {
     {
       title: "Key Tax Deadlines for 2024/25",
       date: "March 2024",
-      readTime: "5 min read",
+      readTime: "3 min read",
       excerpt: "Stay on top of important tax deadlines to avoid penalties. Self-assessment deadlines, corporation tax payment dates, and VAT return submissions.",
       category: "Compliance",
       fullContent: `
@@ -68,7 +68,7 @@ export default function TaxTipsPage() {
     {
       title: "Maximizing Tax Relief on Business Expenses",
       date: "February 2024",
-      readTime: "7 min read",
+      readTime: "2 min read",
       excerpt: "Learn which business expenses qualify for tax relief and how to claim them correctly. From office costs to travel expenses and equipment purchases.",
       category: "Tax Planning",
       fullContent: `
@@ -121,7 +121,7 @@ export default function TaxTipsPage() {
     {
       title: "IR35 Changes: What Contractors Need to Know",
       date: "February 2024",
-      readTime: "6 min read",
+      readTime: "3 min read",
       excerpt: "Understanding the latest IR35 legislation and how it affects your contracting business. Determination statements, status assessments, and compliance strategies.",
       category: "Contractors",
       fullContent: `
@@ -177,7 +177,7 @@ export default function TaxTipsPage() {
     {
       title: "Capital Allowances: A Complete Guide",
       date: "January 2024",
-      readTime: "8 min read",
+      readTime: "2 min read",
       excerpt: "Everything you need to know about claiming capital allowances on business assets. Annual Investment Allowance, writing down allowances, and super-deduction.",
       category: "Tax Relief",
       fullContent: `
@@ -249,7 +249,7 @@ export default function TaxTipsPage() {
     {
       title: "VAT Tips for Small Businesses",
       date: "January 2024",
-      readTime: "5 min read",
+      readTime: "1 min read",
       excerpt: "Essential VAT guidance for small businesses. Registration thresholds, flat rate schemes, and Making Tax Digital compliance.",
       category: "VAT",
       fullContent: `
@@ -325,7 +325,7 @@ export default function TaxTipsPage() {
     {
       title: "Year-End Tax Planning Strategies",
       date: "December 2023",
-      readTime: "10 min read",
+      readTime: "3 min read",
       excerpt: "Strategic tax planning tips for year-end. Pension contributions, dividend planning, and timing of income and expenses to optimize your tax position.",
       category: "Tax Planning",
       fullContent: `
@@ -568,7 +568,7 @@ export default function TaxTipsPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 auto-rows-fr">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {taxTips.map((tip, index) => {
               const isExpanded = expandedCard === index;
               
@@ -579,13 +579,11 @@ export default function TaxTipsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  layout
-                  className={isExpanded ? "lg:col-span-2" : ""}
                 >
                   <Card 
-                    className={`hover-elevate transition-all duration-300 overflow-hidden border-2 hover:border-primary/30 group h-full ${
+                    className={`hover-elevate transition-all duration-300 overflow-visible border-2 hover:border-primary/30 group relative ${
                       isExpanded 
-                        ? 'bg-gradient-to-br from-primary/5 via-card to-accent/5' 
+                        ? 'bg-gradient-to-br from-primary/5 via-card to-accent/5 z-40' 
                         : 'bg-gradient-to-br from-card to-muted/5'
                     }`}
                     data-testid={`card-tax-tip-${index}`}
@@ -607,15 +605,9 @@ export default function TaxTipsPage() {
                             <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors pr-8">
                               {tip.title}
                             </h3>
-                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                              <div className="flex items-center gap-1">
-                                <Calendar className="h-4 w-4" />
-                                <span>{tip.date}</span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Clock className="h-4 w-4" />
-                                <span>{tip.readTime}</span>
-                              </div>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Clock className="h-4 w-4" />
+                              <span>{tip.readTime}</span>
                             </div>
                           </div>
                           <motion.div
@@ -632,15 +624,9 @@ export default function TaxTipsPage() {
                       </CardHeader>
                     </button>
                     
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.4, ease: "easeInOut" }}
-                        >
-                          <CardContent className="pt-0">
+                    {isExpanded && (
+                      <div className="absolute left-0 right-0 top-full mt-0 bg-gradient-to-br from-primary/5 via-card to-accent/5 border-2 border-primary/30 rounded-b-lg shadow-2xl z-50 overflow-hidden">
+                        <CardContent className="pt-0 animate-in fade-in slide-in-from-top-2 duration-300">
                             {/* Decorative gradient bar */}
                             <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-green-500 to-purple-500 rounded-full mb-6" />
                             
@@ -682,9 +668,8 @@ export default function TaxTipsPage() {
                               </div>
                             </div>
                           </CardContent>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                        </div>
+                    )}
                   </Card>
                 </motion.div>
               );
@@ -723,54 +708,6 @@ export default function TaxTipsPage() {
                 <Clock className="w-5 h-5" />
                 <span className="font-medium">Timely Reminders</span>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-br from-muted/30 via-background to-muted/20">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 w-32 h-32 border-4 border-purple-500/30 rounded-full" />
-          <div className="absolute bottom-20 right-20 w-24 h-24 border-4 border-blue-500/30 rounded-lg rotate-45" />
-        </div>
-
-        <motion.div
-          animate={{
-            rotate: 360,
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute w-96 h-96 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-full blur-3xl top-0 left-1/2"
-        />
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.div 
-              className="inline-block mb-6 px-4 py-2 bg-purple-500/5 rounded-full border border-purple-500/10"
-              whileHover={{ scale: 1.05 }}
-            >
-              <span className="text-sm font-medium text-purple-600 dark:text-purple-400">Newsletter</span>
-            </motion.div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Subscribe to Our Newsletter</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Get the latest tax tips, updates, and insights delivered straight to your inbox every month.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg border bg-background focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                data-testid="input-newsletter-email"
-              />
-              <Button size="lg" data-testid="button-subscribe">
-                Subscribe
-              </Button>
             </div>
           </motion.div>
         </div>
