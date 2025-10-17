@@ -337,6 +337,277 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ========== PAYROLL PACKAGES ROUTES ==========
+  
+  // Get all payroll packages (public - can filter by published)
+  app.get("/api/payroll-packages", async (req, res) => {
+    try {
+      const published = req.query.published === 'true' ? true : 
+                       req.query.published === 'false' ? false : undefined;
+      const packages = await storage.getPayrollPackages(published);
+      res.json(packages);
+    } catch (error) {
+      console.error("Get payroll packages error:", error);
+      res.status(500).json({ error: "Failed to fetch payroll packages" });
+    }
+  });
+
+  // Get single payroll package (public)
+  app.get("/api/payroll-packages/:id", async (req, res) => {
+    try {
+      const pkg = await storage.getPayrollPackage(parseInt(req.params.id));
+      if (!pkg) {
+        return res.status(404).json({ error: "Payroll package not found" });
+      }
+      res.json(pkg);
+    } catch (error) {
+      console.error("Get payroll package error:", error);
+      res.status(500).json({ error: "Failed to fetch payroll package" });
+    }
+  });
+
+  // Create payroll package (admin only)
+  app.post("/api/admin/payroll-packages", requireAdmin, async (req, res) => {
+    try {
+      const pkg = await storage.createPayrollPackage(req.body);
+      res.status(201).json(pkg);
+    } catch (error) {
+      console.error("Create payroll package error:", error);
+      res.status(500).json({ error: "Failed to create payroll package" });
+    }
+  });
+
+  // Update payroll package (admin only)
+  app.patch("/api/admin/payroll-packages/:id", requireAdmin, async (req, res) => {
+    try {
+      const pkg = await storage.updatePayrollPackage(parseInt(req.params.id), req.body);
+      if (!pkg) {
+        return res.status(404).json({ error: "Payroll package not found" });
+      }
+      res.json(pkg);
+    } catch (error) {
+      console.error("Update payroll package error:", error);
+      res.status(500).json({ error: "Failed to update payroll package" });
+    }
+  });
+
+  // Delete payroll package (admin only)
+  app.delete("/api/admin/payroll-packages/:id", requireAdmin, async (req, res) => {
+    try {
+      const success = await storage.deletePayrollPackage(parseInt(req.params.id));
+      if (!success) {
+        return res.status(404).json({ error: "Payroll package not found" });
+      }
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Delete payroll package error:", error);
+      res.status(500).json({ error: "Failed to delete payroll package" });
+    }
+  });
+
+  // ========== BUSINESS TYPES ROUTES ==========
+  
+  // Get all business types (public - can filter by published)
+  app.get("/api/business-types", async (req, res) => {
+    try {
+      const published = req.query.published === 'true' ? true : 
+                       req.query.published === 'false' ? false : undefined;
+      const types = await storage.getBusinessTypes(published);
+      res.json(types);
+    } catch (error) {
+      console.error("Get business types error:", error);
+      res.status(500).json({ error: "Failed to fetch business types" });
+    }
+  });
+
+  // Get single business type (public)
+  app.get("/api/business-types/:id", async (req, res) => {
+    try {
+      const type = await storage.getBusinessType(parseInt(req.params.id));
+      if (!type) {
+        return res.status(404).json({ error: "Business type not found" });
+      }
+      res.json(type);
+    } catch (error) {
+      console.error("Get business type error:", error);
+      res.status(500).json({ error: "Failed to fetch business type" });
+    }
+  });
+
+  // Create business type (admin only)
+  app.post("/api/admin/business-types", requireAdmin, async (req, res) => {
+    try {
+      const type = await storage.createBusinessType(req.body);
+      res.status(201).json(type);
+    } catch (error) {
+      console.error("Create business type error:", error);
+      res.status(500).json({ error: "Failed to create business type" });
+    }
+  });
+
+  // Update business type (admin only)
+  app.patch("/api/admin/business-types/:id", requireAdmin, async (req, res) => {
+    try {
+      const type = await storage.updateBusinessType(parseInt(req.params.id), req.body);
+      if (!type) {
+        return res.status(404).json({ error: "Business type not found" });
+      }
+      res.json(type);
+    } catch (error) {
+      console.error("Update business type error:", error);
+      res.status(500).json({ error: "Failed to update business type" });
+    }
+  });
+
+  // Delete business type (admin only)
+  app.delete("/api/admin/business-types/:id", requireAdmin, async (req, res) => {
+    try {
+      const success = await storage.deleteBusinessType(parseInt(req.params.id));
+      if (!success) {
+        return res.status(404).json({ error: "Business type not found" });
+      }
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Delete business type error:", error);
+      res.status(500).json({ error: "Failed to delete business type" });
+    }
+  });
+
+  // ========== PRICING TIERS ROUTES ==========
+  
+  // Get all pricing tiers (public - can filter by business type)
+  app.get("/api/pricing-tiers", async (req, res) => {
+    try {
+      const businessTypeId = req.query.businessTypeId ? parseInt(req.query.businessTypeId as string) : undefined;
+      const tiers = await storage.getPricingTiers(businessTypeId);
+      res.json(tiers);
+    } catch (error) {
+      console.error("Get pricing tiers error:", error);
+      res.status(500).json({ error: "Failed to fetch pricing tiers" });
+    }
+  });
+
+  // Get single pricing tier (public)
+  app.get("/api/pricing-tiers/:id", async (req, res) => {
+    try {
+      const tier = await storage.getPricingTier(parseInt(req.params.id));
+      if (!tier) {
+        return res.status(404).json({ error: "Pricing tier not found" });
+      }
+      res.json(tier);
+    } catch (error) {
+      console.error("Get pricing tier error:", error);
+      res.status(500).json({ error: "Failed to fetch pricing tier" });
+    }
+  });
+
+  // Create pricing tier (admin only)
+  app.post("/api/admin/pricing-tiers", requireAdmin, async (req, res) => {
+    try {
+      const tier = await storage.createPricingTier(req.body);
+      res.status(201).json(tier);
+    } catch (error) {
+      console.error("Create pricing tier error:", error);
+      res.status(500).json({ error: "Failed to create pricing tier" });
+    }
+  });
+
+  // Update pricing tier (admin only)
+  app.patch("/api/admin/pricing-tiers/:id", requireAdmin, async (req, res) => {
+    try {
+      const tier = await storage.updatePricingTier(parseInt(req.params.id), req.body);
+      if (!tier) {
+        return res.status(404).json({ error: "Pricing tier not found" });
+      }
+      res.json(tier);
+    } catch (error) {
+      console.error("Update pricing tier error:", error);
+      res.status(500).json({ error: "Failed to update pricing tier" });
+    }
+  });
+
+  // Delete pricing tier (admin only)
+  app.delete("/api/admin/pricing-tiers/:id", requireAdmin, async (req, res) => {
+    try {
+      const success = await storage.deletePricingTier(parseInt(req.params.id));
+      if (!success) {
+        return res.status(404).json({ error: "Pricing tier not found" });
+      }
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Delete pricing tier error:", error);
+      res.status(500).json({ error: "Failed to delete pricing tier" });
+    }
+  });
+
+  // ========== ADDITIONAL SERVICES ROUTES ==========
+  
+  // Get all additional services (public - can filter by published)
+  app.get("/api/additional-services", async (req, res) => {
+    try {
+      const published = req.query.published === 'true' ? true : 
+                       req.query.published === 'false' ? false : undefined;
+      const services = await storage.getAdditionalServices(published);
+      res.json(services);
+    } catch (error) {
+      console.error("Get additional services error:", error);
+      res.status(500).json({ error: "Failed to fetch additional services" });
+    }
+  });
+
+  // Get single additional service (public)
+  app.get("/api/additional-services/:id", async (req, res) => {
+    try {
+      const service = await storage.getAdditionalService(parseInt(req.params.id));
+      if (!service) {
+        return res.status(404).json({ error: "Additional service not found" });
+      }
+      res.json(service);
+    } catch (error) {
+      console.error("Get additional service error:", error);
+      res.status(500).json({ error: "Failed to fetch additional service" });
+    }
+  });
+
+  // Create additional service (admin only)
+  app.post("/api/admin/additional-services", requireAdmin, async (req, res) => {
+    try {
+      const service = await storage.createAdditionalService(req.body);
+      res.status(201).json(service);
+    } catch (error) {
+      console.error("Create additional service error:", error);
+      res.status(500).json({ error: "Failed to create additional service" });
+    }
+  });
+
+  // Update additional service (admin only)
+  app.patch("/api/admin/additional-services/:id", requireAdmin, async (req, res) => {
+    try {
+      const service = await storage.updateAdditionalService(parseInt(req.params.id), req.body);
+      if (!service) {
+        return res.status(404).json({ error: "Additional service not found" });
+      }
+      res.json(service);
+    } catch (error) {
+      console.error("Update additional service error:", error);
+      res.status(500).json({ error: "Failed to update additional service" });
+    }
+  });
+
+  // Delete additional service (admin only)
+  app.delete("/api/admin/additional-services/:id", requireAdmin, async (req, res) => {
+    try {
+      const success = await storage.deleteAdditionalService(parseInt(req.params.id));
+      if (!success) {
+        return res.status(404).json({ error: "Additional service not found" });
+      }
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Delete additional service error:", error);
+      res.status(500).json({ error: "Failed to delete additional service" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
