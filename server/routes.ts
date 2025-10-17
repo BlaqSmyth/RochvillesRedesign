@@ -652,6 +652,73 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ========== QUOTE REQUESTS ROUTES ==========
+
+  // Create quote request (public)
+  app.post("/api/quotes", async (req, res) => {
+    try {
+      const quote = await storage.createQuoteRequest(req.body);
+      res.status(201).json(quote);
+    } catch (error) {
+      console.error("Create quote request error:", error);
+      res.status(500).json({ error: "Failed to create quote request" });
+    }
+  });
+
+  // Get all quote requests for admin
+  app.get("/api/admin/quotes", requireAdmin, async (req, res) => {
+    try {
+      const status = req.query.status as string | undefined;
+      const quotes = await storage.getQuoteRequests(status);
+      res.json(quotes);
+    } catch (error) {
+      console.error("Get quote requests error:", error);
+      res.status(500).json({ error: "Failed to fetch quote requests" });
+    }
+  });
+
+  // Get single quote request (admin only)
+  app.get("/api/admin/quotes/:id", requireAdmin, async (req, res) => {
+    try {
+      const quote = await storage.getQuoteRequest(parseInt(req.params.id));
+      if (!quote) {
+        return res.status(404).json({ error: "Quote request not found" });
+      }
+      res.json(quote);
+    } catch (error) {
+      console.error("Get quote request error:", error);
+      res.status(500).json({ error: "Failed to fetch quote request" });
+    }
+  });
+
+  // Update quote request (admin only - for status/notes updates)
+  app.patch("/api/admin/quotes/:id", requireAdmin, async (req, res) => {
+    try {
+      const quote = await storage.updateQuoteRequest(parseInt(req.params.id), req.body);
+      if (!quote) {
+        return res.status(404).json({ error: "Quote request not found" });
+      }
+      res.json(quote);
+    } catch (error) {
+      console.error("Update quote request error:", error);
+      res.status(500).json({ error: "Failed to update quote request" });
+    }
+  });
+
+  // Delete quote request (admin only)
+  app.delete("/api/admin/quotes/:id", requireAdmin, async (req, res) => {
+    try {
+      const success = await storage.deleteQuoteRequest(parseInt(req.params.id));
+      if (!success) {
+        return res.status(404).json({ error: "Quote request not found" });
+      }
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Delete quote request error:", error);
+      res.status(500).json({ error: "Failed to delete quote request" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
