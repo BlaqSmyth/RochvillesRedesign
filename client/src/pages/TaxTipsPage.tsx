@@ -425,7 +425,11 @@ export default function TaxTipsPage() {
     "Tax Planning": "bg-green-500/10 text-green-600 dark:text-green-400",
     "Contractors": "bg-purple-500/10 text-purple-600 dark:text-purple-400",
     "Tax Relief": "bg-orange-500/10 text-orange-600 dark:text-orange-400",
-    "VAT": "bg-red-500/10 text-red-600 dark:text-red-400"
+    "VAT": "bg-red-500/10 text-red-600 dark:text-red-400",
+    "Capital Gains Tax": "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+    "Income Tax": "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
+    "Capital Allowances": "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    "Corporation Tax": "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
   };
 
   return (
