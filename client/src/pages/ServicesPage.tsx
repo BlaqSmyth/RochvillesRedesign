@@ -2,51 +2,59 @@ import { Calculator, FileText, Users, Building2, ShieldCheck, PieChart, Trending
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import CTASection from "@/components/CTASection";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import type { Service } from "@shared/schema";
 
 import accountingTeamImage from "@assets/stock_images/professional_account_056a0694.jpg";
 import financialPlanningImage from "@assets/stock_images/business_financial_p_af4632a3.jpg";
 import officeWorkspaceImage from "@assets/stock_images/modern_accounting_of_d8580445.jpg";
 import consultationImage from "@assets/stock_images/professional_busines_167f51bd.jpg";
 
+// Icon mapping for services
+const serviceIcons: Record<string, any> = {
+  "Accountancy Services": Calculator,
+  "Corporation Tax": Building2,
+  "Mergers & Acquisitions": Handshake,
+  "Fund Raising": DollarSign,
+  "Company Formation": Building2,
+  "Personal Tax": FileText,
+  "Payroll Bureau": Users,
+  "Bookkeeping": BookOpen,
+  "Commercial Loan Brokerage": Building2,
+  "Bridging Finance": Banknote,
+  "Business Start Up": TrendingUp,
+  "VAT and Capital Gains Tax": Calculator,
+  "Due Diligence": ShieldCheck,
+  "Cash Flow Forecasting": LineChart,
+  "Interim Management Accounts": PieChart,
+  "Directors P11D & Dividends": Receipt,
+  "CIS Services": Hammer,
+  "Struck Off Company Restorations": RefreshCcw,
+  "Secretarial Services": FileText,
+  "Registered Office Address": Building2,
+  "Corporate Finance": LineChart,
+  "Insurance": ShieldCheck,
+  "Umbrella Company Services": Briefcase,
+  "Agency Workers Payroll": Users,
+  "IT Contractors Payroll & Umbrella": Calculator,
+  "NHS & Public Sector Umbrella": Users,
+};
+
 export default function ServicesPage() {
-  const coreServices = [
-    {
-      icon: Calculator,
-      title: "Accountancy Services",
-      description: "Complete accounting preparation and taxation services. We ensure your accounts and self-assessment are completed on time, well before filing deadlines. We use historical accounts as vital tools for planning your future and assessing areas requiring attention.",
-      features: ["Annual accounts preparation", "Tax returns", "Financial analysis", "Strategic planning"]
-    },
-    {
-      icon: Building2,
-      title: "Corporation Tax",
-      description: "Expert tax planning to save thousands legitimately. We handle all routine tax work ensuring returns are submitted well before deadlines. Fellows of the Federation of Tax Advisors guarantee you receive the best tax advice possible.",
-      features: ["Tax planning", "Corporation tax returns", "Self-assessment", "HMRC liaison"]
-    },
-    {
-      icon: Handshake,
-      title: "Mergers & Acquisitions",
-      description: "We help you buy or sell a business quickly and easily at the best possible price. Whether retirement, new challenges, or strategic change, we're committed to making the process painless.",
-      features: ["Business valuations", "Broker services", "Due diligence", "Deal structuring"]
-    },
-    {
-      icon: DollarSign,
-      title: "Fund Raising",
-      description: "Your success is our success. We assist clients to source the best possible funding available to meet day-to-day working capital and run businesses efficiently.",
-      features: ["Funding applications", "Working capital solutions", "Investment sourcing", "Financial planning"]
-    },
-    {
-      icon: Building2,
-      title: "Company Formation",
-      description: "Company formation agent service with 24-hour setup. Off-the-shelf or same-day company formation, or custom name within seven working days. Includes memorandum of association, nominee secretary, and registered office services.",
-      features: ["24-hour formation", "Custom company names", "Registered office", "Nominee secretary"]
-    },
-    {
-      icon: FileText,
-      title: "Personal Tax",
-      description: "Self-assessment has placed greater burden on taxpayers. We deal with HMRC on your behalf, ensuring compliance with tax and accounting rules while minimizing your tax bill to the best possible terms.",
-      features: ["Self-assessment returns", "Tax planning", "HMRC representation", "Tax optimization"]
-    }
-  ];
+  // Fetch services from database
+  const { data: allServices = [], isLoading } = useQuery<Service[]>({
+    queryKey: ["/api/services"],
+    select: (data) => data.filter(service => service.published),
+  });
+  // Group services by category
+  const coreServices = allServices
+    .filter(s => s.category === "Core Services")
+    .map(s => ({
+      icon: serviceIcons[s.name] || Calculator,
+      title: s.name,
+      description: s.description,
+      features: s.features
+    }));
 
   const colorClasses = {
     blue: { bg: "bg-blue-500/10", text: "text-blue-600 dark:text-blue-400", border: "border-blue-500/20", gradient: "from-blue-500/20 to-blue-500/5" },
@@ -57,103 +65,26 @@ export default function ServicesPage() {
     teal: { bg: "bg-teal-500/10", text: "text-teal-600 dark:text-teal-400", border: "border-teal-500/20", gradient: "from-teal-500/20 to-teal-500/5" }
   };
 
-  const specialistServices = [
-    {
-      icon: Users,
-      title: "Payroll Bureau",
-      description: "Life becomes complex when hiring your first employee. We relieve you of the payroll burden, ensuring proper calculations and legal compliance. Experienced professionals handle all HMRC dealings and form submissions.",
-      features: ["Monthly payroll processing", "RTI submissions", "HMRC compliance", "P11D preparation"],
-      color: "blue" as keyof typeof colorClasses
-    },
-    {
-      icon: BookOpen,
-      title: "Bookkeeping",
-      description: "Professional bookkeeping services to keep your financial records accurate and up-to-date. Regular reconciliation, transaction recording, and financial reporting.",
-      features: ["Transaction recording", "Bank reconciliation", "VAT preparation", "Financial reports"],
-      color: "green" as keyof typeof colorClasses
-    },
-    {
-      icon: Building2,
-      title: "Commercial Loan Brokerage",
-      description: "Expert commercial finance solutions for businesses. We source competitive commercial loans and property finance to help your business grow and expand with confidence.",
-      features: ["Commercial property loans", "Business expansion finance", "Asset finance", "Competitive rates"],
-      color: "purple" as keyof typeof colorClasses
-    },
-    {
-      icon: Banknote,
-      title: "Bridging Finance",
-      description: "Fast, flexible short-term financing solutions. Bridging loans for property purchases, development projects, and time-sensitive opportunities when quick access to capital is essential.",
-      features: ["Rapid approvals", "Property bridging loans", "Development finance", "Flexible terms"],
-      color: "orange" as keyof typeof colorClasses
-    },
-    {
-      icon: TrendingUp,
-      title: "Business Start Up",
-      description: "Comprehensive start-up support to ensure you don't leap into the unknown. Guidance on business structure, tax efficiency, HMRC dealings, accounting records, legislation compliance, and authority registration.",
-      features: ["Structure selection", "Business registration", "Tax setup", "Compliance guidance"],
-      color: "red" as keyof typeof colorClasses
-    },
-    {
-      icon: Calculator,
-      title: "VAT and Capital Gains Tax",
-      description: "Expert VAT registration, returns, and capital gains tax planning. We ensure compliance while maximizing available reliefs and exemptions including taper relief, indexation allowance, and annual exemptions.",
-      features: ["VAT registration", "Quarterly returns", "CGT planning", "Relief optimization"],
-      color: "teal" as keyof typeof colorClasses
-    },
-    {
-      icon: ShieldCheck,
-      title: "Due Diligence",
-      description: "In-depth business analysis for acquisitions. Three-year performance review, income/expenditure verification, P&L and balance sheet checks, with expert opinion on future viability.",
-      features: ["Performance analysis", "Financial verification", "Viability assessment", "Expert reporting"],
-      color: "purple" as keyof typeof colorClasses
-    },
-    {
-      icon: LineChart,
-      title: "Cash Flow Forecasting",
-      description: "Comprehensive cash flow forecasting and projections to help you plan ahead and maintain healthy business finances. Essential for growth planning and preventing cash flow problems.",
-      features: ["12-month forecasts", "Scenario planning", "Working capital analysis", "Strategic planning"],
-      color: "blue" as keyof typeof colorClasses
-    },
-    {
-      icon: PieChart,
-      title: "Interim Management Accounts",
-      description: "Detailed interim management accounts and forecasts providing real-time insights into your business performance. Essential for making informed decisions between annual accounts.",
-      features: ["Monthly/quarterly reports", "Performance analysis", "Variance reporting", "KPI tracking"],
-      color: "green" as keyof typeof colorClasses
-    },
-    {
-      icon: Receipt,
-      title: "Directors P11D & Dividends",
-      description: "Expert handling of directors' benefits in kind (P11D) and dividend administration. Ensuring compliance while maximizing tax efficiency for company directors.",
-      features: ["P11D preparation", "Dividend calculations", "Tax optimization", "HMRC compliance"],
-      color: "orange" as keyof typeof colorClasses
-    },
-    {
-      icon: Hammer,
-      title: "CIS Services",
-      description: "Comprehensive Construction Industry Scheme (CIS) services. We handle all your CIS returns, verification, and compliance, ensuring you meet HMRC requirements.",
-      features: ["Monthly CIS returns", "Subcontractor verification", "Deduction calculations", "HMRC compliance"],
-      color: "teal" as keyof typeof colorClasses
-    },
-    {
-      icon: RefreshCcw,
-      title: "Struck Off Company Restorations",
-      description: "Professional restoration services for companies that have been struck off or dissolved. We handle the entire restoration process with Companies House to bring your company back to the register.",
-      features: ["Companies House applications", "Legal documentation", "Asset recovery support", "Full restoration service"],
-      color: "red" as keyof typeof colorClasses
-    }
-  ];
+  // Color rotation for specialist services
+  const colors: Array<keyof typeof colorClasses> = ["blue", "green", "purple", "orange", "red", "teal"];
+  
+  const specialistServices = allServices
+    .filter(s => s.category === "Specialist Services")
+    .map((s, index) => ({
+      icon: serviceIcons[s.name] || Calculator,
+      title: s.name,
+      description: s.description,
+      features: s.features,
+      color: colors[index % colors.length]
+    }));
 
-  const additionalServices = [
-    { icon: FileText, title: "Secretarial Services", description: "Company secretarial support and compliance services" },
-    { icon: Building2, title: "Registered Office Address", description: "Professional registered office service" },
-    { icon: LineChart, title: "Corporate Finance", description: "Strategic financial advice and planning" },
-    { icon: ShieldCheck, title: "Insurance", description: "Business insurance and protection advice" },
-    { icon: Briefcase, title: "Umbrella Company Services", description: "Comprehensive contractor umbrella services" },
-    { icon: Users, title: "Agency Workers Payroll", description: "Specialist payroll for agency workers" },
-    { icon: Calculator, title: "IT Contractors Payroll & Umbrella", description: "Dedicated IT contractor services" },
-    { icon: Users, title: "NHS & Public Sector Umbrella", description: "Specialized NHS and public sector umbrella services" }
-  ];
+  const additionalServices = allServices
+    .filter(s => s.category === "Additional Services")
+    .map(s => ({
+      icon: serviceIcons[s.name] || FileText,
+      title: s.name,
+      description: s.description
+    }));
 
   const detailedServices = [
     {
