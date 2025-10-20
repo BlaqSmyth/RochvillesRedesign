@@ -21,6 +21,7 @@ import { RichTextEditor } from "@/components/RichTextEditor";
 const articleSchema = z.object({
   title: z.string().min(1, "Title is required"),
   category: z.string().min(1, "Category is required"),
+  customCategory: z.string().optional(),
   excerpt: z.string().min(1, "Excerpt is required"),
   fullContent: z.string().min(1, "Content is required"),
   readTime: z.string().min(1, "Read time is required"),
@@ -29,9 +30,22 @@ const articleSchema = z.object({
 
 type ArticleForm = z.infer<typeof articleSchema>;
 
+const PREDEFINED_CATEGORIES = [
+  "Tax Planning",
+  "Compliance",
+  "Business",
+  "Personal Tax",
+  "VAT",
+  "Capital Gains Tax",
+  "Income Tax",
+  "Corporation Tax",
+  "Capital Allowances",
+];
+
 export default function AdminArticlesPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingArticle, setEditingArticle] = useState<Article | null>(null);
+  const [showCustomCategory, setShowCustomCategory] = useState(false);
   const { toast } = useToast();
 
   const { data: articles = [], isLoading } = useQuery<Article[]>({
@@ -43,6 +57,7 @@ export default function AdminArticlesPage() {
     defaultValues: {
       title: "",
       category: "",
+      customCategory: "",
       excerpt: "",
       fullContent: "",
       readTime: "2 min read",
@@ -91,9 +106,11 @@ export default function AdminArticlesPage() {
 
   function handleCreate() {
     setEditingArticle(null);
+    setShowCustomCategory(false);
     form.reset({
       title: "",
       category: "",
+      customCategory: "",
       excerpt: "",
       fullContent: "",
       readTime: "2 min read",
@@ -104,9 +121,12 @@ export default function AdminArticlesPage() {
 
   function handleEdit(article: Article) {
     setEditingArticle(article);
+    const isCustomCategory = !PREDEFINED_CATEGORIES.includes(article.category);
+    setShowCustomCategory(isCustomCategory);
     form.reset({
       title: article.title,
-      category: article.category,
+      category: isCustomCategory ? "Other" : article.category,
+      customCategory: isCustomCategory ? article.category : "",
       excerpt: article.excerpt,
       fullContent: article.fullContent,
       readTime: article.readTime,
@@ -122,10 +142,25 @@ export default function AdminArticlesPage() {
   }
 
   function onSubmit(data: ArticleForm) {
+    const finalData = {
+      ...data,
+      category: data.category === "Other" ? (data.customCategory || "") : data.category,
+    };
+    
+    // Validate custom category if "Other" is selected
+    if (data.category === "Other" && !data.customCategory?.trim()) {
+      toast({ 
+        title: "Custom category required", 
+        description: "Please enter a custom category name",
+        variant: "destructive" 
+      });
+      return;
+    }
+    
     if (editingArticle) {
-      updateMutation.mutate({ id: editingArticle.id, data });
+      updateMutation.mutate({ id: editingArticle.id, data: finalData });
     } else {
-      createMutation.mutate(data);
+      createMutation.mutate(finalData);
     }
   }
 
@@ -231,24 +266,55 @@ export default function AdminArticlesPage() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Category</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
+                    <Select 
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        setShowCustomCategory(value === "Other");
+                        if (value !== "Other") {
+                          form.setValue("customCategory", "");
+                        }
+                      }} 
+                      value={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger data-testid="select-article-category">
                           <SelectValue placeholder="Select category" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Tax Planning">Tax Planning</SelectItem>
-                        <SelectItem value="Compliance">Compliance</SelectItem>
-                        <SelectItem value="Business">Business</SelectItem>
-                        <SelectItem value="Personal Tax">Personal Tax</SelectItem>
-                        <SelectItem value="VAT">VAT</SelectItem>
+                        {PREDEFINED_CATEGORIES.map((cat) => (
+                          <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                        ))}
+                        <SelectItem value="Other">Other (Custom)</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
+              {showCustomCategory && (
+                <FormField
+                  control={form.control}
+                  name="customCategory"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Custom Category Name</FormLabel>
+                      <FormControl>
+                        <Input 
+                          {...field} 
+                          placeholder="Enter custom category name" 
+                          data-testid="input-custom-category"
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Enter a custom category name for this article
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
               <FormField
                 control={form.control}
