@@ -1,148 +1,71 @@
 # 🚀 Deployment Guide - Rochvilles & Co. Website
 
-**Quick Start**: Deploy this application on **Railway** or **Render + Supabase** - both excellent platforms for Express.js apps.
+**Platform**: Render + Supabase (100% Free!)
 
-⚠️ **NOT compatible with Vercel** (requires major refactoring for serverless)
+This application is deployed using **Render** for hosting and **Supabase** for PostgreSQL database.
+
+⚠️ **NOT compatible with Vercel** (requires serverless architecture)
 
 ---
 
-## ⚠️ Important: Platform Compatibility
-
-### ✅ Recommended Platforms
+## ✅ Why Render + Supabase?
 
 This is a **traditional full-stack Express.js application** with persistent sessions.
 
-Choose either option below - both work perfectly:
-
-**Option 1: Railway** ⭐ 
-- All-in-one platform (hosting + database)
-- Built-in PostgreSQL database
-- Simple one-click deployment
-- Free tier ($5/month credit)
-- Automatic SSL certificates
-- **[Complete Guide: DEPLOYMENT_RAILWAY.md](./DEPLOYMENT_RAILWAY.md)**
-
-**Option 2: Render + Supabase** ⭐
-- Free permanent hosting (Render)
-- Professional PostgreSQL with dashboard (Supabase)
-- Auto-deployment from GitHub
-- Free tier ($0/month)
-- Automatic SSL certificates
-- **[Complete Guide: DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)**
-
-### 📌 Other Compatible Platforms
-
-These also support Express + PostgreSQL:
-
-- **Fly.io** - Container-based deployment, global distribution
-- **DigitalOcean App Platform** - Full PaaS solution
-
-### ❌ NOT Recommended
-
-**Vercel** - Does NOT support this application without major refactoring:
-- Vercel uses serverless functions, this app uses `server.listen()`
-- Session management incompatible with serverless
-- Would require complete backend rewrite
+**Render + Supabase** offers:
+- ✅ **$0/month** - Permanent free tier
+- ✅ Professional PostgreSQL with dashboard (Supabase)
+- ✅ Auto-deployment from GitHub
+- ✅ Automatic SSL certificates
+- ✅ Easy database management
+- ✅ Built-in connection pooling
 
 ---
 
-## 📚 Documentation
+## 📚 Complete Deployment Guide
 
-Choose your deployment platform:
+**👉 Follow the step-by-step guide**: **[DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)**
 
-### Recommended Platforms (Choose One)
-- **[DEPLOYMENT_RAILWAY.md](./DEPLOYMENT_RAILWAY.md)** - Complete Railway deployment guide ⭐
-- **[DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)** - Complete Render + Supabase guide ⭐
-
-### Quick Reference
-- **[DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)** - Railway quick checklist
-
-### Platform Comparison
-
-| Feature | Railway | Render + Supabase |
-|---------|---------|-------------------|
-| **Complexity** | Easiest (all-in-one) | Easy (two platforms) |
-| **Cost** | $5 credit/month | $0/month (permanent free) |
-| **Database** | Built-in PostgreSQL | Supabase (feature-rich) |
-| **Cold starts** | None (always on) | Yes (spins down after 15 min) |
-| **Setup time** | 10 minutes | 15 minutes |
-| **Best for** | Quick setup, paid plan OK | Budget-conscious, free tier |
+This comprehensive guide covers:
+1. ✅ Supabase database setup
+2. ✅ Render web service deployment
+3. ✅ Environment variables configuration
+4. ✅ Database schema initialization
+5. ✅ Admin user creation
+6. ✅ Custom domain setup
+7. ✅ Troubleshooting & monitoring
 
 ---
 
-## 🎯 Quick Deployment (Railway)
+## 🎯 Quick Overview
 
-### 1. Prerequisites
-```bash
-# Ensure code is pushed to GitHub
-git push origin main
+### 1. Set Up Database (Supabase)
+- Create Supabase account
+- Create new project
+- Get PostgreSQL connection string
+- Configure connection pooling
 
-# Ensure build works locally
-npm run build
-```
+### 2. Deploy Application (Render)
+- Connect GitHub repository
+- Configure build & start commands
+- Add environment variables
+- Auto-deploy from GitHub
 
-### 2. Deploy to Railway
-
-1. Go to [railway.app](https://railway.app)
-2. Sign in with GitHub
-3. "New Project" → "Deploy from GitHub repo"
-4. Select your repository
-5. Add PostgreSQL database
-6. Set environment variables:
-   ```
-   DATABASE_URL=(auto-provided by Railway PostgreSQL)
-   SESSION_SECRET=(generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
-   NODE_ENV=production
-   ```
-7. Deploy! 🚀
-
-### 3. Initialize Database
-
-```bash
-# Install Railway CLI
-npm i -g @railway/cli
-
-# Login and link
-railway login
-railway link
-
-# Push database schema
-railway run npm run db:push
-```
-
-### 4. Add Custom Domain
-
-1. Railway → Settings → Domains
-2. Add your domain
-3. Update DNS at your registrar
-4. SSL auto-generates
+### 3. Initialize & Configure
+- Push database schema
+- Create admin user
+- Populate content via CMS
+- Connect custom domain
 
 ---
 
-## 🗄️ Database: Neon PostgreSQL
+## 📋 Environment Variables Required
 
-### Option A: Use Railway's PostgreSQL (Recommended)
-- Automatically configured
-- DATABASE_URL provided automatically
-- Easy backups
-
-### Option B: Use Neon (External)
-1. Create account at [neon.tech](https://neon.tech)
-2. Create new project
-3. Copy connection string
-4. Add to Railway environment variables
-
----
-
-## 📋 Environment Variables
-
-Required for all platforms:
-
-| Variable | Value | How to Get |
-|----------|-------|------------|
-| `DATABASE_URL` | `postgresql://...` | Railway PostgreSQL or Neon |
-| `SESSION_SECRET` | 32+ random characters | `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
-| `NODE_ENV` | `production` | Type manually |
+| Variable | Description | Where to Get |
+|----------|-------------|--------------|
+| `DATABASE_URL` | PostgreSQL connection string | Supabase dashboard |
+| `SESSION_SECRET` | 32+ random characters | Generate: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
+| `NODE_ENV` | Set to `production` | Type manually |
 
 ---
 
@@ -150,22 +73,44 @@ Required for all platforms:
 
 - **Frontend**: React + Vite + Tailwind CSS
 - **Backend**: Express.js + Node.js
-- **Database**: PostgreSQL (Neon or Railway)
+- **Database**: PostgreSQL (Supabase)
+- **Hosting**: Render
 - **Session**: PostgreSQL session store
 - **Build**: Vite (frontend) + esbuild (backend)
+
+---
+
+## 💰 Cost Breakdown
+
+### Render Free Tier
+- ✅ **Free forever**
+- ⚠️ Spins down after 15 min inactivity
+- ⚠️ First request after sleep takes ~30 seconds
+- ✅ Unlimited bandwidth
+
+**Tip**: Use [UptimeRobot](https://uptimerobot.com) (free) to ping your site every 5 minutes and prevent sleep.
+
+### Supabase Free Tier
+- ✅ **Free forever**
+- ✅ 500 MB database storage
+- ✅ Unlimited API requests
+- ✅ 50,000 monthly active users
+- ✅ Daily backups (7 days retention)
+
+**Total Cost: $0/month** 🎉
 
 ---
 
 ## 📁 Project Structure
 
 ```
-├── client/          # React frontend
-├── server/          # Express backend
-├── shared/          # Shared types & schemas
-├── dist/            # Build output (generated)
-│   ├── public/      # Frontend build
-│   └── index.js     # Backend bundle
-└── attached_assets/ # Images & assets
+├── client/                  # React frontend
+├── server/                  # Express backend
+├── shared/                  # Shared types & schemas
+├── dist/                    # Build output (generated)
+│   ├── public/             # Frontend build
+│   └── index.js            # Backend bundle
+└── DEPLOYMENT_RENDER_SUPABASE.md  # Complete deployment guide
 ```
 
 ---
@@ -178,7 +123,7 @@ npm install
 
 # Set up environment variables
 cp .env.example .env
-# Edit .env with your DATABASE_URL
+# Edit .env with your Supabase DATABASE_URL
 
 # Push database schema
 npm run db:push
@@ -207,126 +152,72 @@ Output:
 
 ---
 
-## 📊 Post-Deployment
-
-### Create Admin User
-
-```sql
--- Generate password hash at https://bcrypt-generator.com/ (10 rounds)
-
-INSERT INTO users (username, password, email, role)
-VALUES (
-  'admin',
-  '$2a$10$your-bcrypt-hash-here',
-  'admin@rochvilles.co.uk',
-  'admin'
-);
-```
-
-### Populate Content
-
-Login to admin at: `https://yourdomain.com/admin`
-
-- Add services
-- Add testimonials  
-- Publish articles
-- Configure pricing
-
----
-
-## 🧪 Testing
-
-```bash
-# Type checking
-npm run check
-
-# Build test
-npm run build
-
-# Production test
-npm start
-```
-
----
-
-## 📈 Monitoring
-
-Recommended tools:
-- **Uptime**: UptimeRobot (free)
-- **Analytics**: Google Analytics or Plausible
-- **Errors**: Sentry (free tier)
-
----
-
 ## 🔐 Security Checklist
 
 - [ ] `SESSION_SECRET` is strong (32+ random characters)
-- [ ] `DATABASE_URL` includes `?sslmode=require`
+- [ ] `DATABASE_URL` uses connection pooling
 - [ ] Admin password is strong
-- [ ] No secrets committed to Git
-- [ ] HTTPS enabled (automatic on Railway)
+- [ ] No secrets committed to Git (.gitignore configured)
+- [ ] HTTPS enabled (automatic on Render)
 
 ---
 
-## 💰 Cost Estimate
+## 📈 Post-Deployment Monitoring
 
-### Railway Free Tier
-- **$5 credit per month** (free)
-- Covers most small-medium traffic sites
+### Recommended Tools
+- **Uptime**: [UptimeRobot](https://uptimerobot.com) (free, prevents cold starts)
+- **Analytics**: Google Analytics or Plausible
+- **Errors**: Sentry (free tier)
 
-### If You Exceed Free Tier
-- ~$10-20/month for moderate traffic
-- Database storage is usually the largest cost
+### Dashboards
+- **Render**: Monitor deployment logs, resource usage
+- **Supabase**: Database queries, storage, backups
 
 ---
 
 ## 🆘 Troubleshooting
 
-### Build Fails
+### Build Fails on Render
 ```bash
 # Test locally first
 npm run build
 
-# Check logs in Railway dashboard
+# Check Render logs for specific error
+# Common issues: missing dependencies, environment variables
 ```
 
 ### Database Connection Error
-```bash
-# Verify DATABASE_URL is set
-# Should include ?sslmode=require for Neon
-# Railway PostgreSQL works automatically
-```
+- Verify `DATABASE_URL` is set in Render
+- Use Supabase connection pooler URL (recommended)
+- Check Supabase database is not paused
 
 ### Admin Can't Login
-```bash
-# Verify:
-# 1. Admin user exists in database
-# 2. SESSION_SECRET is set  
-# 3. Session table exists (auto-created)
-```
+- Verify admin user exists in Supabase (Table Editor → users)
+- Check `SESSION_SECRET` is set in Render
+- Session table auto-created by `connect-pg-simple`
+
+### Site is Slow (First Load)
+- Normal for Render free tier (cold start ~30 seconds)
+- Set up UptimeRobot to ping every 5 minutes
+- Or upgrade to Render paid plan ($7/month for always-on)
 
 ---
 
-## 📞 Support
+## 📞 Support Resources
 
-- **Railway Docs**: https://docs.railway.app
-- **Neon Docs**: https://neon.tech/docs
-- **This Project**: See detailed guides in this folder
+- **Render Docs**: https://render.com/docs
+- **Render Community**: https://community.render.com
+- **Supabase Docs**: https://supabase.com/docs
+- **Supabase Discord**: https://discord.supabase.com
+- **Project Guide**: [DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)
 
 ---
 
 ## 🎉 Ready to Deploy?
 
-### Option 1: Railway (All-in-one)
-1. ✅ Read **[DEPLOYMENT_RAILWAY.md](./DEPLOYMENT_RAILWAY.md)**
-2. ✅ Follow **[DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)**
-3. ✅ Deploy to Railway
-4. 🎉 Go live!
-
-### Option 2: Render + Supabase (Free forever)
-1. ✅ Read **[DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)**
-2. ✅ Follow the complete guide step-by-step
-3. ✅ Deploy to Render with Supabase
+1. ✅ Code pushed to GitHub
+2. ✅ Read **[DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)**
+3. ✅ Follow the step-by-step guide
 4. 🎉 Go live!
 
 ---
@@ -335,7 +226,7 @@ npm run build
 
 Vercel is designed for:
 - Static sites
-- Serverless functions (must be stateless)
+- Serverless functions (stateless)
 - Next.js applications
 
 This application uses:
@@ -343,13 +234,7 @@ This application uses:
 - Persistent session management
 - Long-running processes
 
-To deploy on Vercel, you would need to:
-1. Refactor entire backend to serverless functions
-2. Replace session management with JWT or external session store
-3. Rewrite middleware to be stateless
-4. Handle routing completely differently
-
-**Result**: Not worth the effort. Use Railway instead! 🚂
+**Not compatible without complete backend rewrite.**
 
 ---
 
