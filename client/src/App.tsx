@@ -37,6 +37,7 @@ function Router({ darkMode, toggleDarkMode }: { darkMode: boolean; toggleDarkMod
   if (location.startsWith('/admin')) {
     return (
       <Switch>
+        <Route path="/admin" component={AdminLoginPage} />
         <Route path="/admin/login" component={AdminLoginPage} />
         <Route path="/admin/dashboard">
           <AdminLayout>
