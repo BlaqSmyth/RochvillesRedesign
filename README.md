@@ -257,28 +257,40 @@ App runs at: **http://localhost:5000**
 
 ## 🚢 Deployment
 
-This application can be deployed to various platforms. Choose based on your needs:
+This application is deployed using **Render + Supabase** - a 100% free solution!
 
-### Recommended Platforms
+### Platform
 
-| Platform | Database | Cost | Best For |
-|----------|----------|------|----------|
-| **Railway** | Railway PostgreSQL | $5 credit/month (free) | Easiest setup |
-| **Render + Supabase** | Supabase PostgreSQL | $0/month (free) | Budget-conscious |
+**Render + Supabase**
+- 🆓 **$0/month** - Permanent free tier
+- 🗄️ **Professional PostgreSQL** with dashboard (Supabase)
+- 🚀 **Auto-deployment** from GitHub
+- 🔒 **Free SSL** certificates
+- 📊 **Easy database management**
 
-### Deployment Guides
+### Deployment Guide
 
-📖 **Start here**: [README_DEPLOYMENT.md](README_DEPLOYMENT.md)
+📖 **Complete Guide**: [DEPLOYMENT_RENDER_SUPABASE.md](DEPLOYMENT_RENDER_SUPABASE.md)
 
-**Platform-specific guides:**
-- 🚂 [Railway Deployment](DEPLOYMENT_RAILWAY.md)
-- 🎨 [Render + Supabase Deployment](DEPLOYMENT_RENDER_SUPABASE.md)
-- ✅ [Quick Checklist](DEPLOY_CHECKLIST.md)
+This step-by-step guide covers everything:
+- Database setup with Supabase
+- Render web service configuration
+- Environment variables
+- Custom domain setup
+- Admin user creation
+- Troubleshooting
+
+### Quick Overview
+
+1. **Set up Supabase database** (PostgreSQL)
+2. **Deploy to Render** (connects to GitHub)
+3. **Initialize database** schema
+4. **Create admin user**
+5. **Go live!** 🎉
 
 ### ⚠️ Platform Compatibility
 
-- ✅ **Railway**: Perfect for Express + PostgreSQL
-- ✅ **Render**: Perfect for Express + PostgreSQL
+- ✅ **Render**: Perfect for Express + PostgreSQL ⭐
 - ✅ **Fly.io**: Compatible
 - ✅ **DigitalOcean App Platform**: Compatible
 - ❌ **Vercel**: NOT compatible (doesn't support Express servers)
