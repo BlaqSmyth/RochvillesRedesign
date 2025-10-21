@@ -69,9 +69,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       req.session.adminUser = serializeAdminUser(adminUser);
       
-      res.json({ 
-        success: true, 
-        user: serializeAdminUser(adminUser) 
+      // Explicitly save session before sending response
+      req.session.save((err) => {
+        if (err) {
+          console.error("Session save error:", err);
+          return res.status(500).json({ error: "Login failed" });
+        }
+        
+        res.json({ 
+          success: true, 
+          user: serializeAdminUser(adminUser) 
+        });
       });
     } catch (error) {
       console.error("Admin login error:", error);
