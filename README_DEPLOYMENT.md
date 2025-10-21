@@ -1,6 +1,6 @@
 # 🚀 Deployment Guide - Rochvilles & Co. Website
 
-**Quick Start**: Deploy this application on **Railway** - the recommended platform for Express.js apps.
+**Quick Start**: Deploy this application on **Railway** or **Render + Supabase** - both excellent platforms for Express.js apps.
 
 ⚠️ **NOT compatible with Vercel** (requires major refactoring for serverless)
 
@@ -8,23 +8,32 @@
 
 ## ⚠️ Important: Platform Compatibility
 
-### ✅ Recommended Platform
+### ✅ Recommended Platforms
 
 This is a **traditional full-stack Express.js application** with persistent sessions.
 
-**Railway** ⭐ THE RECOMMENDED PLATFORM
-- Perfect for Express apps with persistent sessions
+Choose either option below - both work perfectly:
+
+**Option 1: Railway** ⭐ 
+- All-in-one platform (hosting + database)
 - Built-in PostgreSQL database
 - Simple one-click deployment
 - Free tier ($5/month credit)
 - Automatic SSL certificates
 - **[Complete Guide: DEPLOYMENT_RAILWAY.md](./DEPLOYMENT_RAILWAY.md)**
 
-### 📌 Alternative Platforms (Optional)
+**Option 2: Render + Supabase** ⭐
+- Free permanent hosting (Render)
+- Professional PostgreSQL with dashboard (Supabase)
+- Auto-deployment from GitHub
+- Free tier ($0/month)
+- Automatic SSL certificates
+- **[Complete Guide: DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)**
 
-If Railway doesn't meet your needs, these platforms also support Express + PostgreSQL:
+### 📌 Other Compatible Platforms
 
-- **Render** - Good Node.js support, free tier available
+These also support Express + PostgreSQL:
+
 - **Fly.io** - Container-based deployment, global distribution
 - **DigitalOcean App Platform** - Full PaaS solution
 
@@ -41,16 +50,23 @@ If Railway doesn't meet your needs, these platforms also support Express + Postg
 
 Choose your deployment platform:
 
-### Primary Guide (Recommended)
+### Recommended Platforms (Choose One)
 - **[DEPLOYMENT_RAILWAY.md](./DEPLOYMENT_RAILWAY.md)** - Complete Railway deployment guide ⭐
-
-### Alternative Platforms
-- **Render.com** - Similar to Railway, good Node.js support
-- **Fly.io** - Good for containerized deployments
-- **DigitalOcean App Platform** - Full PaaS solution
+- **[DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)** - Complete Render + Supabase guide ⭐
 
 ### Quick Reference
-- **[DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)** - Step-by-step checklist
+- **[DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)** - Railway quick checklist
+
+### Platform Comparison
+
+| Feature | Railway | Render + Supabase |
+|---------|---------|-------------------|
+| **Complexity** | Easiest (all-in-one) | Easy (two platforms) |
+| **Cost** | $5 credit/month | $0/month (permanent free) |
+| **Database** | Built-in PostgreSQL | Supabase (feature-rich) |
+| **Cold starts** | None (always on) | Yes (spins down after 15 min) |
+| **Setup time** | 10 minutes | 15 minutes |
+| **Best for** | Quick setup, paid plan OK | Budget-conscious, free tier |
 
 ---
 
@@ -301,9 +317,16 @@ npm run build
 
 ## 🎉 Ready to Deploy?
 
+### Option 1: Railway (All-in-one)
 1. ✅ Read **[DEPLOYMENT_RAILWAY.md](./DEPLOYMENT_RAILWAY.md)**
 2. ✅ Follow **[DEPLOY_CHECKLIST.md](./DEPLOY_CHECKLIST.md)**
 3. ✅ Deploy to Railway
+4. 🎉 Go live!
+
+### Option 2: Render + Supabase (Free forever)
+1. ✅ Read **[DEPLOYMENT_RENDER_SUPABASE.md](./DEPLOYMENT_RENDER_SUPABASE.md)**
+2. ✅ Follow the complete guide step-by-step
+3. ✅ Deploy to Render with Supabase
 4. 🎉 Go live!
 
 ---
