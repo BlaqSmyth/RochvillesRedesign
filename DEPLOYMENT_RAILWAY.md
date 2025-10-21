@@ -1,20 +1,24 @@
-# Railway Deployment Guide (Alternative to Vercel)
+# Railway Deployment Guide
 
-**Why Railway?** Railway is better suited for traditional Express.js applications with persistent sessions and long-running processes. If you experience issues with Vercel's serverless architecture, Railway is the recommended alternative.
+**This is the recommended deployment platform** for Rochvilles & Co. website.
+
+Railway is the ideal platform for this full-stack Express.js application with persistent sessions and PostgreSQL database.
 
 ---
 
-## 🚂 Railway.app Deployment
+## 🚂 Why Railway?
 
 Railway is a modern platform that handles full-stack Node.js apps excellently, with built-in PostgreSQL support.
 
-### ✅ Benefits Over Vercel
+### ✅ Key Benefits
 
-- ✅ **Better for Express**: Traditional server processes, not serverless
-- ✅ **Session persistence**: Real process keeps sessions stable
-- ✅ **Simpler setup**: One-click PostgreSQL integration
-- ✅ **WebSocket support**: If you add real-time features later
-- ✅ **Free tier**: $5 free credit monthly (enough for small sites)
+- ✅ **Perfect for Express**: Traditional server processes with persistent connections
+- ✅ **Session management**: Real processes keep sessions stable and secure
+- ✅ **Built-in PostgreSQL**: One-click database integration
+- ✅ **WebSocket ready**: Support for real-time features if needed
+- ✅ **Free tier**: $5 free credit monthly (enough for small business sites)
+- ✅ **Auto-deployment**: Deploys automatically from GitHub
+- ✅ **Free SSL**: Automatic HTTPS certificates
 
 ---
 
@@ -42,10 +46,12 @@ Railway is a modern platform that handles full-stack Node.js apps excellently, w
 3. Railway creates a database and provides `DATABASE_URL` automatically
 4. Copy the connection string from the **"Connect"** tab
 
-**Option B: Use Neon (External)**
+**Option B: Use Neon (External PostgreSQL)**
 
-1. Set up Neon as described in main DEPLOYMENT.md
-2. Add `DATABASE_URL` manually in Railway environment variables
+1. Create account at [neon.tech](https://neon.tech)
+2. Create new project and copy connection string
+3. Add `DATABASE_URL` manually in Railway environment variables
+4. Ensure connection string includes `?sslmode=require`
 
 ### 4. Configure Environment Variables
 
@@ -295,23 +301,6 @@ app.get('/health', (req, res) => {
 Configure in Railway → Settings → Health Check:
 - **Path**: `/health`
 - **Port**: `5000`
-
----
-
-## 🆚 Railway vs Vercel Comparison
-
-| Feature | Railway | Vercel |
-|---------|---------|--------|
-| **Best for** | Full-stack Node.js | Static sites, serverless |
-| **Express support** | ✅ Excellent | ⚠️ Limited (serverless) |
-| **Sessions** | ✅ Persistent | ⚠️ Tricky |
-| **PostgreSQL** | ✅ Built-in | Need external (Neon) |
-| **Pricing** | $5/month free credit | 100GB bandwidth free |
-| **Custom domain** | ✅ Free SSL | ✅ Free SSL |
-| **WebSockets** | ✅ Supported | ❌ Not supported |
-| **Deployment** | Git push | Git push |
-
-**Recommendation**: Use **Railway** for this Express app, or **Vercel** if you prefer and don't need persistent sessions.
 
 ---
 

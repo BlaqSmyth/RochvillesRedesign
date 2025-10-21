@@ -1,22 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/.*",
-      "dest": "dist/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "dist/public/$1"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  "comment": "⚠️ WARNING: This configuration does NOT work for this application!",
+  "comment2": "This Express app uses server.listen() which is incompatible with Vercel's serverless platform.",
+  "comment3": "RECOMMENDED: Deploy to Railway, Render, or Fly.io instead.",
+  "comment4": "See DEPLOYMENT_RAILWAY.md for proper deployment instructions.",
+  "comment5": "This file is kept for reference only."
 }
