@@ -47,18 +47,6 @@ export default function ServicesPage() {
     select: (data) => data.filter(service => service.published),
   });
   
-  // Show loading state
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading services...</p>
-        </div>
-      </div>
-    );
-  }
-  
   // Group services by category
   const coreServices = allServices
     .filter(s => s.category === "Core Services")
@@ -269,44 +257,68 @@ export default function ServicesPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {coreServices.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50 bg-gradient-to-br from-primary/5 to-card" data-testid={`core-service-${index}`}>
+            {isLoading ? (
+              // Skeleton loading cards
+              Array.from({ length: 6 }).map((_, index) => (
+                <Card key={index} className="h-full border-2 bg-gradient-to-br from-primary/5 to-card">
                   <CardHeader>
                     <div className="flex items-start gap-4">
-                      <motion.div 
-                        className="p-3 rounded-lg bg-primary/10"
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <service.icon className="h-6 w-6 text-primary" />
-                      </motion.div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                        <p className="text-sm text-muted-foreground">{service.description}</p>
+                      <div className="p-3 rounded-lg bg-primary/10 w-12 h-12 animate-pulse"></div>
+                      <div className="flex-1 space-y-2">
+                        <div className="h-6 bg-muted rounded animate-pulse"></div>
+                        <div className="h-4 bg-muted rounded w-3/4 animate-pulse"></div>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                          {feature}
-                        </li>
+                    <div className="space-y-2">
+                      {Array.from({ length: 3 }).map((_, i) => (
+                        <div key={i} className="h-4 bg-muted rounded animate-pulse"></div>
                       ))}
-                    </ul>
+                    </div>
                   </CardContent>
                 </Card>
-              </motion.div>
-            ))}
+              ))
+            ) : (
+              coreServices.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                >
+                  <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50 bg-gradient-to-br from-primary/5 to-card" data-testid={`core-service-${index}`}>
+                    <CardHeader>
+                      <div className="flex items-start gap-4">
+                        <motion.div 
+                          className="p-3 rounded-lg bg-primary/10"
+                          whileHover={{ rotate: 360, scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <service.icon className="h-6 w-6 text-primary" />
+                        </motion.div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                          <p className="text-sm text-muted-foreground">{service.description}</p>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -382,42 +394,64 @@ export default function ServicesPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {specialistServices.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                <Card className={`hover-elevate transition-all duration-300 h-full border-2 ${colorClasses[service.color].border} bg-gradient-to-br ${colorClasses[service.color].gradient}`} data-testid={`specialist-service-${index}`}>
+            {isLoading ? (
+              // Skeleton loading cards
+              Array.from({ length: 9 }).map((_, index) => (
+                <Card key={index} className="h-full border-2 bg-gradient-to-br from-purple-500/5 to-card">
                   <CardHeader>
                     <div className="flex items-start gap-3">
-                      <motion.div 
-                        className={`p-2 rounded-lg ${colorClasses[service.color].bg}`}
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <service.icon className={`h-5 w-5 ${colorClasses[service.color].text}`} />
-                      </motion.div>
-                      <div className="flex-1">
-                        <h3 className="font-bold mb-2">{service.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-3">{service.description}</p>
-                        <ul className="space-y-1">
-                          {service.features.map((feature, idx) => (
-                            <li key={idx} className="text-xs text-muted-foreground flex items-center gap-1">
-                              <span className={`w-1 h-1 rounded-full ${colorClasses[service.color].text}`}></span>
-                              {feature}
-                            </li>
+                      <div className="p-2 rounded-lg bg-purple-500/10 w-9 h-9 animate-pulse"></div>
+                      <div className="flex-1 space-y-2">
+                        <div className="h-5 bg-muted rounded animate-pulse"></div>
+                        <div className="h-4 bg-muted rounded w-3/4 animate-pulse"></div>
+                        <div className="space-y-1 mt-3">
+                          {Array.from({ length: 2 }).map((_, i) => (
+                            <div key={i} className="h-3 bg-muted rounded animate-pulse"></div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
                     </div>
                   </CardHeader>
                 </Card>
-              </motion.div>
-            ))}
+              ))
+            ) : (
+              specialistServices.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                >
+                  <Card className={`hover-elevate transition-all duration-300 h-full border-2 ${colorClasses[service.color].border} bg-gradient-to-br ${colorClasses[service.color].gradient}`} data-testid={`specialist-service-${index}`}>
+                    <CardHeader>
+                      <div className="flex items-start gap-3">
+                        <motion.div 
+                          className={`p-2 rounded-lg ${colorClasses[service.color].bg}`}
+                          whileHover={{ rotate: 360, scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <service.icon className={`h-5 w-5 ${colorClasses[service.color].text}`} />
+                        </motion.div>
+                        <div className="flex-1">
+                          <h3 className="font-bold mb-2">{service.title}</h3>
+                          <p className="text-sm text-muted-foreground mb-3">{service.description}</p>
+                          <ul className="space-y-1">
+                            {service.features.map((feature, idx) => (
+                              <li key={idx} className="text-xs text-muted-foreground flex items-center gap-1">
+                                <span className={`w-1 h-1 rounded-full ${colorClasses[service.color].text}`}></span>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </CardHeader>
+                  </Card>
+                </motion.div>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -574,32 +608,47 @@ export default function ServicesPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {additionalServices.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -5, scale: 1.03 }}
-              >
-                <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50 bg-gradient-to-br from-blue-500/5 to-card" data-testid={`additional-service-${index}`}>
+            {isLoading ? (
+              // Skeleton loading cards
+              Array.from({ length: 8 }).map((_, index) => (
+                <Card key={index} className="h-full border-2 bg-gradient-to-br from-blue-500/5 to-card">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3 mb-2">
-                      <motion.div 
-                        className="p-2 rounded-lg bg-blue-500/10"
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <service.icon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                      </motion.div>
-                      <h3 className="font-semibold text-sm">{service.title}</h3>
+                      <div className="p-2 rounded-lg bg-blue-500/10 w-8 h-8 animate-pulse"></div>
+                      <div className="h-4 bg-muted rounded flex-1 animate-pulse"></div>
                     </div>
-                    <p className="text-xs text-muted-foreground">{service.description}</p>
+                    <div className="h-3 bg-muted rounded w-full animate-pulse"></div>
                   </CardContent>
                 </Card>
-              </motion.div>
-            ))}
+              ))
+            ) : (
+              additionalServices.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ y: -5, scale: 1.03 }}
+                >
+                  <Card className="hover-elevate transition-all duration-300 h-full border-2 hover:border-primary/50 bg-gradient-to-br from-blue-500/5 to-card" data-testid={`additional-service-${index}`}>
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3 mb-2">
+                        <motion.div 
+                          className="p-2 rounded-lg bg-blue-500/10"
+                          whileHover={{ rotate: 360, scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <service.icon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        </motion.div>
+                        <h3 className="font-semibold text-sm">{service.title}</h3>
+                      </div>
+                      <p className="text-xs text-muted-foreground">{service.description}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))
+            )}
           </div>
         </div>
       </section>
