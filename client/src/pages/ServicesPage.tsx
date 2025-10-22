@@ -229,6 +229,10 @@ export default function ServicesPage() {
                     src={accountingTeamImage} 
                     alt="Professional accounting team" 
                     className="w-full h-auto"
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="600"
                     data-testid="img-hero-accounting"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
@@ -314,6 +318,10 @@ export default function ServicesPage() {
             src={financialPlanningImage} 
             alt="Financial planning meeting" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-purple-600/90" />
         </div>
@@ -421,6 +429,10 @@ export default function ServicesPage() {
             src={officeWorkspaceImage} 
             alt="Modern accounting office" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="500"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 via-purple-500/80 to-green-600/90" />
         </div>
@@ -517,6 +529,10 @@ export default function ServicesPage() {
             src={consultationImage} 
             alt="Professional business consultation" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-green-600/90 via-green-500/80 to-blue-600/90" />
         </div>

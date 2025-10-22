@@ -172,6 +172,10 @@ export default function ContractorsGuidePage() {
                     src={itContractorImage} 
                     alt="IT contractor working" 
                     className="w-full h-auto"
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="600"
                     data-testid="img-hero-contractor"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
@@ -376,6 +380,10 @@ export default function ContractorsGuidePage() {
                       src={contractorImage} 
                       alt="Freelancer working" 
                       className="w-full h-auto"
+                      loading="lazy"
+                      decoding="async"
+                      width="600"
+                      height="400"
                     />
                   </div>
                 </div>
@@ -434,6 +442,10 @@ export default function ContractorsGuidePage() {
             src={workspaceImage} 
             alt="Modern contractor workspace" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-orange-600/90 via-orange-500/80 to-green-600/90" />
         </div>
@@ -603,6 +615,10 @@ export default function ContractorsGuidePage() {
             src={contractSigningImage} 
             alt="Contract signing and review" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="500"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-green-600/90" />
         </div>
@@ -716,6 +732,10 @@ export default function ContractorsGuidePage() {
             src={taxComplianceImage} 
             alt="Tax compliance and planning" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-green-600/90 via-green-500/80 to-blue-600/90" />
         </div>

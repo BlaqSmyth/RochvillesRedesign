@@ -187,6 +187,8 @@ export default function AboutPage() {
                     src={aiaLogo} 
                     alt="Association of International Accountants (AIA)"
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
 
@@ -199,6 +201,8 @@ export default function AboutPage() {
                     src={ifaLogo} 
                     alt="Institute of Financial Accountants (IFA)"
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
 
@@ -211,6 +215,8 @@ export default function AboutPage() {
                     src={ciiLogo} 
                     alt="Chartered Insurance Institute (CII)"
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
 
@@ -223,6 +229,8 @@ export default function AboutPage() {
                     src={cmiLogo} 
                     alt="Chartered Management Institute (CMI)"
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
 
@@ -235,6 +243,8 @@ export default function AboutPage() {
                     src={ftaLogo} 
                     alt="Federation of Tax Advisers (FTA)"
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
 
@@ -247,6 +257,8 @@ export default function AboutPage() {
                     src={ipaLogo} 
                     alt="Institute of Public Accountants (IPA)"
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
 
@@ -259,6 +271,8 @@ export default function AboutPage() {
                     src={pfsLogo} 
                     alt="Personal Finance Society (PFS)"
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
 
@@ -271,6 +285,8 @@ export default function AboutPage() {
                     src={smpLogo} 
                     alt="Society of Mortgage Professionals (SMP)"
                     className="w-full h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
               </div>
@@ -345,6 +361,10 @@ export default function AboutPage() {
                     src={ceoPhoto} 
                     alt="Marcelli Oguh - CEO of Rochvilles & Co. Accountants" 
                     className="w-full h-auto"
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="1000"
                     data-testid="img-ceo"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
@@ -483,6 +503,10 @@ export default function AboutPage() {
                     src={officeImage} 
                     alt="Modern office workspace" 
                     className="w-full h-auto"
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="600"
                     data-testid="img-office"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />

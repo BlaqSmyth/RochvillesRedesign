@@ -265,6 +265,10 @@ export default function FinancialServicesPage() {
                     src={financialImage} 
                     alt="Financial planning" 
                     className="w-full h-auto"
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="600"
                     data-testid="img-hero-financial"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
@@ -350,6 +354,10 @@ export default function FinancialServicesPage() {
             src={advisorImage} 
             alt="Professional financial advisor" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-purple-600/90" />
         </div>
@@ -561,6 +569,10 @@ export default function FinancialServicesPage() {
             src={familyImage} 
             alt="Happy family planning their future" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="500"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-purple-600/90" />
         </div>

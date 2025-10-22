@@ -198,6 +198,10 @@ export default function CompliancePage() {
                     src={complianceImage} 
                     alt="Compliance documents" 
                     className="w-full h-auto"
+                    loading="lazy"
+                    decoding="async"
+                    width="800"
+                    height="600"
                     data-testid="img-hero-compliance"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
@@ -272,6 +276,10 @@ export default function CompliancePage() {
             src={regulatoryImage} 
             alt="Regulatory compliance standards" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-green-600/90" />
         </div>
@@ -376,6 +384,10 @@ export default function CompliancePage() {
             src={legalComplianceImage} 
             alt="Legal compliance documentation" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="500"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-green-600/90 via-green-500/80 to-purple-600/90" />
         </div>
@@ -614,6 +626,10 @@ export default function CompliancePage() {
             src={complianceSecurityImage} 
             alt="Compliance security and trust" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 via-blue-500/80 to-green-600/90" />
         </div>
@@ -801,6 +817,10 @@ export default function CompliancePage() {
             src={complianceExcellenceImage} 
             alt="Compliance excellence" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            width="1920"
+            height="500"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-green-600/90 via-blue-500/80 to-purple-600/90" />
         </div>

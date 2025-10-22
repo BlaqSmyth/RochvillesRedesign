@@ -260,6 +260,10 @@ export default function HomePage() {
                   src={whyChooseUsImage} 
                   alt="Team collaboration and financial planning" 
                   className="relative rounded-2xl shadow-2xl w-full h-auto"
+                  loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="600"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.4 }}
                 />
@@ -293,6 +297,10 @@ export default function HomePage() {
                   src={ourApproachImage} 
                   alt="Modern technology-driven accounting with real-time financial insights" 
                   className="relative rounded-2xl shadow-2xl w-full h-auto"
+                  loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="600"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.4 }}
                 />
@@ -388,6 +396,10 @@ export default function HomePage() {
               src={teamCelebrationImage} 
               alt="Team celebrating success" 
               className="relative rounded-2xl shadow-2xl w-full h-auto"
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="800"
             />
           </motion.div>
         </div>
